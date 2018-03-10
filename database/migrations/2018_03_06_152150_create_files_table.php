@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIdeasTable extends Migration
+class CreateFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateIdeasTable extends Migration
      */
     public function up()
     {
-        Schema::create('ideas', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('idea');
-            $table->integer('cat_id')->unsigned();
-            $table->integer('student_id')->unsigned();
+            $table->string('file');
+            $table->integer('idea_id')->unsigned();
 
-            $table->foreign('student_id')->references('id')->on('users');
-            $table->foreign('cat_id')->references('id')->on('categories');
-
+            $table->foreign('idea_id')->references('id')->on('files');
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ class CreateIdeasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ideas');
+        Schema::dropIfExists('files');
     }
 }
