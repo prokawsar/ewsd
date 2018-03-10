@@ -15,6 +15,11 @@ class CreateCoordinatorsTable extends Migration
         Schema::create('coordinators', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->integer('cord_id')->unsigned();
+//            $table->primary('student_id');
+
+            $table->foreign('cord_id')->references('id')->on('users');
+
             $table->rememberToken();
             $table->timestamps();
         });

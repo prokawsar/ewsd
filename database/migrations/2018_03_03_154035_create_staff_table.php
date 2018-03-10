@@ -15,6 +15,11 @@ class CreateStaffTable extends Migration
         Schema::create('staff', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->integer('staff_id')->unsigned();
+//            $table->primary('student_id');
+
+            $table->foreign('staff_id')->references('id')->on('users');
+
             $table->rememberToken();
             $table->timestamps();
         });

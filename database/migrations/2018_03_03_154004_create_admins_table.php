@@ -15,6 +15,11 @@ class CreateAdminsTable extends Migration
         Schema::create('admins', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->integer('admin_id')->unsigned();
+//            $table->primary('student_id');
+
+            $table->foreign('admin_id')->references('id')->on('users');
+
             $table->rememberToken();
             $table->timestamps();
         });

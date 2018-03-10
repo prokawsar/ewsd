@@ -15,6 +15,11 @@ class CreateQamanagersTable extends Migration
         Schema::create('qamanagers', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->integer('qamanage_id')->unsigned();
+//            $table->primary('student_id');
+
+            $table->foreign('qamanage_id')->references('id')->on('users');
+
             $table->rememberToken();
             $table->timestamps();
         });
