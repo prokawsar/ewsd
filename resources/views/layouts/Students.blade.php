@@ -40,7 +40,7 @@
                     @guest
                     @else
                       
-                        <li><a href="#">All Ideas</a></li>
+                        <li><a href="#">My Ideas</a></li>
                     @endguest
                     </ul>
 
@@ -76,6 +76,7 @@
                 </div>
             </div>
         </nav>
+        @if (Auth::guard('student')->check())
  <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -85,11 +86,12 @@
         <li class="header"></li>
         
         <li><a href="{{ url('/sthome')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        <li><a href="{{ url('/stownCon')}}"><i class="fa fa-book"></i> <span>Own Contributions</span></a></li>
+        <li><a href="{{ url('/stowncon')}}"><i class="fa fa-book"></i> <span>Own Contributions</span></a></li>
         
         
       </ul>
     </section>
+     @endif
     <!-- /.sidebar -->
   </aside>
 

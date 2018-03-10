@@ -15,65 +15,13 @@
 Route::get('/', function () {
   return view('welcome');
 });
+
 Route::get('/qahome', function () {
     return view('qamanager.home');
 });
 
-
-
-Route::get('/statistics', function () {
-  return view('qamanager.statistics');
-});
-Route::get('/statical2', function () {
-  return view('qamanager.statical2');
-});
-Route::get('/addcat', function () {
-  return view('qamanager.Add_catagory');
-});
-Route::get('/percentage', function () {
-  return view('qamanager.percentage');
-});
-Route::get('/ideas', function () {
-  return view('qamanager.ideas');
-});
-Route::get('/contributors', function () {
-  return view('qamanager.contributors');
-});
-Route::get('/contributor_idea', function () {
-  return view('qamanager.contributor_idea');
-});
-Route::get('/idea_list', function () {
-  return view('qamanager.idea_list');
-});
-Route::get('/ideas_catagory', function () {
-  return view('qamanager.ideas_catagory');
-});
-Route::get('/catagorys_idea', function () {
-  return view('qamanager.catagorys_idea');
-});
-Route::get('/liked_idea_details', function () {
-  return view('qamanager.liked_idea_details');
-});
-Route::get('/commented_idea_details', function () {
-  return view('qamanager.commented_idea_details');
-});
-Route::get('/idea_without_comment_details', function () {
-  return view('qamanager.idea_without_comment_details');
-});
-Route::get('/idea_without_like_details', function () {
-  return view('qamanager.idea_without_like_details');
-});
-Route::get('/liked_idea', function () {
-  return view('qamanager.liked_idea');
-});
-Route::get('/commented_idea', function () {
-  return view('qamanager.commented_idea');
-});
-Route::get('/idea_without_comment', function () {
-  return view('qamanager.idea_without_comment');
-});
-Route::get('/idea_without_like', function () {
-  return view('qamanager.idea_without_like');
+Route::get('/stowncon', function () {
+    return view('student.stowncon');
 });
 
 Route::get('/sthome', function () {
@@ -130,12 +78,70 @@ Route::group(['prefix' => 'qamanager'], function () {
   Route::post('/login', 'QamanagerAuth\LoginController@login');
   Route::post('/logout', 'QamanagerAuth\LoginController@logout')->name('qlogout');
 
+
+    Route::get('/statistics', function () {
+        return view('qamanager.statistics');
+    });
+    Route::get('/statical2', function () {
+        return view('qamanager.statical2');
+    });
+    Route::get('/addcat', function () {
+        return view('qamanager.Add_catagory');
+    });
+    Route::get('/percentage', function () {
+        return view('qamanager.percentage');
+    });
+    Route::get('/ideas', function () {
+        return view('qamanager.ideas');
+    });
+    Route::get('/contributors', function () {
+        return view('qamanager.contributors');
+    });
+    Route::get('/contributor_idea', function () {
+        return view('qamanager.contributor_idea');
+    });
+    Route::get('/idea_list', function () {
+        return view('qamanager.idea_list');
+    });
+    Route::get('/ideas_catagory', function () {
+        return view('qamanager.ideas_catagory');
+    });
+    Route::get('/catagorys_idea', function () {
+        return view('qamanager.catagorys_idea');
+    });
+    Route::get('/liked_idea_details', function () {
+        return view('qamanager.liked_idea_details');
+    });
+    Route::get('/commented_idea_details', function () {
+        return view('qamanager.commented_idea_details');
+    });
+    Route::get('/idea_without_comment_details', function () {
+        return view('qamanager.idea_without_comment_details');
+    });
+    Route::get('/idea_without_like_details', function () {
+        return view('qamanager.idea_without_like_details');
+    });
+    Route::get('/liked_idea', function () {
+        return view('qamanager.liked_idea');
+    });
+    Route::get('/commented_idea', function () {
+        return view('qamanager.commented_idea');
+    });
+    Route::get('/idea_without_comment', function () {
+        return view('qamanager.idea_without_comment');
+    });
+    Route::get('/idea_without_like', function () {
+        return view('qamanager.idea_without_like');
+    });
+
+
 });
 
 Route::group(['prefix' => 'coordinator'], function () {
   Route::get('/login', 'CoordinatorAuth\LoginController@showLoginForm')->name('clogin');
   Route::post('/login', 'CoordinatorAuth\LoginController@login');
   Route::post('/logout', 'CoordinatorAuth\LoginController@logout')->name('clogout');
+  Route::post('/home', 'LoginController@logout')->name('chome');
 
   Route::post('/password/email', 'CoordinatorAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
   Route::post('/password/reset', 'CoordinatorAuth\ResetPasswordController@reset')->name('password.email');
