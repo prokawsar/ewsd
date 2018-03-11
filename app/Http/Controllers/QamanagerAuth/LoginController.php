@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\QamanagerAuth;
 
 use App\Http\Controllers\Controller;
+use App\Qamanager;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Hesto\MultiAuth\Traits\LogsoutGuard;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -59,5 +63,36 @@ class LoginController extends Controller
     protected function guard()
     {
         return Auth::guard('qamanager');
+    }
+
+    public function login(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+//        where('password', Hash::check($request->password))->first();
+        $qamanager = Qamanager::where('qamanage_id', $user->id)->get();
+
+
+        if (isset($qamanager[0]->id)) {
+
+//            dd($user);
+            if (Auth::guard('qamanager') && Hash::check($request->password, $user->password)) {
+
+                Auth::guard('qamanager')->login($user);
+//                dd($user);
+                return redirect(route('qahome'));
+
+            }
+        }
+        return redirect(route('qlogin'))
+            ->withInput($request->only('email'))
+            ->withErrors([
+                'email' => "Problem with email or password !!",
+            ]);
+
     }
 }

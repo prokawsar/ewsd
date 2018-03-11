@@ -10,6 +10,12 @@ class QAManagerController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('qamanager');
+    }
+
+    public function index()
+    {
+        return view('qamanager.home');
     }
 
     public function addCategory(Request $request)

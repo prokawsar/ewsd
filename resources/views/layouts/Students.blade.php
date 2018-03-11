@@ -47,7 +47,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-                        @guest
+                        @if( !Auth::guard('student')->check())
                             <li><a href="{{ route('slogin') }}">Login</a></li>
                            
                         @else
@@ -65,13 +65,13 @@
                                             Logout
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('slogout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
                                 </ul>
                             </li>
-                        @endguest
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -85,8 +85,8 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header"></li>
         
-        <li><a href="{{ url('/sthome')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        <li><a href="{{ url('/stowncon')}}"><i class="fa fa-book"></i> <span>Own Contributions</span></a></li>
+        <li><a href="{{ route('shome')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+        <li><a href="{{ route('sowncon')}}"><i class="fa fa-book"></i> <span>Own Contributions</span></a></li>
         
         
       </ul>
