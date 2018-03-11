@@ -83,13 +83,12 @@
      
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header"></li>
-        <li class="active treeview">
-          <a href="{{ url('/')}}">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span> 
-          </a>
+
+          <li><a href="{{ route('qahome')}}">
+            <i class="fa fa-dashboard"></i> Dashboard
+          </a></li>
           
-        </li>
-        <li><a href="{{ url('/addcat')}}"><i class="fa fa-book"></i> <span>Catagories</span></a></li>
+        <li><a href="{{ url('/qamanager/addcat')}}"><i class="fa fa-book"></i> <span>Catagories</span></a></li>
         <li class="treeview">
           <a href="{{ url('/statical1')}}">
             <i class="fa fa-files-o"></i>

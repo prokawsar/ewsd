@@ -18,7 +18,7 @@ $(document).on('click','#submitIdea',function () {
 
         $.ajax({
             type: 'post',
-            url: 'ideastore',
+            url: '/student/storeidea',
             data: {
                 _token: _token,
                 ideas: idea,
@@ -26,6 +26,7 @@ $(document).on('click','#submitIdea',function () {
                 cat_id: cat_id
             },
             success: function (response) {
+                console.log(response);
                 $(".validation").hide();
                 $(".postConfirm").show().delay(5000).fadeOut();
                 $('.postConfirm').text(response['message']);

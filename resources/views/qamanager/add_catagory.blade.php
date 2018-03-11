@@ -3,12 +3,19 @@
 @section('content')
 <div class="container">
     <div class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-11 col-md-offset-1">
             <div class="panel panel-default">
+
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
                 <div class="panel-heading">Add Catagories</div>
                 <div class="panel-body">
                 
-                  <div class="col-md-8 ">
+                  <div class="col-md-10 ">
                     <table id="example1" class="table table-striped">
                       <thead>
                       <tr>
@@ -20,19 +27,25 @@
                       
                       </thead>
                       <tbody>
+                      @php
+                        $categories = \App\Category::all();
+                      @endphp
+                      @foreach( $categories as $category)
                         <tr>
-                            <td>Campus</td>
-                            <td>10/12/2018</td>
-                            <td>10/12/2018</td>
-                            <td>10/12/2018</td>
-                        
-                        </tr>                
+                            <td>{{ $category->cat_name }}</td>
+                            <td>{{ $category->start_date->toDateString() }}</td>
+                            <td>{{ $category->end_date->toDateString() }}</td>
+                            <td>{{ $category->final_end_date->toDateString() }}</td>
+                            <td><a href="#"><i class="fa fa-crosshairs"></i></a>  </td>
+
+                        </tr>
+                          @endforeach
                     </tbody>
               
                   </table>
                   </div>
-                  <div class="col-md-4 ">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/register') }}">
+                  <div class="col-md-6 ">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/qamanager/addcat') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -81,7 +94,7 @@
                             <label for="finaldate" class="col-md-4 control-label">Final Date</label>
 
                             <div class="col-md-6">
-                                <input id="finaldate" type="password" class="form-control" name="finaldate">
+                                <input id="finaldate" type="date" class="form-control" name="finaldate">
 
                                 @if ($errors->has('finaldate'))
                                     <span class="help-block">

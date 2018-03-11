@@ -1,6 +1,6 @@
 @section('title', 'Home')
 
-@extends('layouts.student')
+@extends('layouts.Students')
 
 @section('content')
     <div class="container">
@@ -22,32 +22,60 @@
 
                                 <form id="cform">
                                     {{csrf_field()}}
-                                    <input type="hidden" value="" name="user_id" id="user_id">
+                                    <input type="hidden" value="1" name="user_id" id="user_id">
 
-                                    <fieldset>
-                                        <div class="form-group">
+                                    {{--<fieldset>--}}
+                                    <div class="form-group">
                                             <textarea name="posts" id="posts" cols="10" rows="5"
                                                       class="form-control"></textarea>
-                                        </div>
-                                        @php
-                                            //retrieve all category
-                                        @endphp
-                                        <div class="form-group col-md-3 pull-left">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-12">
                                             <select class="form-control" name="category" id="category">
                                                 <option value="#">Select a Category</option>
 
-                                                    <option value="">cat_name</option>
-
+                                                <option value="">cat_name</option>
 
                                             </select>
-
                                         </div>
-                                        <div class="form-group">
+                                    </div>
 
-                                            <a class="btn btn-primary pull-right" id="submitIdea"> <i
-                                                        class="fa fa-terminal"></i> Submit</a>
+                                    <br>
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="file" class="col-md-3 control-label">Supporting file: </label>
+
+                                        <div class="col-md-8">
+                                            <input type="file" name="file" class="form-control">
                                         </div>
-                                    </fieldset>
+
+                                    </div>
+
+                                    @php
+                                        //retrieve all category
+                                    @endphp
+                                    <br>
+                                    <br>
+
+
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="remember" required> I have read <a
+                                                            href="#" target="_blank">Terms and Conditions</a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <a class="btn btn-primary pull-right" id="submitIdea"> <i
+                                                    class="fa fa-terminal"></i> Submit</a>
+                                    </div>
+                                    {{--</fieldset>--}}
                                 </form>
 
                             </div>
@@ -67,7 +95,8 @@
                             <div class="row" id="eachPost{{$posts->id}}">
                                 <div class="col-md-8 col-md-offset-2">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading"><strong>Posted by {{$posts->user->display_name}} &nbsp</strong>
+                                        <div class="panel-heading"><strong>Posted by {{$posts->user->display_name}}
+                                                &nbsp</strong>
                                             {{$posts->created_at->diffForHumans()}}
 
                                             <span class="cust-badge badge-success"><strong>{{ $posts->user->campus }}</strong> </span>
@@ -87,7 +116,7 @@
                                             <blockquote>
 
                                                 <a class="post_link" href="posts/{{$posts->id}}/show" target="_blank">
-                                                    <p>{{$posts->posts}}</p></a>
+                                                    <p>{{$posts->idea }}</p></a>
 
                                             </blockquote>
 
@@ -113,7 +142,7 @@
 
                                                     @if(Auth::user()->likepost()->where(['idea_id' => $posts->id])->get()->count()==0)
 
-                                                        <div id="likeArea" onmousedown="play()" style="width: 2%"
+                                                        <div id="likeArea" style="width: 2%"
                                                              data-id="{{$posts->id}}"
                                                              data-id1="{{\Illuminate\Support\Facades\Auth::id()}}">
                                                 <a style="cursor: pointer;text-decoration: none;color: #040b02"
@@ -122,7 +151,7 @@
                                             </div>
                                                     @else
 
-                                                        <div id="unlikeArea" onmousedown="playDislike()"
+                                                        <div id="unlikeArea"
                                                              style="width: 2%" data-id="{{$posts->id}}"
                                                              data-id1="{{\Illuminate\Support\Facades\Auth::id()}}">
                                                 <a style="cursor: pointer" title="Unlike" id="dislike"><i
@@ -191,7 +220,6 @@
                         @endforeach
 
 
-
                     </div>
                 </div>
             </div>
@@ -199,20 +227,23 @@
 
     </div>
 @endsection
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
 
-@section('script')
-    <script src="{{ asset('js/post.js') }}"> </script>
-    <script>
+<script src="{{ asset('js/posts.js') }}"></script>
+<script>
 
-        var token = '{{csrf_token()}}';
+    var token = '{{csrf_token()}}';
 
-        function increaseHeight(e) {
-            e.style.height = 'auto';
-            var newHeight = (e.scrollHeight > 32 ? e.scrollHeight : 32);
-            e.style.height = newHeight.toString() + 'px';
-        }
+    function increaseHeight(e) {
+        e.style.height = 'auto';
+        var newHeight = (e.scrollHeight > 32 ? e.scrollHeight : 32);
+        e.style.height = newHeight.toString() + 'px';
+    }
 
 
-    </script>
-@endsection
+</script>
+
 

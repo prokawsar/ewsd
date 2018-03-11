@@ -44,6 +44,10 @@ Route::group(['prefix' => 'student'], function () {
   Route::post('/login', 'StudentAuth\LoginController@login');
   Route::post('/logout', 'StudentAuth\LoginController@logout')->name('slogout');
 
+  Route::get('/home', 'StudentController@index')->name('shome');
+  Route::post('/storeidea', 'IdeaController@saveIdea');
+
+
   Route::get('/register', 'StudentAuth\RegisterController@showRegistrationForm')->name('register');
   Route::post('/register', 'StudentAuth\RegisterController@register');
 
@@ -78,6 +82,9 @@ Route::group(['prefix' => 'qamanager'], function () {
   Route::post('/login', 'QamanagerAuth\LoginController@login');
   Route::post('/logout', 'QamanagerAuth\LoginController@logout')->name('qlogout');
 
+    Route::get('/home', function () {
+        return view('qamanager.home');
+    })->name('qahome');
 
     Route::get('/statistics', function () {
         return view('qamanager.statistics');
@@ -86,8 +93,10 @@ Route::group(['prefix' => 'qamanager'], function () {
         return view('qamanager.statical2');
     });
     Route::get('/addcat', function () {
-        return view('qamanager.Add_catagory');
+        return view('qamanager.add_catagory');
     });
+    Route::post('/addcat', 'QAManagerController@addCategory');
+
     Route::get('/percentage', function () {
         return view('qamanager.percentage');
     });
