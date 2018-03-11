@@ -74,8 +74,9 @@
 
                                     <div class="form-group">
 
-                                        <button class="btn btn-primary pull-right" id="submitIdea"> <i
-                                                    class="fa fa-terminal"></i> Submit</button>
+                                        <button class="btn btn-primary pull-right" id="submitIdea"><i
+                                                    class="fa fa-terminal"></i> Submit
+                                        </button>
                                     </div>
                                     {{--</fieldset>--}}
                                 </form>
@@ -142,7 +143,7 @@
                                                         {{$count." Likes "}}
                                                     @endif
 
-                                                   @if(true)
+                                                    @if(true)
 
                                                         <div id="likeArea" style="width: 2%"
                                                              data-id="{{$posts->id}}"
@@ -151,6 +152,7 @@
                                                    id="{{ $posts->id }}like" title="Like it"><i
                                                             class="fa fa-thumbs-up fa-lg"></i></a>
                                             </div>
+
                                                     @else
 
                                                         <div id="unlikeArea"
@@ -182,7 +184,7 @@
                                                     <div class="@php if(count($comments)!=0) {echo 'well well-sm';} @endphp">
                                                         @foreach($comments as $cmt)
 
-                                                            <span class="user"> {{Auth::user()->name}}</span> <i
+                                                            <span class="user"> username </span> <i
                                                                     class="fa fa-terminal"></i>  {{$cmt->comment}} <br/>
                                                             {{$cmt->created_at->diffForHumans()}} <br/>
                                                             <hr class="style"></hr>
