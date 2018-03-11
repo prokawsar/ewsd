@@ -1,4 +1,4 @@
-@section('title', 'Home')
+@section('title', 'Student Home')
 
 @extends('layouts.Students')
 
@@ -30,13 +30,18 @@
                                                       class="form-control"></textarea>
                                     </div>
 
+                                    @php
+                                        //retrieve all category
+                                        $categories = \App\Category::all();
+                                    @endphp
+
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <select class="form-control" name="category" id="category">
                                                 <option value="#">Select a Category</option>
-
-                                                <option value="">cat_name</option>
-
+                                                @foreach($categories as $category)
+                                                    <option value="">{{ $category->cat_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -52,9 +57,6 @@
 
                                     </div>
 
-                                    @php
-                                        //retrieve all category
-                                    @endphp
                                     <br>
                                     <br>
 
@@ -72,8 +74,8 @@
 
                                     <div class="form-group">
 
-                                        <a class="btn btn-primary pull-right" id="submitIdea"> <i
-                                                    class="fa fa-terminal"></i> Submit</a>
+                                        <button class="btn btn-primary pull-right" id="submitIdea"> <i
+                                                    class="fa fa-terminal"></i> Submit</button>
                                     </div>
                                     {{--</fieldset>--}}
                                 </form>

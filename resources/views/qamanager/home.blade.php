@@ -1,3 +1,5 @@
+@section('title', 'QAM Home')
+
 @extends('layouts.QAman')
 
 @section('content')

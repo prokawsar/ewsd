@@ -1,3 +1,5 @@
+@section('title', 'QAM Add Category')
+
 @extends('layouts.QAman')
 
 @section('content')
