@@ -1,3 +1,5 @@
+@section('title', 'Student Login')
+
 @extends('layouts.Students')
 
 @section('content')

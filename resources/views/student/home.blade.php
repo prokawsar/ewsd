@@ -40,7 +40,7 @@
                                             <select class="form-control" name="category" id="category">
                                                 <option value="#">Select a Category</option>
                                                 @foreach($categories as $category)
-                                                    <option value="">{{ $category->cat_name }}</option>
+                                                    <option value="{{ $category->id }}">{{ $category->cat_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -97,16 +97,16 @@
                             <div class="row" id="eachPost{{$posts->id}}">
                                 <div class="col-md-8 col-md-offset-2">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading"><strong>Posted by {{$posts->user->display_name}}
+                                        <div class="panel-heading"><strong>Posted by
                                                 &nbsp</strong>
                                             {{$posts->created_at->diffForHumans()}}
 
-                                            <span class="cust-badge badge-success"><strong>{{ $posts->user->campus }}</strong> </span>
+                                            <span class="cust-badge badge-success"><strong>{{ $posts->cat_id }}</strong> </span>
                                             <div class="pull-right">
                                                 <!-- $category = \App\PostCategory::where('id',$posts->cat_id)->select('cat_name')->first(); -->
 
                                                 @php
-                                                    $category=\App\Category::find($posts->cat_id);
+                                                    $category= App\Category::find($posts->cat_id);
                                                 @endphp
 
                                                 [ <span class="badge badge-success">  <i
@@ -142,7 +142,7 @@
                                                         {{$count." Likes "}}
                                                     @endif
 
-                                                    @if(Auth::user()->likepost()->where(['idea_id' => $posts->id])->get()->count()==0)
+                                                   @if(true)
 
                                                         <div id="likeArea" style="width: 2%"
                                                              data-id="{{$posts->id}}"
@@ -182,7 +182,7 @@
                                                     <div class="@php if(count($comments)!=0) {echo 'well well-sm';} @endphp">
                                                         @foreach($comments as $cmt)
 
-                                                            <span class="user"> {{Auth::user()->display_name}}</span> <i
+                                                            <span class="user"> {{Auth::user()->name}}</span> <i
                                                                     class="fa fa-terminal"></i>  {{$cmt->comment}} <br/>
                                                             {{$cmt->created_at->diffForHumans()}} <br/>
                                                             <hr class="style"></hr>
@@ -201,7 +201,7 @@
                                                               style="padding-top:10px;"></textarea>
                                                     <br/> <a class=" btn btn-default pull-right"
                                                              id="commentPostButton{{$posts->id}}"
-                                                             onclick="return commentButtonClicked('{{$posts->id}}','{{\Illuminate\Support\Facades\Auth::id()}}')"><i
+                                                             onclick="return commentButtonClicked('{{$posts->id}}','1')"><i
                                                                 class="fa fa-paper-plane-o" aria-hidden="true"></i>
                                                         comment</a>
                                                     &nbsp;

@@ -32,7 +32,7 @@ $(document).on('click','#submitIdea',function () {
                 $('.postConfirm').text(response['message']);
                 document.getElementById("cform").reset();
 
-                $('#postsTable').load(location.href + " #postsTable");
+                // $('#postsTable').load(location.href + " #postsTable");
             },
             error: function (response) {
                 alert(response);
@@ -98,19 +98,18 @@ $(document).on('click','#unlikeArea',function () {
 function commentButtonClicked(id, user_id){
 
     var elementId = document.getElementById(id+'comment');
-    var comment=elementId.value;
+    var comment= elementId.value;
     if(comment==''){
        alert("Can't make an empty comment !");
     }else{
 
         $.ajax({
-
             type:'post',
             url:'/postComment',
             data:{
                 _token:token,
                 comment:comment,
-                idea_id:id,
+                idea_id: id,
                 user_id: user_id
             },
             success:function (data) {

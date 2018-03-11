@@ -38,6 +38,7 @@ Route::get('/ahome', function () {
   return view('admin.home');
 });
 
+Route::post('/postComment', 'IdeaController@saveComment');
 
 Route::group(['prefix' => 'student'], function () {
   Route::get('/login', 'StudentAuth\LoginController@showLoginForm')->name('slogin');

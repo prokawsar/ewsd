@@ -16,7 +16,7 @@ class Coordinator extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'cord_id',
     ];
 
     /**

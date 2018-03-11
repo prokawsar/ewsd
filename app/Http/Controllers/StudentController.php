@@ -4,12 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Idea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class StudentController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('student');
+    }
 
+    protected function guard()
+    {
+        return Auth::guard('student');
     }
 
     /**
@@ -22,4 +29,6 @@ class StudentController extends Controller
         $allIdeas = Idea::all();
         return view('student.home', compact(['allIdeas']));
     }
+
+
 }

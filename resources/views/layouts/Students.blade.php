@@ -29,7 +29,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ route('shome') }}">
                         {{ config('app.name', 'Laravel') }} : Student
                     </a>
                 </div>
