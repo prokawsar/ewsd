@@ -128,7 +128,7 @@
 
                                                 <!-- counting likes -->
 
-                                                <span id="{{ $posts->id }}areaDefine">
+                                                <div id="{{ $posts->id }}areaDefine" style="width: 50px;">
                                              @php
                                                  $count=\App\Like::where('idea_id',$posts->id)->count();
                                              @endphp
@@ -143,27 +143,26 @@
                                                         {{$count." Likes "}}
                                                     @endif
 
-                                                    @if(true)
 
-                                                        <div id="likeArea" style="width: 2%"
+
+                                                        <span id="likeArea" style="width: 2%"
                                                              data-id="{{$posts->id}}"
-                                                             data-id1="{{\Illuminate\Support\Facades\Auth::id()}}">
+                                                             data-id1="{{Auth::id()}}">
                                                 <a style="cursor: pointer;text-decoration: none;color: #040b02"
                                                    id="{{ $posts->id }}like" title="Like it"><i
                                                             class="fa fa-thumbs-up fa-lg"></i></a>
-                                            </div>
-
-                                                    @else
-
-                                                        <div id="unlikeArea"
-                                                             style="width: 2%" data-id="{{$posts->id}}"
-                                                             data-id1="{{\Illuminate\Support\Facades\Auth::id()}}">
+                                            </span>
+                                                    &nbsp
+                                                       <span id="unlikeArea"
+                                                            style="width: 2%" data-id="{{$posts->id}}"
+                                                            data-id1="{{Auth::id()}}">
                                                 <a style="cursor: pointer" title="Unlike" id="dislike"><i
                                                             class="fa fa-thumbs-down fa-lg"></i></a>
-                                            </div>
+                                            </span>
 
-                                                    @endif
-                                        </span>
+                                        </div>
+                                            <br>
+
 
                                                 <!-- showing comments -->
                                                 @php
