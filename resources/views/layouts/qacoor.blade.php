@@ -12,7 +12,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
 </head>
 <body>
 <div id="app">
@@ -30,28 +29,22 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ route('shome') }}">
-                    {{ config('app.name', 'Laravel') }} : Student
+                <a class="navbar-brand" href="{{ route('chome') }}">
+                    {{ config('app.name', 'Laravel') }} : QA Coordinator
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    @if( !Auth::user()->hasRole('student'))
-                    @else
-
-                        <li><a href="#">My Ideas</a></li>
-                    @endif
+                    
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    @if( !Auth::user()->hasRole('student'))
+                    @if( !Auth::user()->hasRole('coordinator'))
                         <li><a href="{{ route('login') }}">Login</a></li>
-                        {{----}}
-
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -75,32 +68,34 @@
                                 </li>
                             </ul>
                         </li>
-                    @endif
+                        @endguest
                 </ul>
             </div>
         </div>
     </nav>
-    @if (Auth::guard('student')->check())
-        <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <!-- Sidebar user panel -->
+@if (Auth::user()->hasRole('coordinator'))
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
 
-                <ul class="sidebar-menu" data-widget="tree">
-                    <li class="header"></li>
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header"></li>
+                <li class="active treeview">
+                    <a href="{{ route('chome')}}">
+                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                    </a>
 
-                    <li><a href="{{ route('shome')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-                    <li><a href="{{ route('sowncon')}}"><i class="fa fa-book"></i> <span>Own Contributions</span></a>
-                    </li>
+                </li>
+                <li><a href="#"><i class="fa fa-book"></i> <span>Own Contributions</span></a></li>
 
-
-                </ul>
-            </section>
-        @endif
+            </ul>
+        </section>
         <!-- /.sidebar -->
-        </aside>
+    </aside>
+    @endif
 
-        @yield('content')
+    @yield('content')
 </div>
 
 <!-- Scripts -->

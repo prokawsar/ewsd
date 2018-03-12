@@ -1,4 +1,6 @@
-@extends('layouts.qacor')
+@section('title', 'Coordinator')
+
+@extends('layouts.qacoor')
 
 @section('content')
 <div class="container">

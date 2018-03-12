@@ -1,6 +1,6 @@
 @section('title', 'Student Home')
 
-@extends('layouts.Students')
+@extends('layouts.student')
 
 @section('content')
     <div class="container">

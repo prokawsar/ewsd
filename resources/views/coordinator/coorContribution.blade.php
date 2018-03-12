@@ -1,4 +1,4 @@
-@extends('layouts.qacor')
+@extends('layouts.qacoor')
 
 @section('content')
 <div class="container">

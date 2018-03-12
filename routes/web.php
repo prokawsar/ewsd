@@ -13,7 +13,23 @@
 
 
 Route::get('/', function () {
-    // return view('welcome')
+    if(Auth::user()){
+        if( Auth::user()->hasRole('admin'))
+        {
+            return redirect(route('ahome'));
+        }
+        else if(Auth::user()->hasRole('coordinator')){
+
+            return redirect(route('chome'));
+        }
+        else if(Auth::user()->hasRole('student')){
+
+            return redirect(route('shome'));
+        }
+        else if(Auth::user()->hasRole('qamanager')){
+            return redirect(route('qahome'));
+        }
+    }
     return view('auth.login');
     
 });
