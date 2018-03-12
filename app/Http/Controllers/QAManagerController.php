@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Idea;
 use Illuminate\Http\Request;
 
 class QAManagerController extends Controller
@@ -17,6 +18,19 @@ class QAManagerController extends Controller
     public function index()
     {
         return view('qamanager.home');
+    }
+
+    public function deleteCategory($id)
+    {
+        $check = Idea::where('cat_id', $id)->get();
+
+        if ( !$check->isEmpty() ) {
+            return redirect(route('addcat'))->with('warning', 'You can not delete this Category ! Its already in use');
+
+        }
+        $nCard = Category::find($id);
+        $nCard->delete();
+        return redirect(route('addcat'))->with('warning', 'Category Deleted');
     }
 
     public function addCategory(Request $request)

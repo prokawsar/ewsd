@@ -33,6 +33,7 @@ Route::get('/', function () {
     return view('auth.login');
     
 });
+
 Route::group(['middleware'=>'auth','role'=>['student']], function() {
     Route::get('/home', 'HomeController@index')->name('shome');
     Route::post('/storeidea', 'IdeaController@saveIdea');
@@ -50,6 +51,11 @@ Route::group(['middleware'=>'auth','role'=>['admin']], function() {
 Route::group(['middleware'=>'auth','role'=>['qamanager']], function() {
     Route::get('/qamanager/home', 'QAManagerController@index')->name('qahome');
     Route::post('/qamanager/addcat', 'QAManagerController@addCategory');
+    Route::get('/qamanager/delcat{id}', 'QAManagerController@deleteCategory')->name('delcat');
+
+    Route::get('/qamanager/addcat', function () {
+        return view('qamanager.add_catagory');
+    })->name('addcat');
 
 });
 
@@ -71,9 +77,7 @@ Route::group(['prefix' => 'qamanager'], function () {
     Route::get('/statical2', function () {
         return view('qamanager.statical2');
     });
-    Route::get('/addcat', function () {
-        return view('qamanager.add_catagory');
-    });
+
 
     Route::get('/percentage', function () {
         return view('qamanager.percentage');
