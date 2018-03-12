@@ -46,6 +46,9 @@ Route::group(['middleware'=>'auth','role'=>['student']], function() {
 
 Route::group(['middleware'=>'auth','role'=>['admin']], function() {
     Route::get('/admin/home', 'AdminController@index')->name('ahome');
+    Route::get('/admin/ideas', 'AdminController@ideas')->name('ideas');
+
+    Route::get('/ideaApprove{id}', 'AdminController@ideaApprove')->name('ideaApprove');
 });
 
 Route::group(['middleware'=>'auth','role'=>['qamanager']], function() {

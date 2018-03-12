@@ -15,16 +15,4 @@ class StudentController extends Controller
         $this->middleware('role');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $allIdeas = Idea::all();
-        return view('student.home', compact(['allIdeas']));
-    }
-
-
 }

@@ -1,6 +1,6 @@
-@section('title', 'Student Home')
+@section('title', 'All Submitted Ideas')
 
-@extends('layouts.student')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container">
@@ -9,78 +9,43 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Share your idea.....</div>
                             <div class="panel-body">
-                                <span class="label label-success postConfirm" style="font-size: 15px"></span>
-                                <span class="label label-danger validation" style="font-size: 15px"></span>
 
                                 @if (session('status'))
                                     <div class="alert alert-success">
                                         {{ session('status') }}
                                     </div>
                                 @endif
+                                <table id="example1" class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Idea</th>
+                                        <th>Category</th>
+                                        <th>Publish Status</th>
+                                    </tr>
 
-                                <form id="cform">
-                                    {{csrf_field()}}
-                                    <input type="hidden" value="1" name="user_id" id="user_id">
+                                    </thead>
+                                    <tbody>
+                                    @if( !$draftIdeas->isEmpty() )
+                                        @foreach( $draftIdeas as $idea)
+                                            <tr>
+                                                <td>{{ $idea->created_at->toDateString()  }}</td>
+                                                <td>{{ $idea->idea}}</td>
+                                                <td>{{ $idea->cat_id }}</td>
+                                                <td>{{ $idea->approve }}</td>
+                                                <td><a class="btn btn-success"
+                                                       href="{{route('ideaApprove', ['id' => $idea->id])}}">Approve</a>
+                                                </td>
 
-                                    {{--<fieldset>--}}
-                                    <div class="form-group">
-                                            <textarea name="posts" id="posts" cols="10" rows="5"
-                                                      class="form-control"></textarea>
-                                    </div>
+                                            </tr>
+                                        @endforeach
+                                        @else
+                                        <td class="warning text-center" colspan="4">No Pending Idea</td>
+                                    @endif
+                                    </tbody>
 
-                                    @php
-                                        //retrieve all category
-                                        $categories = \App\Category::all();
-                                    @endphp
-
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <select class="form-control" name="category" id="category">
-                                                <option value="#">Select a Category</option>
-                                                @foreach($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->cat_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <br>
-                                    <br>
-                                    <div class="form-group">
-                                        <label for="file" class="col-md-3 control-label">Supporting file: </label>
-
-                                        <div class="col-md-8">
-                                            <input type="file" name="file" class="form-control">
-                                        </div>
-
-                                    </div>
-
-                                    <br>
-                                    <br>
-
-
-                                    <div class="form-group">
-                                        <div class="col-md-6">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="remember" required> I have read <a
-                                                            href="#" target="_blank">Terms and Conditions</a>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        <button class="btn btn-primary pull-right" id="submitIdea"><i
-                                                    class="fa fa-terminal"></i> Submit
-                                        </button>
-                                    </div>
-                                    {{--</fieldset>--}}
-                                </form>
-
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -89,11 +54,11 @@
         </div> <!-- end row -->
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">Idea feed</div>
+                    <div class="panel-heading">Published Ideas</div>
                     <div id="postsTable" class="panel-body">
-                        @foreach($allIdeas as $posts)
+                        @foreach($pubIdeas as $posts)
 
                             <div class="row" id="eachPost{{$posts->id}}">
                                 <div class="col-md-8 col-md-offset-2">
@@ -129,10 +94,10 @@
                                                 <!-- counting likes -->
 
                                                 <div id="{{ $posts->id }}areaDefine" style="width: 50px;">
-                                             @php
-                                                 $likeCount=\App\Like::where('idea_id',$posts->id)->where('status', 1)->count();
-                                                 $dislikeCount=\App\Like::where('idea_id',$posts->id)->where('status', 0)->count();
-                                             @endphp
+                                                    @php
+                                                        $likeCount=\App\Like::where('idea_id',$posts->id)->where('status', 1)->count();
+                                                        $dislikeCount=\App\Like::where('idea_id',$posts->id)->where('status', 0)->count();
+                                                    @endphp
 
                                                     @if($likeCount==1)
 
@@ -144,9 +109,9 @@
                                                         {{$likeCount." Likes "}}
                                                     @endif
 
-                                                        <span id="likeArea" style="width: 2%"
-                                                             data-id="{{$posts->id}}"
-                                                             data-id1="{{Auth::id()}}">
+                                                    <span id="likeArea" style="width: 2%"
+                                                          data-id="{{$posts->id}}"
+                                                          data-id1="{{Auth::id()}}">
                                                 <a style="cursor: pointer;text-decoration: none;color: #040b02"
                                                    id="{{ $posts->id }}like" title="Like it"><i
                                                             class="fa fa-thumbs-up fa-lg"></i></a>
@@ -162,15 +127,15 @@
                                                         {{$dislikeCount." Dislikes "}}
                                                     @endif
 
-                                                       <span id="unlikeArea"
-                                                            style="width: 2%" data-id="{{$posts->id}}"
-                                                            data-id1="{{Auth::id()}}">
+                                                    <span id="unlikeArea"
+                                                          style="width: 2%" data-id="{{$posts->id}}"
+                                                          data-id1="{{Auth::id()}}">
                                                 <a style="cursor: pointer" title="Unlike" id="dislike"><i
                                                             class="fa fa-thumbs-down fa-lg"></i></a>
                                             </span>
 
-                                        </div>
-                                            <br>
+                                                </div>
+                                                <br>
 
 
                                                 <!-- showing comments -->
@@ -230,7 +195,7 @@
 
 
                         @endforeach
-{{ $allIdeas->links() }}
+                        {{ $pubIdeas->links() }}
 
                     </div>
                 </div>

@@ -15,7 +15,7 @@ class HomeController extends Controller
     }
 
     public function index(){
-        $allIdeas = Idea::all();
+        $allIdeas = Idea::where('approve', 1)->paginate(5);
         return view('student.home', compact(['allIdeas']));
     }
 }

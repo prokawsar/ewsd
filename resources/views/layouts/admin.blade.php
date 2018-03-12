@@ -39,7 +39,7 @@
                     @guest
                     @else
                       
-                        <li><a href="#">All Ideas</a></li>
+                        <li><a href="{{ route('ideas') }}">All Ideas</a></li>
                     @endguest
                     </ul>
 

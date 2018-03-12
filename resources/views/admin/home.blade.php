@@ -1,3 +1,4 @@
+@section('title', 'Admin')
 @extends('layouts.admin')
 
 @section('content')

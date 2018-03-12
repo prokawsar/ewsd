@@ -72,4 +72,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Coordinator');
     }
+
+    public function idea()
+    {
+        return $this->hasMany('App\Idea');
+    }
 }

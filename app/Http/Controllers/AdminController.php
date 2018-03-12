@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Idea;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -22,6 +23,28 @@ class AdminController extends Controller
     {
         return view('admin.home');
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ideas()
+    {
+        $pubIdeas = Idea::where('approve', 1)->paginate(5);
+        $draftIdeas = Idea::where('approve', 0)->paginate(5);
+//        dd($draftIdeas);
+        return view('admin.allidea', compact('pubIdeas', 'draftIdeas'));
+    }
+
+    public function ideaApprove($id)
+    {
+        $idea = Idea::find($id);
+        $idea->approve = 1;
+        $idea->save();
+
+        return view('admin.allidea')->with('status', 'Idea Approved');
+    }
+
 
     /**
      * Show the form for creating a new resource.
