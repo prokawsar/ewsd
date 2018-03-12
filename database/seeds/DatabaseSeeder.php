@@ -12,6 +12,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call('RoleTableSeeder');
+        $this->command->info('Role table seeded!');
+
         $this->call('UserTableSeeder');
         $this->command->info('User table seeded!');
 
@@ -26,46 +29,91 @@ class DatabaseSeeder extends Seeder
 
         $this->call('CoordinatorTableSeeder');
         $this->command->info('Coordinator table seeded!');
+
+        $this->call('CategoryTableSeeder');
+        $this->command->info('Idea table seeded!');
+
+        $this->call('IdeaTableSeeder');
+        $this->command->info('Idea table seeded!');
     }
 }
 
-class UserTableSeeder extends Seeder {
+class RoleTableSeeder extends Seeder {
 
     public function run()
     {
+        DB::table('roles')->delete();
+        DB::table('comments')->delete();
+        DB::table('ideas')->delete();
         DB::table('students')->delete();
         DB::table('admins')->delete();
         DB::table('qamanagers')->delete();
         DB::table('coordinators')->delete();
+        DB::table('categories')->delete();
 
         DB::table('users')->delete();
         DB::statement("ALTER TABLE users AUTO_INCREMENT = 1;");
+        DB::statement("ALTER TABLE roles AUTO_INCREMENT = 1;");
+        DB::statement("ALTER TABLE categories AUTO_INCREMENT = 1;");
 
+
+        App\Role::create([
+            'role_name' => 'admin',
+
+        ]);
+
+        App\Role::create([
+            'role_name' => 'student',
+
+        ]);
+
+        App\Role::create([
+            'role_name' => 'coordinator',
+
+        ]);
+
+        App\Role::create([
+            'role_name' => 'qamanager',
+
+        ]);
+
+
+    }
+
+}
+class UserTableSeeder extends Seeder {
+
+    public function run()
+    {
         User::create([
             'name' => 'Student',
             'email' => 'student@bar.com',
-            'password' => bcrypt('111111')
+            'password' => bcrypt('111111'),
+            'role_id' => 2
 
         ]);
 
         User::create([
             'name' => 'Admin',
             'email' => 'kouther80@gmail.com',
-            'password' => bcrypt('111111')
+            'password' => bcrypt('111111'),
+            'role_id' => 1
 
         ]);
 
         User::create([
             'name' => 'QA Manager',
             'email' => 'manager@bar.com',
-            'password' => bcrypt('111111')
+            'password' => bcrypt('111111'),
+            'role_id' => 4
 
         ]);
 
         User::create([
             'name' => 'QA Coordinator',
             'email' => 'coordinator@gmail.com',
-            'password' => bcrypt('111111')
+            'password' => bcrypt('111111'),
+            'role_id' => 3
 
         ]);
 
@@ -122,6 +170,40 @@ class CoordinatorTableSeeder extends Seeder {
         DB::table('coordinators')->delete();
         App\Coordinator::create([
             'cord_id' => '4',
+        ]);
+
+    }
+
+}
+class CategoryTableSeeder extends Seeder {
+
+    public function run()
+    {
+        App\Category::create([
+            'cat_name' => 'Campus',
+
+        ]);
+
+
+    }
+
+}
+class IdeaTableSeeder extends Seeder {
+
+    public function run()
+    {
+
+        DB::table('ideas')->delete();
+        App\Idea::create([
+            'idea' => 'Wonderful Idea 1',
+            'cat_id' => 1,
+            'student_id' => 1
+        ]);
+
+        App\Idea::create([
+            'idea' => 'Wonderful Idea 2',
+            'cat_id' => 1,
+            'student_id' => 1
         ]);
 
     }

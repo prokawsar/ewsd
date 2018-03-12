@@ -18,7 +18,7 @@ Route::get('/', function () {
     
 });
 
-Route::get('/home', ['uses'=>'HomeController@index','as'=>'home','role'=>['student']]);
+Route::get('/home', ['uses'=>'HomeController@index','as'=>'home','role'=>['student']])->name('home');
 Route::get('/ahome', ['uses'=>'HomeController@index','as'=>'ahome','role'=>['admin']]);
 
 
@@ -40,15 +40,24 @@ Route::get('/stfhome', function () {
 Route::get('/qacorhome', function () {
     return view('coordinator.home');
 });
-
+//Route::get('/ahome', function () {
+//    return view('admin.home');
+//})->name('index');
 
 Route::post('/postComment', 'IdeaController@saveComment');
 
 Route::group(['prefix' => 'student'], function () {
+    Route::get('/login', 'StudentAuth\LoginController@showLoginForm')->name('slogin');
+    Route::post('/login', 'StudentAuth\LoginController@login');
+    Route::post('/logout', 'StudentAuth\LoginController@logout')->name('slogout');
 
     Route::get('/home', 'StudentController@index')->name('shome');
     Route::get('/contribution', 'StudentController@index')->name('sowncon');
     Route::post('/storeidea', 'IdeaController@saveIdea');
+
+    Route::get('/register', 'StudentAuth\RegisterController@showRegistrationForm')->name('register');
+    Route::post('/register', 'StudentAuth\RegisterController@register');
+
 
     Route::post('/password/email', 'StudentAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
     Route::post('/password/reset', 'StudentAuth\ResetPasswordController@reset')->name('password.email');
@@ -58,14 +67,27 @@ Route::group(['prefix' => 'student'], function () {
 });
 
 Route::group(['prefix' => 'admin'], function () {
+    Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('alogin');
+    Route::post('/login', 'AdminAuth\LoginController@login');
+    Route::post('/logout', 'AdminAuth\LoginController@logout')->name('alogout');
 
     Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm')->name('register');
     Route::post('/register', 'AdminAuth\RegisterController@register');
 
 });
 
+Route::group(['prefix' => 'staff'], function () {
+    Route::get('/login', 'StaffAuth\LoginController@showLoginForm')->name('stlogin');
+    Route::post('/login', 'StaffAuth\LoginController@login');
+    Route::post('/logout', 'StaffAuth\LoginController@logout')->name('stlogout');
+
+
+});
 
 Route::group(['prefix' => 'qamanager'], function () {
+    Route::get('/login', 'QamanagerAuth\LoginController@showLoginForm')->name('qlogin');
+    Route::post('/login', 'QamanagerAuth\LoginController@login');
+    Route::post('/logout', 'QamanagerAuth\LoginController@logout')->name('qlogout');
 
     Route::get('/home', 'QAManagerController@index')->name('qahome');
 
@@ -130,7 +152,9 @@ Route::group(['prefix' => 'qamanager'], function () {
 });
 
 Route::group(['prefix' => 'coordinator'], function () {
-
+    Route::get('/login', 'CoordinatorAuth\LoginController@showLoginForm')->name('clogin');
+    Route::post('/login', 'CoordinatorAuth\LoginController@login');
+    Route::post('/logout', 'CoordinatorAuth\LoginController@logout')->name('clogout');
     Route::post('/home', 'LoginController@logout')->name('chome');
 
     Route::post('/password/email', 'CoordinatorAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
@@ -140,3 +164,5 @@ Route::group(['prefix' => 'coordinator'], function () {
 });
 
 Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
