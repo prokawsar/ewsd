@@ -49,7 +49,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if( !Auth::user()->hasRole('student'))
-                        <li><a href="{{ route('slogin') }}">Login</a></li>
+                        <li><a href="{{ route('login') }}">Login</a></li>
                         {{----}}
 
                     @else
@@ -62,13 +62,13 @@
                             <ul class="dropdown-menu">
                                 <li>
 
-                                    <a href="{{ route('slogout') }}"
+                                    <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         Logout
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('slogout') }}" method="POST"
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                           style="display: none;">
                                         {{ csrf_field() }}
                                     </form>

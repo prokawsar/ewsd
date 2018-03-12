@@ -49,23 +49,10 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
-                        <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    Login as <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
+                    
                                     
-                        <li><a href="{{ route('alogin') }}"> Admin </a></li>
+                        <li><a href="{{ route('login') }}"> Login </a></li>
                         
-                        <li><a href="{{ route('qlogin') }}"> QA Manager </a></li>
-                
-                        <li><a href="{{ route('clogin') }}"> QA Coordinator </a></li>
-                 
-                            <li><a href="{{ route('slogin') }}"> Student </a></li>
-                                </ul>
-                            </li>
-
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -75,7 +62,7 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         
-                                        <a href="{{ route('slogout') }}"
+                                        <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout
