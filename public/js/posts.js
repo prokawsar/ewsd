@@ -18,7 +18,7 @@ $(document).on('click','#submitIdea',function () {
 
         $.ajax({
             type: 'post',
-            url: '/student/storeidea',
+            url: '/storeidea',
             data: {
                 _token: _token,
                 ideas: idea,
@@ -35,7 +35,7 @@ $(document).on('click','#submitIdea',function () {
                 // $('#postsTable').load(location.href + " #postsTable");
             },
             error: function (response) {
-                alert(response);
+                alert(response.message);
             }
         })
     }

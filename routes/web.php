@@ -17,57 +17,37 @@ Route::get('/', function () {
     return view('auth.login');
     
 });
+Route::group(['middleware'=>'auth','role'=>['student']], function() {
+    Route::get('/home', 'HomeController@index')->name('shome');
+    Route::post('/storeidea', 'IdeaController@saveIdea');
 
-Route::get('/home', ['uses'=>'HomeController@index','as'=>'home','role'=>['student']]);
-Route::get('/ahome', ['uses'=>'HomeController@index','as'=>'ahome','role'=>['admin']]);
+    Route::get('/contribution', function () {
+        return view('student.stowncon');
+    })->name('sowncon');
 
-
-Route::get('/qahome', function () {
-    return view('qamanager.home');
 });
 
-Route::get('/stowncon', function () {
-    return view('student.stowncon');
+Route::group(['middleware'=>'auth','role'=>['admin']], function() {
+    Route::get('/admin/home', 'AdminController@index')->name('ahome');
 });
 
-Route::get('/sthome', function () {
-    return view('student.home');
-});
-Route::get('/stfhome', function () {
-    return view('staff.home');
+Route::group(['middleware'=>'auth','role'=>['qamanager']], function() {
+    Route::get('/qamanager/home', 'QAManagerController@index')->name('qahome');
+    Route::post('/qamanager/addcat', 'QAManagerController@addCategory');
+
 });
 
-Route::get('/qacorhome', function () {
-    return view('coordinator.home');
+Route::group(['middleware'=>'auth','role'=>['coordinator']], function() {
+    Route::get('/coordinator/home', 'QACoordinatorController@index')->name('chome');
 });
+
+//Route::get('/home', ['uses'=>'HomeController@index','as'=>'home','role'=>['student']]);
+//Route::get('/ahome', ['uses'=>'HomeController@index','as'=>'ahome','role'=>['admin']]);
 
 
 Route::post('/postComment', 'IdeaController@saveComment');
 
-Route::group(['prefix' => 'student'], function () {
-
-    Route::get('/home', 'StudentController@index')->name('shome');
-    Route::get('/contribution', 'StudentController@index')->name('sowncon');
-    Route::post('/storeidea', 'IdeaController@saveIdea');
-
-    Route::post('/password/email', 'StudentAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
-    Route::post('/password/reset', 'StudentAuth\ResetPasswordController@reset')->name('password.email');
-    Route::get('/password/reset', 'StudentAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
-    Route::get('/password/reset/{token}', 'StudentAuth\ResetPasswordController@showResetForm');
-
-});
-
-Route::group(['prefix' => 'admin'], function () {
-
-    Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm')->name('register');
-    Route::post('/register', 'AdminAuth\RegisterController@register');
-
-});
-
-
 Route::group(['prefix' => 'qamanager'], function () {
-
-    Route::get('/home', 'QAManagerController@index')->name('qahome');
 
     Route::get('/statistics', function () {
         return view('qamanager.statistics');
@@ -78,7 +58,6 @@ Route::group(['prefix' => 'qamanager'], function () {
     Route::get('/addcat', function () {
         return view('qamanager.add_catagory');
     });
-    Route::post('/addcat', 'QAManagerController@addCategory');
 
     Route::get('/percentage', function () {
         return view('qamanager.percentage');
@@ -127,16 +106,6 @@ Route::group(['prefix' => 'qamanager'], function () {
     });
 
 
-});
-
-Route::group(['prefix' => 'coordinator'], function () {
-
-    Route::post('/home', 'LoginController@logout')->name('chome');
-
-    Route::post('/password/email', 'CoordinatorAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
-    Route::post('/password/reset', 'CoordinatorAuth\ResetPasswordController@reset')->name('password.email');
-    Route::get('/password/reset', 'CoordinatorAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
-    Route::get('/password/reset/{token}', 'CoordinatorAuth\ResetPasswordController@showResetForm');
 });
 
 Auth::routes();

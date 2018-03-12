@@ -10,6 +10,8 @@ class IdeaController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth');
+        $this->middleware('role');
     }
 
     public function saveIdea(Request $request)
@@ -41,7 +43,7 @@ class IdeaController extends Controller
             $comment->save();
 
             return response()->json([
-                'message'=>'Idea successfully submitted'
+                'message'=>'Comment successful. '
             ]);
         }
     }

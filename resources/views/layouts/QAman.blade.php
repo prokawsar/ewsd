@@ -44,7 +44,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    @if( !Auth::guard('qamanager')->check())
+                    @if( !Auth::user()->hasRole('qamanager'))
                         <li><a href="{{ route('login') }}">Login</a></li>
 
                     @else
@@ -63,7 +63,7 @@
                                         Logout
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('qlogout') }}" method="POST"
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                           style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
@@ -76,7 +76,7 @@
         </div>
     </nav>
 
-    @if ( Auth::guard('qamanager')->check())
+    @if ( Auth::user()->hasRole('qamanager'))
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">

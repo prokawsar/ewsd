@@ -38,18 +38,13 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                    @guest
-                    @else
-                      
-                        <li><a href="#">All Ideas</a></li>
-                    @endguest
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-                        @guest
-                    
+                        @if( !Auth::user())
                                     
                         <li><a href="{{ route('login') }}"> Login </a></li>
                         

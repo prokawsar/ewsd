@@ -38,7 +38,7 @@
                             <td>{{ $category->start_date->toDateString() }}</td>
                             <td>{{ $category->end_date->toDateString() }}</td>
                             <td>{{ $category->final_end_date->toDateString() }}</td>
-                            <td><a href="#"><i class="fa fa-crosshairs"></i></a>  </td>
+                            <td><a href="#"><i class="fa fa-remove"></i></a>  </td>
 
                         </tr>
                           @endforeach

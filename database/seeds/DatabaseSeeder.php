@@ -181,6 +181,9 @@ class CategoryTableSeeder extends Seeder {
     {
         App\Category::create([
             'cat_name' => 'Campus',
+            'start_date' => '2018-03-04',
+            'end_date' => '2018-03-10',
+            'final_end_date' => '2018-03-14',
 
         ]);
 

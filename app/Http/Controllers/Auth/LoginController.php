@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -39,20 +41,20 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if(Auth::user()->hasRole('admin'))
+        if( Auth::user()->hasRole('admin'))
         {
             return redirect(route('ahome'));
         }
         else if(Auth::user()->hasRole('coordinator')){
 
-            return redirect(route('index'));
+            return redirect(route('chome'));
         }
         else if(Auth::user()->hasRole('student')){
 
             return redirect(route('shome'));
         }
         else if(Auth::user()->hasRole('qamanager')){
-            return redirect('admin');
+            return redirect(route('qahome'));
         }
     }
 }

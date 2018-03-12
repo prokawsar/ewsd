@@ -10,7 +10,8 @@ class QAManagerController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('qamanager');
+        $this->middleware('auth');
+        $this->middleware('role');
     }
 
     public function index()

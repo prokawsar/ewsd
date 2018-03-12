@@ -11,12 +11,8 @@ class StudentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('student');
-    }
-
-    protected function guard()
-    {
-        return Auth::guard('student');
+        $this->middleware('auth');
+        $this->middleware('role');
     }
 
     /**
