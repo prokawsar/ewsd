@@ -69,6 +69,10 @@ Route::group(['middleware'=>'auth','role'=>['coordinator']], function() {
 
 Route::post('/postComment', 'IdeaController@saveComment');
 
+Route::post('/like',['uses'=>'IdeaController@setLike','role'=>['coordinator', 'student', 'qamanager'],'as'=>'like']);
+Route::post('/dislike',['uses'=>'IdeaController@setDislike','role'=>['coordinator', 'student', 'qamanager'],'as'=>'dislike']);
+
+
 Route::group(['prefix' => 'qamanager'], function () {
 
     Route::get('/statistics', function () {

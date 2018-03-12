@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Idea;
 use App\Comment;
+use App\Like;
 use Illuminate\Http\Request;
 
 class IdeaController extends Controller
@@ -17,7 +18,7 @@ class IdeaController extends Controller
     public function saveIdea(Request $request)
     {
         //dd($request);
-        if($request->ajax()){
+        if ($request->ajax()) {
 
             $idea = new Idea();
             $idea->idea = $request->ideas;
@@ -26,7 +27,7 @@ class IdeaController extends Controller
             $idea->save();
 
             return response()->json([
-                'message'=>'Idea successfully submitted'
+                'message' => 'Idea successfully submitted'
             ]);
         }
     }
@@ -34,7 +35,7 @@ class IdeaController extends Controller
     public function saveComment(Request $request)
     {
         //dd($request);
-        if($request->ajax()){
+        if ($request->ajax()) {
 
             $comment = new Comment();
             $comment->comment = $request->comment;
@@ -43,8 +44,43 @@ class IdeaController extends Controller
             $comment->save();
 
             return response()->json([
-                'message'=>'Comment successful. '
+                'message' => 'Comment successful. '
             ]);
         }
+    }
+
+
+    public function setLike(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $like = new Like();
+            $like->status = 1;
+            $like->idea_id = $request->idea_id;
+            $like->user_id = $request->user_id;
+            $like->save();
+
+            return response()->json([
+                'message' => 'Like successful. '
+            ]);
+        }
+    }
+
+
+    public function setDislike(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $like = new Like();
+            $like->status = 0;
+            $like->idea_id = $request->idea_id;
+            $like->user_id = $request->user_id;
+            $like->save();
+
+            return response()->json([
+                'message' => 'Dislike successful. '
+            ]);
+        }
+
     }
 }

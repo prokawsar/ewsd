@@ -40,6 +40,14 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+                                    {!! NoCaptcha::display() !!}
+                                </div>
+                            </div>
+
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
@@ -58,9 +66,7 @@
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         Forgot Your Password?
                                     </a>
-                                    {!! NoCaptcha::display() !!}
 
-                                    <br>
                                     <button type="submit" class="btn btn-primary">
                                         Login
                                     </button>
@@ -74,6 +80,3 @@
         </div>
     </div>
 @endsection
-
-
-<script src="https://www.google.com/recaptcha/api.js"></script>

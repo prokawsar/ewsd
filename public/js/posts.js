@@ -50,7 +50,7 @@ $(document).on('click','#likeArea',function () {
         type: 'post',
         url: '/like',
         data: {
-            _token: _token,
+            _token: token,
             idea_id: ideaid,
             user_id: userid
         },

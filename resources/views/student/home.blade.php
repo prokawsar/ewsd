@@ -130,20 +130,19 @@
 
                                                 <div id="{{ $posts->id }}areaDefine" style="width: 50px;">
                                              @php
-                                                 $count=\App\Like::where('idea_id',$posts->id)->count();
+                                                 $likeCount=\App\Like::where('idea_id',$posts->id)->where('status', 1)->count();
+                                                 $dislikeCount=\App\Like::where('idea_id',$posts->id)->where('status', 0)->count();
                                              @endphp
 
-                                                    @if($count==1)
+                                                    @if($likeCount==1)
 
-                                                        {{$count." Like "}}
+                                                        {{$likeCount." Like "}}
 
-                                                    @elseif ($count==0)
+                                                    @elseif ($likeCount==0)
 
                                                     @else
-                                                        {{$count." Likes "}}
+                                                        {{$likeCount." Likes "}}
                                                     @endif
-
-
 
                                                         <span id="likeArea" style="width: 2%"
                                                              data-id="{{$posts->id}}"
@@ -153,6 +152,16 @@
                                                             class="fa fa-thumbs-up fa-lg"></i></a>
                                             </span>
                                                     &nbsp
+                                                    @if($dislikeCount==1)
+
+                                                        {{$dislikeCount." Dislike "}}
+
+                                                    @elseif ($dislikeCount==0)
+
+                                                    @else
+                                                        {{$dislikeCount." Dislikes "}}
+                                                    @endif
+
                                                        <span id="unlikeArea"
                                                             style="width: 2%" data-id="{{$posts->id}}"
                                                             data-id1="{{Auth::id()}}">
