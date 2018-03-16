@@ -1,9 +1,10 @@
-@section('title', 'All Submitted Ideas')
+@section('title', 'My ideas')
 
-@extends('layouts.admin')
+@extends('layouts.student')
 
 @section('content')
     <div class="container">
+
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
@@ -34,13 +35,10 @@
                                                 <td>{{ $idea->idea}}</td>
                                                 <td>{{ $idea->cat_id }}</td>
                                                 <td>{{ $idea->approve }}</td>
-                                                {{--<td><a class="btn btn-success"--}}
-                                                       {{--href="{{route('ideaApprove', ['id' => $idea->id])}}">Approve</a>--}}
-                                                {{--</td>--}}
 
                                             </tr>
                                         @endforeach
-                                        @else
+                                    @else
                                         <td class="warning text-center" colspan="4">No Pending Idea</td>
                                     @endif
                                     </tbody>
@@ -56,15 +54,14 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">Published Ideas</div>
+                    <div class="panel-heading">Approved Ideas</div>
                     <div id="postsTable" class="panel-body">
-                        @foreach($pubIdeas as $posts)
+                        @foreach($allIdeas as $posts)
 
                             <div class="row" id="eachPost{{$posts->id}}">
                                 <div class="col-md-8 col-md-offset-2">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading"><strong>Posted by
-                                                &nbsp</strong>
+                                        <div class="panel-heading">
                                             {{$posts->created_at->diffForHumans()}}
 
                                             <span class="cust-badge badge-success"><strong>{{ $posts->cat_id }}</strong> </span>
@@ -174,7 +171,10 @@
                                                               placeholder="Write a comment..." type="text"
                                                               class="form-control" name="comment"
                                                               style="padding-top:10px;"></textarea>
-                                                    <br/> <a class=" btn btn-default pull-right"
+                                                    <br/>
+                                                    <input title="Anonymously" type="checkbox" id="anonymComment" name="anonymComment"> Comment Anonymously
+
+                                                    <a class=" btn btn-default pull-right"
                                                              id="commentPostButton{{$posts->id}}"
                                                              onclick="return commentButtonClicked('{{$posts->id}}','1')"><i
                                                                 class="fa fa-paper-plane-o" aria-hidden="true"></i>
@@ -195,7 +195,7 @@
 
 
                         @endforeach
-                        {{ $pubIdeas->links() }}
+                        {{ $allIdeas->links() }}
 
                     </div>
                 </div>

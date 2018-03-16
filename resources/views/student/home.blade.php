@@ -20,7 +20,7 @@
                                     </div>
                                 @endif
 
-                                <form id="cform">
+                                <form id="cform" enctype="multipart/form-data">
                                     {{csrf_field()}}
                                     <input type="hidden" value="1" name="user_id" id="user_id">
 
@@ -49,10 +49,10 @@
                                     <br>
                                     <br>
                                     <div class="form-group">
-                                        <label for="file" class="col-md-3 control-label">Supporting file: </label>
+                                        <label for="file" class="col-md-3 control-label">Supporting file/s: </label>
 
                                         <div class="col-md-8">
-                                            <input type="file" name="file" class="form-control">
+                                            <input type="file" name="file[]" class="form-control" multiple>
                                         </div>
 
                                     </div>
@@ -62,13 +62,18 @@
 
 
                                     <div class="form-group">
-                                        <div class="col-md-6">
+                                        <div class="col-md-10">
                                             <div class="checkbox">
                                                 <label>
                                                     <input type="checkbox" name="remember" required> I have read <a
                                                             href="#" target="_blank">Terms and Conditions</a>
+
                                                 </label>
+                                                <span class="pull-right">
+                                                        <input title="Anonymously" type="checkbox" id="anonym" name="anonym"> Post Anonymously
+                                                    </span>
                                             </div>
+
                                         </div>
                                     </div>
 
@@ -128,11 +133,11 @@
 
                                                 <!-- counting likes -->
 
-                                                <div id="{{ $posts->id }}areaDefine" style="width: 50px;">
-                                             @php
-                                                 $likeCount=\App\Like::where('idea_id',$posts->id)->where('status', 1)->count();
-                                                 $dislikeCount=\App\Like::where('idea_id',$posts->id)->where('status', 0)->count();
-                                             @endphp
+                                                <div id="{{ $posts->id }}areaDefine">
+                                                    @php
+                                                        $likeCount=\App\Like::where('idea_id',$posts->id)->where('status', 1)->count();
+                                                        $dislikeCount=\App\Like::where('idea_id',$posts->id)->where('status', 0)->count();
+                                                    @endphp
 
                                                     @if($likeCount==1)
 
@@ -144,9 +149,9 @@
                                                         {{$likeCount." Likes "}}
                                                     @endif
 
-                                                        <span id="likeArea" style="width: 2%"
-                                                             data-id="{{$posts->id}}"
-                                                             data-id1="{{Auth::id()}}">
+                                                    <span id="likeArea" style="width: 2%"
+                                                          data-id="{{$posts->id}}"
+                                                          data-id1="{{Auth::id()}}">
                                                 <a style="cursor: pointer;text-decoration: none;color: #040b02"
                                                    id="{{ $posts->id }}like" title="Like it"><i
                                                             class="fa fa-thumbs-up fa-lg"></i></a>
@@ -162,15 +167,15 @@
                                                         {{$dislikeCount." Dislikes "}}
                                                     @endif
 
-                                                       <span id="unlikeArea"
-                                                            style="width: 2%" data-id="{{$posts->id}}"
-                                                            data-id1="{{Auth::id()}}">
-                                                <a style="cursor: pointer" title="Unlike" id="dislike"><i
+                                                    <span id="unlikeArea"
+                                                          style="width: 2%" data-id="{{$posts->id}}"
+                                                          data-id1="{{Auth::id()}}">
+                                                <a style="cursor: pointer" title="Dislike" id="dislike"><i
                                                             class="fa fa-thumbs-down fa-lg"></i></a>
                                             </span>
 
-                                        </div>
-                                            <br>
+                                                </div>
+                                                <br>
 
 
                                                 <!-- showing comments -->
@@ -209,7 +214,11 @@
                                                               placeholder="Write a comment..." type="text"
                                                               class="form-control" name="comment"
                                                               style="padding-top:10px;"></textarea>
-                                                    <br/> <a class=" btn btn-default pull-right"
+                                                    <br/>
+
+                                                        <input title="Anonymously" type="checkbox" id="anonymComment" name="anonymComment"> Comment Anonymously
+
+                                                    <a class=" btn btn-default pull-right"
                                                              id="commentPostButton{{$posts->id}}"
                                                              onclick="return commentButtonClicked('{{$posts->id}}','1')"><i
                                                                 class="fa fa-paper-plane-o" aria-hidden="true"></i>
@@ -230,7 +239,7 @@
 
 
                         @endforeach
-{{ $allIdeas->links() }}
+                        {{ $allIdeas->links() }}
 
                     </div>
                 </div>

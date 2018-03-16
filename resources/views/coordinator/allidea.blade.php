@@ -1,6 +1,6 @@
 @section('title', 'All Submitted Ideas')
 
-@extends('layouts.admin')
+@extends('layouts.qacoor')
 
 @section('content')
     <div class="container">
@@ -16,6 +16,13 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
+
+                                @if (session('warning'))
+                                    <div class="alert alert-warning">
+                                        {{ session('warning') }}
+                                    </div>
+                                @endif
+
                                 <table id="example1" class="table table-striped">
                                     <thead>
                                     <tr>
@@ -34,13 +41,17 @@
                                                 <td>{{ $idea->idea}}</td>
                                                 <td>{{ $idea->cat_id }}</td>
                                                 <td>{{ $idea->approve }}</td>
-                                                {{--<td><a class="btn btn-success"--}}
-                                                       {{--href="{{route('ideaApprove', ['id' => $idea->id])}}">Approve</a>--}}
-                                                {{--</td>--}}
+                                                <td><a class="btn btn-warning"
+                                                       href="{{route('ideaIgnore', ['id' => $idea->id])}}">Ignore</a>
+                                                </td>
+
+                                                <td><a class="btn btn-success"
+                                                       href="{{route('ideaApprove', ['id' => $idea->id])}}">Approve</a>
+                                                </td>
 
                                             </tr>
                                         @endforeach
-                                        @else
+                                    @else
                                         <td class="warning text-center" colspan="4">No Pending Idea</td>
                                     @endif
                                     </tbody>
@@ -106,7 +117,7 @@
                                                     @elseif ($likeCount==0)
 
                                                     @else
-                                                        {{$likeCount." Likes "}}
+                                                        <span>{{$likeCount." Likes "}} </span>
                                                     @endif
 
                                                     <span id="likeArea" style="width: 2%"

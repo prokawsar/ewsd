@@ -38,11 +38,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    @if( !Auth::user()->hasRole('student'))
-                    @else
 
-                        <li><a href="#">My Ideas</a></li>
-                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -89,7 +85,8 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header"></li>
 
-                    <li><a href="{{ route('shome')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+                    <li><a href="{{ route('shome')}}"><i class="fa fa-dashboard"></i> <span>Home</span></a></li>
+                    <li><a href="{{ route('sideas')}}"><i class="fa fa-dashboard"></i> <span>My Ideas</span></a></li>
                     <li><a href="{{ route('sowncon')}}"><i class="fa fa-book"></i> <span>Own Contributions</span></a>
                     </li>
 

@@ -7,10 +7,17 @@ $(document).ready(function () {
 });
 
 $(document).on('click','#submitIdea',function () {
-    var idea= $('#posts').val();
+    var idea = $('#posts').val();
+    var files = $('input[name=file]').val();
     var user_id= $('#user_id').val();
     var cat_id= $('#category').val();
     var _token= $('input[name=_token]').val();
+    var anonym = 0;
+
+
+    if(document.getElementById('anonym').checked ){
+        anonym = 1;
+    }
 
     if(idea=='' || user_id==''){
         $('.validation').text("Write something !!");
@@ -22,6 +29,8 @@ $(document).on('click','#submitIdea',function () {
             data: {
                 _token: _token,
                 ideas: idea,
+                anonym: anonym,
+                files: files,
                 user_id: user_id,
                 cat_id: cat_id
             },

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Idea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
@@ -42,7 +43,8 @@ class AdminController extends Controller
         $idea->approve = 1;
         $idea->save();
 
-        return view('admin.allidea')->with('status', 'Idea Approved');
+//        return view('admin.allidea')->with('status', 'Idea Approved');
+        return  Redirect::back()->with('status', 'Idea Approved');
     }
 
 

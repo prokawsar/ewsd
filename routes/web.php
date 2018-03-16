@@ -36,6 +36,7 @@ Route::get('/', function () {
 
 Route::group(['middleware'=>'auth','role'=>['student']], function() {
     Route::get('/home', 'HomeController@index')->name('shome');
+    Route::get('/myideas', 'HomeController@myIdeas')->name('sideas');
     Route::post('/storeidea', 'IdeaController@saveIdea');
 
     Route::get('/contribution', function () {
@@ -48,7 +49,8 @@ Route::group(['middleware'=>'auth','role'=>['admin']], function() {
     Route::get('/admin/home', 'AdminController@index')->name('ahome');
     Route::get('/admin/ideas', 'AdminController@ideas')->name('ideas');
 
-    Route::get('/ideaApprove{id}', 'AdminController@ideaApprove')->name('ideaApprove');
+    Route::get('/ideaApprove{id}', ['uses'=>'AdminController@ideaApprove', 'role'=>['admin', 'coordinator']])->name('ideaApprove');
+    Route::get('/ideaApprove{id}', ['uses'=>'AdminController@ideaApprove', 'role'=>['admin', 'coordinator']])->name('ideaApprove');
 });
 
 Route::group(['middleware'=>'auth','role'=>['qamanager']], function() {
@@ -64,6 +66,11 @@ Route::group(['middleware'=>'auth','role'=>['qamanager']], function() {
 
 Route::group(['middleware'=>'auth','role'=>['coordinator']], function() {
     Route::get('/coordinator/home', 'QACoordinatorController@index')->name('chome');
+
+    Route::get('/coordinator/ideas', 'QACoordinatorController@ideas')->name('coorideas');
+
+    Route::get('/ideaIgnore{id}', ['uses'=>'QACoordinatorController@ideaIgnore', 'role'=>[ 'coordinator']])->name('ideaIgnore');
+
 });
 
 //Route::get('/home', ['uses'=>'HomeController@index','as'=>'home','role'=>['student']]);

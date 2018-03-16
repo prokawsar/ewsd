@@ -17,6 +17,7 @@ class CreateIdeasTable extends Migration
             $table->increments('id');
             $table->string('idea');
             $table->boolean('approve')->default(0);
+            $table->boolean('anonym')->default(0);
             $table->integer('cat_id')->unsigned();
             $table->integer('student_id')->unsigned();
 

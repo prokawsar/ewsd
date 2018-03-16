@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Idea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class QACoordinatorController extends Controller
 {
@@ -16,4 +18,23 @@ class QACoordinatorController extends Controller
     {
         return view('coordinator.home');
     }
+
+    public function ideas()
+    {
+        $pubIdeas = Idea::where('approve', 1)->paginate(5);
+        $draftIdeas = Idea::where('approve', 0)->paginate(5);
+//        dd($draftIdeas);
+        return view('coordinator.allidea', compact('pubIdeas', 'draftIdeas'));
+    }
+
+    public function ideaIgnore($id)
+    {
+        $idea = Idea::find($id);
+        $idea->approve = -1;
+        $idea->save();
+
+//        return view('admin.allidea')->with('status', 'Idea Approved');
+        return Redirect::back()->with('warning', 'Idea Ignored');
+    }
+
 }

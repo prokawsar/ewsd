@@ -14,158 +14,169 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
+<div id="app">
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+                <!-- Collapsed Hamburger -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#app-navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }} : Admin
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                    @guest
-                    @else
-                      
-                        <li><a href="{{ route('ideas') }}">All Ideas</a></li>
-                    @endguest
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                           
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    My Account <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                <!-- Branding Image -->
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }} : Admin
+                </a>
             </div>
-        </nav>
-        <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-     
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header"></li>
-       
-        <li><a href="{{ url('/ahome')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        
-        <li class="treeview">
-          <a href="{{ url('#')}}">
-            <i class="fa fa-files-o"></i>
-            <span>Details</span>
-            <span class="pull-right-container">
+
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+
+                </ul>
+
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Authentication Links -->
+                    @guest
+                    <li><a href="{{ route('login') }}">Login</a></li>
+
+                    @else
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false" aria-haspopup="true">
+                                My Account <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li>
+
+                                    <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        Logout
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                        @endguest
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header"></li>
+
+                <li><a href="{{ route('ahome')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+                <li><a href="{{ route('ideas') }}"><i class="fa fa-files-o"></i> All Ideas</a></li>
+
+                <li class="treeview">
+                    <a href="{{ url('#')}}">
+                        <i class="fa fa-files-o"></i>
+                        <span>Details</span>
+                        <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-          </a>
-          <ul class="treeview-menu">
-          
-            <li><a href="{{ url('#')}}"><i class="fa fa-circle-o"></i> Closer Date of Academic Year</a></li>
-            <li><a href="{{ url('#')}}"><i class="fa fa-circle-o"></i> Staff Details</a></li>
-            <li><a href="{{ url('#')}}"><i class="fa fa-circle-o"></i> Student Details</a></li>
-            
-         </ul>
-        </li>
-          <li class="treeview">
-              <a href="{{ url('/statical1')}}">
-                  <i class="fa fa-files-o"></i>
-                  <span>Statistics</span>
-                  <span class="pull-right-container">
+                    </a>
+                    <ul class="treeview-menu">
+
+                        <li><a href="{{ url('#')}}"><i class="fa fa-circle-o"></i> Closer Date of Academic Year</a></li>
+                        <li><a href="{{ url('#')}}"><i class="fa fa-circle-o"></i> Staff Details</a></li>
+                        <li><a href="{{ url('#')}}"><i class="fa fa-circle-o"></i> Student Details</a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="{{ url('/statical1')}}">
+                        <i class="fa fa-files-o"></i>
+                        <span>Statistics</span>
+                        <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-              </a>
-              <ul class="treeview-menu">
-                  <li><a href="{{ url('/statistics')}}"><i class="fa fa-circle-o"></i> Statistics</a></li>
-                  <li><a href="{{ url('/ideas')}}"><i class="fa fa-circle-o"></i> Number of Ideas</a></li>
-                  <li><a href="{{ url('/contributors')}}"><i class="fa fa-circle-o"></i> Contributors</a></li>
-                  <li><a href="{{ url('/percentage')}}"><i class="fa fa-circle-o"></i>Shared Pecentage</a></li>
-                  <li><a href="{{ url('/ideas_catagory')}}"><i class="fa fa-circle-o"></i>Ideas of each Catagories</a></li>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/statistics')}}"><i class="fa fa-circle-o"></i> Statistics</a></li>
+                        <li><a href="{{ url('/ideas')}}"><i class="fa fa-circle-o"></i> Number of Ideas</a></li>
+                        <li><a href="{{ url('/contributors')}}"><i class="fa fa-circle-o"></i> Contributors</a></li>
+                        <li><a href="{{ url('/percentage')}}"><i class="fa fa-circle-o"></i>Shared Pecentage</a></li>
+                        <li><a href="{{ url('/ideas_catagory')}}"><i class="fa fa-circle-o"></i>Ideas of each Catagories</a>
+                        </li>
 
-              </ul>
-          </li>
-          <li class="treeview">
-              <a href="{{ url('#')}}">
-                  <i class="fa fa-files-o"></i>
-                  <span>Further Statistics</span>
-                  <span class="pull-right-container">
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="{{ url('#')}}">
+                        <i class="fa fa-files-o"></i>
+                        <span>Further Statistics</span>
+                        <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-              </a>
-              <ul class="treeview-menu">
+                    </a>
+                    <ul class="treeview-menu">
 
-                  <li><a href="{{ url('/liked_idea')}}"><i class="fa fa-circle-o"></i> Most liked 10 IDEA</a></li>
-                  <li><a href="{{ url('/commented_idea')}}"><i class="fa fa-circle-o"></i> Most commented 10 IDEA</a></li>
-                  <li><a href="{{ url('/idea_without_comment')}}"><i class="fa fa-circle-o"></i> Ideas without comment</a></li>
-                  <li><a href="{{ url('/idea_without_like')}}"><i class="fa fa-circle-o"></i> Ideas without like</a></li>
-              </ul>
-          </li>
-          <li class="treeview">
-              <a href="{{ url('#')}}">
-                  <i class="fa fa-files-o"></i>
-                  <span>Lists</span>
-                  <span class="pull-right-container">
+                        <li><a href="{{ url('/liked_idea')}}"><i class="fa fa-circle-o"></i> Most liked 10 IDEA</a></li>
+                        <li><a href="{{ url('/commented_idea')}}"><i class="fa fa-circle-o"></i> Most commented 10 IDEA</a>
+                        </li>
+                        <li><a href="{{ url('/idea_without_comment')}}"><i class="fa fa-circle-o"></i> Ideas without
+                                comment</a></li>
+                        <li><a href="{{ url('/idea_without_like')}}"><i class="fa fa-circle-o"></i> Ideas without
+                                like</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="{{ url('#')}}">
+                        <i class="fa fa-files-o"></i>
+                        <span>Lists</span>
+                        <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-              </a>
-              <ul class="treeview-menu">
+                    </a>
+                    <ul class="treeview-menu">
 
-                  <li><a href="{{ url('/idea_list')}}"><i class="fa fa-circle-o"></i> Total Ideas of Depertment</a></li>
-                  <li><a href="{{ url('/contributor_idea')}}"><i class="fa fa-circle-o"></i> Contributor's Ideas</a></li>
-                  <li><a href="{{ url('/catagorys_idea')}}"><i class="fa fa-circle-o"></i> Catagory's Ideas</a></li>
+                        <li><a href="{{ url('/idea_list')}}"><i class="fa fa-circle-o"></i> Total Ideas of
+                                Depertment</a></li>
+                        <li><a href="{{ url('/contributor_idea')}}"><i class="fa fa-circle-o"></i> Contributor's
+                                Ideas</a></li>
+                        <li><a href="{{ url('/catagorys_idea')}}"><i class="fa fa-circle-o"></i> Catagory's Ideas</a>
+                        </li>
 
-                  <li><a href="{{ url('/liked_idea_details')}}"><i class="fa fa-circle-o"></i> Most liked 10 IDEA Details</a></li>
-                  <li><a href="{{ url('/commented_idea_details')}}"><i class="fa fa-circle-o"></i> Most commented 10 IDEA Details</a></li>
+                        <li><a href="{{ url('/liked_idea_details')}}"><i class="fa fa-circle-o"></i> Most liked 10 IDEA
+                                Details</a></li>
+                        <li><a href="{{ url('/commented_idea_details')}}"><i class="fa fa-circle-o"></i> Most commented
+                                10 IDEA Details</a></li>
 
-                  <li><a href="{{ url('/idea_without_comment_details')}}"><i class="fa fa-circle-o"></i> Ideas without comment Details</a></li>
-                  <li><a href="{{ url('/idea_without_like_details')}}"><i class="fa fa-circle-o"></i> Ideas without like Details</a></li>
+                        <li><a href="{{ url('/idea_without_comment_details')}}"><i class="fa fa-circle-o"></i> Ideas
+                                without comment Details</a></li>
+                        <li><a href="{{ url('/idea_without_like_details')}}"><i class="fa fa-circle-o"></i> Ideas
+                                without like Details</a></li>
 
-              </ul>
-          </li>
-        
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+                    </ul>
+                </li>
 
-        @yield('content')
-    </div>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    @yield('content')
+</div>
+
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
