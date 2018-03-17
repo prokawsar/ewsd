@@ -22,7 +22,8 @@
 
                                 <form id="cform" enctype="multipart/form-data">
                                     {{csrf_field()}}
-                                    <input type="hidden" value="1" name="user_id" id="user_id">
+                                    <input type="hidden" value="{{ \Illuminate\Support\Facades\Auth::id() }}"
+                                           name="user_id" id="user_id">
 
                                     {{--<fieldset>--}}
                                     <div class="form-group">
@@ -70,7 +71,8 @@
 
                                                 </label>
                                                 <span class="pull-right">
-                                                        <input title="Anonymously" type="checkbox" id="anonym" name="anonym"> Post Anonymously
+                                                        <input title="Anonymously" type="checkbox" id="anonym"
+                                                               name="anonym"> Post Anonymously
                                                     </span>
                                             </div>
 
@@ -137,6 +139,9 @@
                                                     @php
                                                         $likeCount=\App\Like::where('idea_id',$posts->id)->where('status', 1)->count();
                                                         $dislikeCount=\App\Like::where('idea_id',$posts->id)->where('status', 0)->count();
+                                                        $userCheck =\App\Like::where('idea_id', $posts->id )->where('user_id', Auth::id())->get();
+
+                                                   // dd($userCheck);
                                                     @endphp
 
                                                     @if($likeCount==1)
@@ -152,9 +157,11 @@
                                                     <span id="likeArea" style="width: 2%"
                                                           data-id="{{$posts->id}}"
                                                           data-id1="{{Auth::id()}}">
-                                                <a style="cursor: pointer;text-decoration: none;color: #040b02"
-                                                   id="{{ $posts->id }}like" title="Like it"><i
-                                                            class="fa fa-thumbs-up fa-lg"></i></a>
+                                                        @if( count($userCheck) == 0)
+                                                            <a style="cursor: pointer;text-decoration: none;color: #040b02"
+                                                               id="{{ $posts->id }}like" title="Like it"><i
+                                                                        class="fa fa-thumbs-up fa-lg"></i></a>
+                                                        @endif
                                             </span>
                                                     &nbsp
                                                     @if($dislikeCount==1)
@@ -170,9 +177,11 @@
                                                     <span id="unlikeArea"
                                                           style="width: 2%" data-id="{{$posts->id}}"
                                                           data-id1="{{Auth::id()}}">
-                                                <a style="cursor: pointer" title="Dislike" id="dislike"><i
-                                                            class="fa fa-thumbs-down fa-lg"></i></a>
-                                            </span>
+                                                        @if( count($userCheck) == 0 )
+                                                            <a style="cursor: pointer" title="Dislike" id="dislike"><i
+                                                                        class="fa fa-thumbs-down fa-lg"></i></a>
+                                                        @endif
+                                                    </span>
 
                                                 </div>
                                                 <br>
@@ -216,11 +225,12 @@
                                                               style="padding-top:10px;"></textarea>
                                                     <br/>
 
-                                                        <input title="Anonymously" type="checkbox" id="anonymComment" name="anonymComment"> Comment Anonymously
+                                                    <input title="Anonymously" type="checkbox" id="anonymComment"
+                                                           name="anonymComment"> Comment Anonymously
 
                                                     <a class=" btn btn-default pull-right"
-                                                             id="commentPostButton{{$posts->id}}"
-                                                             onclick="return commentButtonClicked('{{$posts->id}}','1')"><i
+                                                       id="commentPostButton{{$posts->id}}"
+                                                       onclick="return commentButtonClicked('{{$posts->id}}','1')"><i
                                                                 class="fa fa-paper-plane-o" aria-hidden="true"></i>
                                                         comment</a>
                                                     &nbsp;

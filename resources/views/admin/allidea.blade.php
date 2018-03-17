@@ -35,12 +35,12 @@
                                                 <td>{{ $idea->cat_id }}</td>
                                                 <td>{{ $idea->approve }}</td>
                                                 {{--<td><a class="btn btn-success"--}}
-                                                       {{--href="{{route('ideaApprove', ['id' => $idea->id])}}">Approve</a>--}}
+                                                {{--href="{{route('ideaApprove', ['id' => $idea->id])}}">Approve</a>--}}
                                                 {{--</td>--}}
 
                                             </tr>
                                         @endforeach
-                                        @else
+                                    @else
                                         <td class="warning text-center" colspan="4">No Pending Idea</td>
                                     @endif
                                     </tbody>
@@ -97,6 +97,8 @@
                                                     @php
                                                         $likeCount=\App\Like::where('idea_id',$posts->id)->where('status', 1)->count();
                                                         $dislikeCount=\App\Like::where('idea_id',$posts->id)->where('status', 0)->count();
+                                                      $userCheck =\App\Like::where('idea_id', $posts->id )->where('user_id', Auth::id())->get();
+
                                                     @endphp
 
                                                     @if($likeCount==1)
@@ -112,10 +114,12 @@
                                                     <span id="likeArea" style="width: 2%"
                                                           data-id="{{$posts->id}}"
                                                           data-id1="{{Auth::id()}}">
-                                                <a style="cursor: pointer;text-decoration: none;color: #040b02"
-                                                   id="{{ $posts->id }}like" title="Like it"><i
-                                                            class="fa fa-thumbs-up fa-lg"></i></a>
-                                            </span>
+                                                        @if( count($userCheck) == 0)
+                                                            <a style="cursor: pointer;text-decoration: none;color: #040b02"
+                                                               id="{{ $posts->id }}like" title="Like it"><i
+                                                                        class="fa fa-thumbs-up fa-lg"></i></a>
+                                                        @endif
+                                                    </span>
                                                     &nbsp
                                                     @if($dislikeCount==1)
 
@@ -130,9 +134,11 @@
                                                     <span id="unlikeArea"
                                                           style="width: 2%" data-id="{{$posts->id}}"
                                                           data-id1="{{Auth::id()}}">
-                                                <a style="cursor: pointer" title="Dislike" id="dislike"><i
-                                                            class="fa fa-thumbs-down fa-lg"></i></a>
-                                            </span>
+                                                        @if( count($userCheck) == 0)
+                                                            <a style="cursor: pointer" title="Dislike" id="dislike"><i
+                                                                        class="fa fa-thumbs-down fa-lg"></i></a>
+                                                        @endif
+                                                    </span>
 
                                                 </div>
                                                 <br>
