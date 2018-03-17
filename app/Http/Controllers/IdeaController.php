@@ -16,6 +16,44 @@ class IdeaController extends Controller
         $this->middleware('role');
     }
 
+
+    public function SaveIdeaLink(Request $request)
+    {
+//        dd($request->files);
+        if(is_null($request->anonym)){
+            $request->anonym = 0;
+        }
+        $idea = new Idea();
+        $idea->idea = $request->posts;
+        $idea->anonym = $request->anonym;
+        $idea->cat_id = $request->category;
+        $idea->student_id = $request->user_id;
+        $idea->save();
+
+        $idea_id = Idea::select('id')->orderBy('created_at', 'desc')->first();
+
+        if (isset($request->files)) {
+
+            foreach ($request->files as $singleFile) {
+                foreach ($singleFile as $files){
+//                    dd($files);
+                    $file = new File();
+                    $fileName = $files->getClientOriginalName() . '.' . $files->getClientOriginalExtension();
+                    $files->move(public_path('supporting'), $fileName);
+
+                    $file->file = $fileName;
+                    $file->idea_id = $idea_id['id'];
+                    $file->save();
+
+                }
+
+            }
+
+        }
+        return redirect('/home')->with('status', 'Idea successfully submitted');
+    }
+
+
     public function saveIdea(Request $request)
     {
         if ($request->ajax()) {
@@ -29,7 +67,7 @@ class IdeaController extends Controller
 
             $idea_id = Idea::select('id')->orderBy('created_at', 'desc')->first();
 
-            if(isset($request->files)){
+            if (isset($request->files)) {
                 foreach ($request->files as $singleFile) {
                     $file = new File();
                     $fileName = time() . '.' . $singleFile->getClientOriginalExtension();

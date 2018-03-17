@@ -20,7 +20,7 @@
                                     </div>
                                 @endif
 
-                                <form id="cform" enctype="multipart/form-data">
+                                <form id="cform" method="post" action="{{ url('/postIdea') }}" enctype="multipart/form-data">
                                     {{csrf_field()}}
                                     <input type="hidden" value="{{ \Illuminate\Support\Facades\Auth::id() }}"
                                            name="user_id" id="user_id">
@@ -28,7 +28,7 @@
                                     {{--<fieldset>--}}
                                     <div class="form-group">
                                             <textarea name="posts" id="posts" cols="10" rows="5"
-                                                      class="form-control"></textarea>
+                                                      class="form-control" required></textarea>
                                     </div>
 
                                     @php
@@ -37,9 +37,10 @@
                                     @endphp
 
                                     <div class="form-group">
-                                        <div class="col-md-12">
-                                            <select class="form-control" name="category" id="category">
-                                                <option value="#">Select a Category</option>
+                                        <label for="category" class="col-md-3 control-label">Select Category: </label>
+
+                                        <div class="col-md-8">
+                                            <select class="form-control" name="category" id="category" required>
                                                 @foreach($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->cat_name }}</option>
                                                 @endforeach
@@ -66,7 +67,7 @@
                                         <div class="col-md-10">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" name="remember" required> I have read <a
+                                                    <input type="checkbox" name="terms" required> I have read <a
                                                             href="#" target="_blank">Terms and Conditions</a>
 
                                                 </label>
@@ -80,8 +81,9 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <!--id="submitIdea"-->
 
-                                        <button class="btn btn-primary pull-right" id="submitIdea"><i
+                                        <button class="btn btn-primary pull-right" ><i
                                                     class="fa fa-terminal"></i> Submit
                                         </button>
                                     </div>

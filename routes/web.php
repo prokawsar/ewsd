@@ -75,7 +75,7 @@ Route::group(['middleware'=>'auth','role'=>['coordinator']], function() {
 
 //Route::get('/home', ['uses'=>'HomeController@index','as'=>'home','role'=>['student']]);
 //Route::get('/ahome', ['uses'=>'HomeController@index','as'=>'ahome','role'=>['admin']]);
-
+Route::post('/postIdea', 'IdeaController@SaveIdeaLink');
 
 Route::post('/postComment', 'IdeaController@saveComment');
 
