@@ -10,4 +10,9 @@ class Idea extends Model
     {
         return $this->belongsTo('App\User', 'student_id');
     }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Category', 'cat_id');
+    }
 }

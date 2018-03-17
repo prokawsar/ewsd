@@ -22,8 +22,8 @@ class QACoordinatorController extends Controller
     public function ideas()
     {
         $pubIdeas = Idea::where('approve', 1)->paginate(5);
-        $draftIdeas = Idea::where('approve', 0)->paginate(5);
-//        dd($draftIdeas);
+        $draftIdeas = Idea::with('category')->where('approve', 0)->paginate(5);
+//        dd($pubIdeas);
         return view('coordinator.allidea', compact('pubIdeas', 'draftIdeas'));
     }
 

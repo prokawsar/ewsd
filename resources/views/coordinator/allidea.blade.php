@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
+                    <div class="col-md-10 col-md-offset-1">
                         <div class="panel panel-default">
                             <div class="panel-body">
 
@@ -27,8 +27,9 @@
                                     <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Idea</th>
+                                        <th>Idea Description</th>
                                         <th>Category</th>
+                                        <th>Submitted on</th>
                                         <th>Publish Status</th>
                                     </tr>
 
@@ -37,9 +38,10 @@
                                     @if( !$draftIdeas->isEmpty() )
                                         @foreach( $draftIdeas as $idea)
                                             <tr>
-                                                <td>{{ $idea->created_at->toDateString()  }}</td>
+                                                <td>{{ $idea->user->name  }}</td>
                                                 <td>{{ $idea->idea}}</td>
-                                                <td>{{ $idea->cat_id }}</td>
+                                                <td>{{ $idea->category->cat_name }}</td>
+                                                <td>{{ $idea->created_at->diffForHumans() }}</td>
                                                 <td>{{ $idea->approve }}</td>
                                                 <td><a class="btn btn-warning"
                                                        href="{{route('ideaIgnore', ['id' => $idea->id])}}">Ignore</a>
