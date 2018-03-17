@@ -189,7 +189,8 @@
 
                                                 <!-- showing comments -->
                                                 @php
-                                                    $comments=\App\Comment::where('idea_id',$posts->id)->orderBy('created_at', 'asc')->get();
+                                                    $comments=\App\Comment::with('user')->where('idea_id',$posts->id)->orderBy('created_at', 'asc')->get();
+
                                                 @endphp
 
                                                 @if(count($comments)==0)
@@ -206,10 +207,13 @@
                                                     <div class="@php if(count($comments)!=0) {echo 'well well-sm';} @endphp">
                                                         @foreach($comments as $cmt)
 
-                                                            <span class="user"> username </span> <i
-                                                                    class="fa fa-terminal"></i>  {{$cmt->comment}} <br/>
-                                                            {{$cmt->created_at->diffForHumans()}} <br/>
-                                                            <hr class="style"></hr>
+                                                            @if( $cmt->user->hasRole('student'))
+                                                                <span class="user"> username </span> <i
+                                                                        class="fa fa-terminal"></i>  {{$cmt->comment}}
+                                                                <br/>
+                                                                {{$cmt->created_at->diffForHumans()}} <br/>
+                                                                <hr class="style"></hr>
+                                                            @endif
 
                                                         @endforeach
                                                     </div>
@@ -230,7 +234,7 @@
 
                                                     <a class=" btn btn-default pull-right"
                                                        id="commentPostButton{{$posts->id}}"
-                                                       onclick="return commentButtonClicked('{{$posts->id}}','1')"><i
+                                                       onclick="return commentButtonClicked('{{$posts->id}}','{{ Auth::id() }}')"><i
                                                                 class="fa fa-paper-plane-o" aria-hidden="true"></i>
                                                         comment</a>
                                                     &nbsp;

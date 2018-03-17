@@ -193,7 +193,7 @@
                                                               style="padding-top:10px;"></textarea>
                                                     <br/> <a class=" btn btn-default pull-right"
                                                              id="commentPostButton{{$posts->id}}"
-                                                             onclick="return commentButtonClicked('{{$posts->id}}','1')"><i
+                                                             onclick="return commentButtonClicked('{{$posts->id}}', '{{ Auth::id()}}' )"><i
                                                                 class="fa fa-paper-plane-o" aria-hidden="true"></i>
                                                         comment</a>
                                                     &nbsp;
