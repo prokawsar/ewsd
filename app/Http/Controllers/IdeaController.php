@@ -55,6 +55,7 @@ class IdeaController extends Controller
 
             $comment = new Comment();
             $comment->comment = $request->comment;
+            $comment->anonym = $request->anonym;
             $comment->idea_id = $request->idea_id;
             $comment->user_id = $request->user_id;
             $comment->save();

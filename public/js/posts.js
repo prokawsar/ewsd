@@ -108,6 +108,12 @@ function commentButtonClicked(id, user_id){
 
     var elementId = document.getElementById(id+'comment');
     var comment= elementId.value;
+    var anonym = 0;
+
+    if(document.getElementById('anonymComment'+id).checked ){
+        anonym = 1;
+    }
+
     if(comment==''){
        alert("Can't make an empty comment !");
     }else{
@@ -118,6 +124,7 @@ function commentButtonClicked(id, user_id){
             data:{
                 _token:token,
                 comment:comment,
+                anonym: anonym,
                 idea_id: id,
                 user_id: user_id
             },

@@ -106,10 +106,14 @@
                                 <div class="col-md-8 col-md-offset-2">
                                     <div class="panel panel-default">
                                         <div class="panel-heading"><strong>Posted by
+                                                @if( !$posts->anonym )
+                                                    {{ $posts->user->name }}
+                                                @else
+                                                    Anonymous
+                                                @endif
                                                 &nbsp</strong>
                                             {{$posts->created_at->diffForHumans()}}
 
-                                            <span class="cust-badge badge-success"><strong>{{ $posts->cat_id }}</strong> </span>
                                             <div class="pull-right">
                                                 <!-- $category = \App\PostCategory::where('id',$posts->cat_id)->select('cat_name')->first(); -->
 
@@ -208,7 +212,13 @@
                                                         @foreach($comments as $cmt)
 
                                                             @if( $cmt->user->hasRole('student'))
-                                                                <span class="user"> username </span> <i
+                                                                <span class="user"> <i class="fa fa-user"></i>
+                                                                    @if($cmt->anonym)
+                                                                        Anonymous
+                                                                    @else
+                                                                        {{ $cmt->user->name  }}
+                                                                    @endif
+                                                                </span> <i
                                                                         class="fa fa-terminal"></i>  {{$cmt->comment}}
                                                                 <br/>
                                                                 {{$cmt->created_at->diffForHumans()}} <br/>
@@ -229,7 +239,7 @@
                                                               style="padding-top:10px;"></textarea>
                                                     <br/>
 
-                                                    <input title="Anonymously" type="checkbox" id="anonymComment"
+                                                    <input title="Anonymously" type="checkbox" id="anonymComment{{ $posts->id }}"
                                                            name="anonymComment"> Comment Anonymously
 
                                                     <a class=" btn btn-default pull-right"

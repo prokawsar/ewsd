@@ -64,10 +64,15 @@
                                 <div class="col-md-8 col-md-offset-2">
                                     <div class="panel panel-default">
                                         <div class="panel-heading"><strong>Posted by
+                                                @if( !$posts->anonym )
+                                                    {{ $posts->user->name }}
+                                                @else
+                                                    Anonymous
+                                                @endif
+
                                                 &nbsp</strong>
                                             {{$posts->created_at->diffForHumans()}}
 
-                                            <span class="cust-badge badge-success"><strong>{{ $posts->cat_id }}</strong> </span>
                                             <div class="pull-right">
                                                 <!-- $category = \App\PostCategory::where('id',$posts->cat_id)->select('cat_name')->first(); -->
 
@@ -163,7 +168,13 @@
                                                     <div class="@php if(count($comments)!=0) {echo 'well well-sm';} @endphp">
                                                         @foreach($comments as $cmt)
 
-                                                            <span class="user"> username </span> <i
+                                                            <span class="user">
+                                                            @if($cmt->anonym)
+                                                                    Anonymous
+                                                                @else
+                                                                    {{ $cmt->user->name  }}
+                                                                @endif
+                                                            </span> <i
                                                                     class="fa fa-terminal"></i>  {{$cmt->comment}} <br/>
                                                             {{$cmt->created_at->diffForHumans()}} <br/>
                                                             <hr class="style"></hr>
@@ -180,7 +191,10 @@
                                                               placeholder="Write a comment..." type="text"
                                                               class="form-control" name="comment"
                                                               style="padding-top:10px;"></textarea>
-                                                    <br/> <a class=" btn btn-default pull-right"
+                                                    <br/>
+                                                    <input title="Anonymously" type="hidden" id="anonymComment{{ $posts->id }}">
+
+                                                    <a class=" btn btn-default pull-right"
                                                              id="commentPostButton{{$posts->id}}"
                                                              onclick="return commentButtonClicked('{{$posts->id}}','{{ Auth::id() }}')"><i
                                                                 class="fa fa-paper-plane-o" aria-hidden="true"></i>
