@@ -90,14 +90,7 @@ Route::group(['prefix' => 'qamanager'], function () {
     Route::get('/statistics', function () {
         return view('qamanager.statistics');
     });
-    Route::get('/statical2', function () {
-        return view('qamanager.statical2');
-    });
 
-
-    Route::get('/percentage', function () {
-        return view('qamanager.percentage');
-    });
 //    Route::get('/ideas', function () {
 //        return view('qamanager.ideas');
 //    });
@@ -107,12 +100,7 @@ Route::group(['prefix' => 'qamanager'], function () {
     Route::get('/contributor_idea', function () {
         return view('qamanager.contributor_idea');
     });
-    Route::get('/idea_list', function () {
-        return view('qamanager.idea_list');
-    });
-    Route::get('/ideas_catagory', function () {
-        return view('qamanager.ideas_catagory');
-    });
+
     Route::get('/catagorys_idea', function () {
         return view('qamanager.catagorys_idea');
     });
