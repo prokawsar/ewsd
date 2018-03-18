@@ -42,7 +42,7 @@
                                                 <td>{{ $idea->idea}}</td>
                                                 <td>{{ $idea->category->cat_name }}</td>
                                                 <td>{{ $idea->created_at->diffForHumans() }}</td>
-                                                <td>{{ $idea->approve }}</td>
+                                                <td> Pending </td>
                                                 <td><a class="btn btn-warning"
                                                        href="{{route('ideaIgnore', ['id' => $idea->id])}}">Ignore</a>
                                                 </td>

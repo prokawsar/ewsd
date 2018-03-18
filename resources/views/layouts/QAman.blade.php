@@ -87,10 +87,14 @@
 
                     <li><a href="{{ route('qahome')}}">
                             <i class="fa fa-dashboard"></i> Dashboard
-                        </a></li>
+                        </a>
+                    </li>
 
                     <li><a href="{{ url('/qamanager/addcat')}}"><i class="fa fa-book"></i> <span>Catagories</span></a>
                     </li>
+                    <li><a href="{{ route('managerideas')}}"><i class="fa fa-book"></i> <span>All Ideas</span></a>
+                    </li>
+
                     <li class="treeview">
                         <a href="{{ url('/statical1')}}">
                             <i class="fa fa-files-o"></i>

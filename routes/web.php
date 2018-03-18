@@ -58,6 +58,8 @@ Route::group(['middleware'=>'auth','role'=>['qamanager']], function() {
     Route::post('/qamanager/addcat', 'QAManagerController@addCategory');
     Route::get('/qamanager/delcat{id}', 'QAManagerController@deleteCategory')->name('delcat');
 
+    Route::get('/qamanager/ideas', 'QAManagerController@ideas')->name('managerideas');
+
     Route::get('/qamanager/addcat', function () {
         return view('qamanager.add_catagory');
     })->name('addcat');
@@ -96,9 +98,9 @@ Route::group(['prefix' => 'qamanager'], function () {
     Route::get('/percentage', function () {
         return view('qamanager.percentage');
     });
-    Route::get('/ideas', function () {
-        return view('qamanager.ideas');
-    });
+//    Route::get('/ideas', function () {
+//        return view('qamanager.ideas');
+//    });
     Route::get('/contributors', function () {
         return view('qamanager.contributors');
     });

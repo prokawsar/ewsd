@@ -1,14 +1,13 @@
-@section('title', 'My ideas')
+@section('title', 'All Submitted Ideas')
 
-@extends('layouts.student')
+@extends('layouts.QAman')
 
 @section('content')
     <div class="container">
-
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
+                    <div class="col-md-10 col-md-offset-1">
                         <div class="panel panel-default">
                             <div class="panel-body">
 
@@ -17,11 +16,17 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
+
+                                @if (session('warning'))
+                                    <div class="alert alert-warning">
+                                        {{ session('warning') }}
+                                    </div>
+                                @endif
+
                                 <table id="example1" class="table table-striped">
                                     <thead>
-                                    <td class="active text-center" colspan="4">Submitted Ideas</td>
-
                                     <tr>
+                                        <th>Name</th>
                                         <th>Idea Description</th>
                                         <th>Category</th>
                                         <th>Submitted on</th>
@@ -30,14 +35,21 @@
 
                                     </thead>
                                     <tbody>
-
                                     @if( !$draftIdeas->isEmpty() )
                                         @foreach( $draftIdeas as $idea)
                                             <tr>
+                                                <td>{{ $idea->user->name  }}</td>
                                                 <td>{{ $idea->idea}}</td>
                                                 <td>{{ $idea->category->cat_name }}</td>
                                                 <td>{{ $idea->created_at->diffForHumans() }}</td>
                                                 <td> Pending </td>
+                                                <td><a class="btn btn-warning"
+                                                       href="{{route('ideaIgnore', ['id' => $idea->id])}}">Ignore</a>
+                                                </td>
+
+                                                <td><a class="btn btn-success"
+                                                       href="{{route('ideaApprove', ['id' => $idea->id])}}">Approve</a>
+                                                </td>
 
                                             </tr>
                                         @endforeach
@@ -55,16 +67,23 @@
         </div> <!-- end row -->
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">Approved Idea</div>
+                    <div class="panel-heading">Published Ideas</div>
                     <div id="postsTable" class="panel-body">
-                        @foreach($allIdeas as $posts)
+                        @foreach($pubIdeas as $posts)
 
                             <div class="row" id="eachPost{{$posts->id}}">
                                 <div class="col-md-8 col-md-offset-2">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading">
+                                        <div class="panel-heading"><strong>Posted by
+                                                @if( !$posts->anonym )
+                                                    {{ $posts->user->name }}
+                                                @else
+                                                    Anonymous
+                                                @endif
+
+                                                &nbsp</strong>
                                             {{$posts->created_at->diffForHumans()}}
 
                                             <div class="pull-right">
@@ -96,9 +115,8 @@
                                                     @php
                                                         $likeCount=\App\Like::where('idea_id',$posts->id)->where('status', 1)->count();
                                                         $dislikeCount=\App\Like::where('idea_id',$posts->id)->where('status', 0)->count();
-                                                        $userCheck =\App\Like::where('idea_id', $posts->id )->where('user_id', Auth::id())->get();
+                                                    $userCheck =\App\Like::where('idea_id', $posts->id )->where('user_id', Auth::id())->get();
 
-                                                   // dd($userCheck);
                                                     @endphp
 
                                                     @if($likeCount==1)
@@ -108,18 +126,18 @@
                                                     @elseif ($likeCount==0)
 
                                                     @else
-                                                        {{$likeCount." Likes "}}
+                                                        <span>{{$likeCount." Likes "}} </span>
                                                     @endif
 
                                                     <span id="likeArea" style="width: 2%"
                                                           data-id="{{$posts->id}}"
                                                           data-id1="{{Auth::id()}}">
-                                                        @if( count($userCheck) == 0)
+                                                         @if( count($userCheck) == 0)
                                                             <a style="cursor: pointer;text-decoration: none;color: #040b02"
                                                                id="{{ $posts->id }}like" title="Like it"><i
                                                                         class="fa fa-thumbs-up fa-lg"></i></a>
                                                         @endif
-                                            </span>
+                                                    </span>
                                                     &nbsp
                                                     @if($dislikeCount==1)
 
@@ -134,7 +152,7 @@
                                                     <span id="unlikeArea"
                                                           style="width: 2%" data-id="{{$posts->id}}"
                                                           data-id1="{{Auth::id()}}">
-                                                        @if( count($userCheck) == 0 )
+                                                        @if( count($userCheck) == 0)
                                                             <a style="cursor: pointer" title="Dislike" id="dislike"><i
                                                                         class="fa fa-thumbs-down fa-lg"></i></a>
                                                         @endif
@@ -146,8 +164,7 @@
 
                                                 <!-- showing comments -->
                                                 @php
-                                                    $comments=\App\Comment::with('user')->where('idea_id',$posts->id)->orderBy('created_at', 'asc')->get();
-
+                                                    $comments=\App\Comment::where('idea_id',$posts->id)->orderBy('created_at', 'asc')->get();
                                                 @endphp
 
                                                 @if(count($comments)==0)
@@ -164,19 +181,16 @@
                                                     <div class="@php if(count($comments)!=0) {echo 'well well-sm';} @endphp">
                                                         @foreach($comments as $cmt)
 
-                                                            @if( $cmt->user->hasRole('student'))
-                                                                <span class="user"> <i class="fa fa-user"></i>
-                                                                    @if($cmt->anonym)
-                                                                        Anonymous
-                                                                    @else
-                                                                        {{ $cmt->user->name  }}
-                                                                    @endif
-                                                                </span> <i
-                                                                        class="fa fa-terminal"></i>  {{$cmt->comment}}
-                                                                <br/>
-                                                                {{$cmt->created_at->diffForHumans()}} <br/>
-                                                                <hr class="style"></hr>
-                                                            @endif
+                                                            <span class="user">
+                                                            @if($cmt->anonym)
+                                                                    Anonymous
+                                                                @else
+                                                                    {{ $cmt->user->name  }}
+                                                                @endif
+                                                            </span> <i
+                                                                    class="fa fa-terminal"></i>  {{$cmt->comment}} <br/>
+                                                            {{$cmt->created_at->diffForHumans()}} <br/>
+                                                            <hr class="style"></hr>
 
                                                         @endforeach
                                                     </div>
@@ -191,14 +205,11 @@
                                                               class="form-control" name="comment"
                                                               style="padding-top:10px;"></textarea>
                                                     <br/>
-
-                                                    <input title="Anonymously" type="checkbox"
-                                                           id="anonymComment{{ $posts->id }}"
-                                                           name="anonymComment"> Comment Anonymously
+                                                    <input title="Anonymously" type="hidden" id="anonymComment{{ $posts->id }}">
 
                                                     <a class=" btn btn-default pull-right"
-                                                       id="commentPostButton{{$posts->id}}"
-                                                       onclick="return commentButtonClicked('{{$posts->id}}','{{ Auth::id() }}')"><i
+                                                             id="commentPostButton{{$posts->id}}"
+                                                             onclick="return commentButtonClicked('{{$posts->id}}', '{{ Auth::id()}}' )"><i
                                                                 class="fa fa-paper-plane-o" aria-hidden="true"></i>
                                                         comment</a>
                                                     &nbsp;
@@ -217,7 +228,7 @@
 
 
                         @endforeach
-                        {{ $allIdeas->links() }}
+                        {{ $pubIdeas->links() }}
 
                     </div>
                 </div>

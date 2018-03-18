@@ -20,6 +20,15 @@ class QAManagerController extends Controller
         return view('qamanager.home');
     }
 
+    public function ideas()
+    {
+        $pubIdeas = Idea::where('approve', 1)->paginate(5);
+        $draftIdeas = Idea::with('category')->where('approve', 0)->paginate(5);
+//        dd($pubIdeas);
+        return view('qamanager.allidea', compact('pubIdeas', 'draftIdeas'));
+    }
+
+
     public function deleteCategory($id)
     {
         $check = Idea::where('cat_id', $id)->get();
