@@ -87,8 +87,6 @@
 
                     <li><a href="{{ route('shome')}}"><i class="fa fa-dashboard"></i> <span>Home</span></a></li>
                     <li><a href="{{ route('sideas')}}"><i class="fa fa-dashboard"></i> <span>My Ideas</span></a></li>
-                    <li><a href="{{ route('sowncon')}}"><i class="fa fa-book"></i> <span>Own Contributions</span></a>
-                    </li>
 
 
                 </ul>

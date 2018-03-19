@@ -44,7 +44,7 @@
                                                 <td>{{ $idea->created_at->diffForHumans() }}</td>
                                                 <td> Pending </td>
                                                 <td><a class="btn btn-warning"
-                                                       href="{{route('ideaIgnore', ['id' => $idea->id])}}">Ignore</a>
+                                                       href="{{route('ideaIgnore', ['id' => $idea->id])}}">Decline</a>
                                                 </td>
 
                                                 <td><a class="btn btn-success"

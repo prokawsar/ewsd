@@ -87,7 +87,7 @@
                     </a>
 
                 </li>
-                <li><a href="#"><i class="fa fa-book"></i> <span>Own Contributions</span></a></li>
+
                 <li><a href="{{ route('coorideas') }}"><i class="fa fa-book"></i> <span>All Ideas</span></a></li>
 
             </ul>

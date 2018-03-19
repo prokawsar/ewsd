@@ -8,97 +8,205 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Share your idea.....</div>
-                            <div class="panel-body">
-                                <span class="label label-success postConfirm" style="font-size: 15px"></span>
-                                <span class="label label-danger validation" style="font-size: 15px"></span>
 
-                                @if (session('status'))
-                                    <div class="alert alert-success">
-                                        {{ session('status') }}
-                                    </div>
-                                @endif
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
 
-                                <form id="cform" method="post" action="{{ url('/postIdea') }}" enctype="multipart/form-data">
-                                    {{csrf_field()}}
-                                    <input type="hidden" value="{{ \Illuminate\Support\Facades\Auth::id() }}"
-                                           name="user_id" id="user_id">
+                        <button type="button" class="btn btn-primary pull-right" data-toggle="modal"
+                                data-target="#myModal">Share my idea
+                        </button>
+                        <br>
+                        <br>
+                        <br>
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog modal-lg">
 
-                                    {{--<fieldset>--}}
-                                    <div class="form-group">
-                                            <textarea name="posts" id="posts" cols="10" rows="5"
-                                                      class="form-control" required></textarea>
-                                    </div>
-
-                                    @php
-                                        //retrieve all category
-                                        $categories = \App\Category::all();
-                                    @endphp
-
-                                    <div class="form-group">
-                                        <label for="category" class="col-md-3 control-label">Select Category: </label>
-
-                                        <div class="col-md-8">
-                                            <select class="form-control" name="category" id="category" required>
-                                                @foreach($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->cat_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <br>
-                                    <br>
-                                    <div class="form-group">
-                                        <label for="file" class="col-md-3 control-label">Supporting file/s: </label>
-
-                                        <div class="col-md-8">
-                                            <input type="file" name="file[]" class="form-control" multiple>
-                                        </div>
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        {{--<button type="button" class="close" data-dismiss="modal">&times;</button>--}}
+                                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">
+                                            Close
+                                        </button>
+                                        <h4 class="modal-title">Share your idea.....</h4>
 
                                     </div>
+                                    <form id="cform" method="post" action="{{ url('/postIdea') }}" enctype="multipart/form-data">
+                                        {{csrf_field()}}
 
-                                    <br>
-                                    <br>
+                                        <div class="modal-body">
+                                            <span class="label label-danger validation" style="font-size: 15px"></span>
 
 
-                                    <div class="form-group">
-                                        <div class="col-md-10">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="terms" required> I have read <a
-                                                            href="#" target="_blank">Terms and Conditions</a>
 
-                                                </label>
-                                                <span class="pull-right">
-                                                        <input title="Anonymously" type="checkbox" id="anonym"
-                                                               name="anonym"> Post Anonymously
-                                                    </span>
+                                            <input type="hidden" value="{{ \Illuminate\Support\Facades\Auth::id() }}"
+                                                   name="user_id" id="user_id">
+
+                                            {{--<fieldset>--}}
+                                            <div class="form-group">
+                                                <textarea name="posts" id="posts" cols="10" rows="5"
+                                                          class="form-control" required></textarea>
+                                            </div>
+
+                                            @php
+                                                //retrieve all category
+                                                $categories = \App\Category::all();
+                                            @endphp
+
+                                            <div class="form-group">
+                                                <label for="category" class="col-md-3 control-label">Select
+                                                    Category: </label>
+
+                                                <div class="col-md-8">
+                                                    <select class="form-control" name="category" id="category" required>
+                                                        @foreach($categories as $category)
+                                                            <option value="{{ $category->id }}">{{ $category->cat_name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <br>
+                                            <br>
+                                            <div class="form-group">
+                                                <label for="file" class="col-md-3 control-label">Supporting
+                                                    file/s: </label>
+
+                                                <div class="col-md-8">
+                                                    <input type="file" name="file[]" class="form-control" multiple>
+                                                </div>
+
+                                            </div>
+
+                                            <br>
+                                            <br>
+
+
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="terms" required> I have read <a
+                                                                    href="#" target="_blank">Terms and Conditions</a>
+
+                                                        </label>
+                                                        <span class="pull-right">
+                                                            <input title="Anonymously" type="checkbox" id="anonym"
+                                                                   name="anonym"> Post Anonymously
+                                                        </span>
+                                                    </div>
+
+                                                </div>
                                             </div>
 
                                         </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <!--id="submitIdea"-->
-
-                                        <button class="btn btn-primary pull-right" ><i
-                                                    class="fa fa-terminal"></i> Submit
-                                        </button>
-                                    </div>
-                                    {{--</fieldset>--}}
-                                </form>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary pull-right"><i
+                                                        class="fa fa-terminal"></i> Submit
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
 
                             </div>
                         </div>
+
+                        {{--<div class="panel panel-default">--}}
+                        {{--<div class="panel-heading">Share your idea.....</div>--}}
+                        {{--<div class="panel-body">--}}
+                        {{--<span class="label label-success postConfirm" style="font-size: 15px"></span>--}}
+                        {{--<span class="label label-danger validation" style="font-size: 15px"></span>--}}
+
+                        {{--@if (session('status'))--}}
+                        {{--<div class="alert alert-success">--}}
+                        {{--{{ session('status') }}--}}
+                        {{--</div>--}}
+                        {{--@endif--}}
+
+                        {{--<form id="cform" method="post" action="{{ url('/postIdea') }}" enctype="multipart/form-data">--}}
+                        {{--{{csrf_field()}}--}}
+                        {{--<input type="hidden" value="{{ \Illuminate\Support\Facades\Auth::id() }}"--}}
+                        {{--name="user_id" id="user_id">--}}
+
+                        {{--<fieldset>--}}
+                        {{--<div class="form-group">--}}
+                        {{--<textarea name="posts" id="posts" cols="10" rows="5"--}}
+                        {{--class="form-control" required></textarea>--}}
+                        {{--</div>--}}
+
+                        {{--@php--}}
+                        {{--//retrieve all category--}}
+                        {{--$categories = \App\Category::all();--}}
+                        {{--@endphp--}}
+
+                        {{--<div class="form-group">--}}
+                        {{--<label for="category" class="col-md-3 control-label">Select Category: </label>--}}
+
+                        {{--<div class="col-md-8">--}}
+                        {{--<select class="form-control" name="category" id="category" required>--}}
+                        {{--@foreach($categories as $category)--}}
+                        {{--<option value="{{ $category->id }}">{{ $category->cat_name }}</option>--}}
+                        {{--@endforeach--}}
+                        {{--</select>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+
+                        {{--<br>--}}
+                        {{--<br>--}}
+                        {{--<div class="form-group">--}}
+                        {{--<label for="file" class="col-md-3 control-label">Supporting file/s: </label>--}}
+
+                        {{--<div class="col-md-8">--}}
+                        {{--<input type="file" name="file[]" class="form-control" multiple>--}}
+                        {{--</div>--}}
+
+                        {{--</div>--}}
+
+                        {{--<br>--}}
+                        {{--<br>--}}
+
+
+                        {{--<div class="form-group">--}}
+                        {{--<div class="col-md-10">--}}
+                        {{--<div class="checkbox">--}}
+                        {{--<label>--}}
+                        {{--<input type="checkbox" name="terms" required> I have read <a--}}
+                        {{--href="#" target="_blank">Terms and Conditions</a>--}}
+
+                        {{--</label>--}}
+                        {{--<span class="pull-right">--}}
+                        {{--<input title="Anonymously" type="checkbox" id="anonym"--}}
+                        {{--name="anonym"> Post Anonymously--}}
+                        {{--</span>--}}
+                        {{--</div>--}}
+
+                        {{--</div>--}}
+                        {{--</div>--}}
+
+                        {{--<div class="form-group">--}}
+                        {{--<!--id="submitIdea"-->--}}
+
+                        {{--<button class="btn btn-primary pull-right" ><i--}}
+                        {{--class="fa fa-terminal"></i> Submit--}}
+                        {{--</button>--}}
+                        {{--</div>--}}
+                        {{--</fieldset>--}}
+                        {{--</form>--}}
+
+                        {{--</div>--}}
+                        {{--</div>--}}
+
                     </div>
                 </div>
             </div>
         </div> <!-- end row -->
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Idea feed</div>
                     <div id="postsTable" class="panel-body">
@@ -241,7 +349,8 @@
                                                               style="padding-top:10px;"></textarea>
                                                     <br/>
 
-                                                    <input title="Anonymously" type="checkbox" id="anonymComment{{ $posts->id }}"
+                                                    <input title="Anonymously" type="checkbox"
+                                                           id="anonymComment{{ $posts->id }}"
                                                            name="anonymComment"> Comment Anonymously
 
                                                     <a class=" btn btn-default pull-right"
