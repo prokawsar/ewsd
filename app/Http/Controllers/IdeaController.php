@@ -53,7 +53,7 @@ class IdeaController extends Controller
         return redirect('/home')->with('status', 'Idea successfully submitted');
     }
 
-
+//    Save by ajax request
     public function saveIdea(Request $request)
     {
         if ($request->ajax()) {
@@ -107,14 +107,18 @@ class IdeaController extends Controller
 
     public function setLike(Request $request)
     {
+        $check = Like::where('idea_id', $request->idea_id)->where('user_id', $request->user_id)->first();
+
         if ($request->ajax()) {
-
-            $like = new Like();
-            $like->status = 1;
-            $like->idea_id = $request->idea_id;
-            $like->user_id = $request->user_id;
-            $like->save();
-
+            if($check){
+                // update status
+            }else {
+                $like = new Like();
+                $like->status = 1;
+                $like->idea_id = $request->idea_id;
+                $like->user_id = $request->user_id;
+                $like->save();
+            }
             return response()->json([
                 'message' => 'Like successful. '
             ]);
