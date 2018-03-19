@@ -20,7 +20,7 @@ class IdeaController extends Controller
     public function SaveIdeaLink(Request $request)
     {
 //        dd($request->files);
-        if(is_null($request->anonym)){
+        if (is_null($request->anonym)) {
             $request->anonym = 0;
         }
         $idea = new Idea();
@@ -35,7 +35,7 @@ class IdeaController extends Controller
         if (isset($request->files)) {
 
             foreach ($request->files as $singleFile) {
-                foreach ($singleFile as $files){
+                foreach ($singleFile as $files) {
 //                    dd($files);
                     $file = new File();
                     $fileName = $files->getClientOriginalName() . '.' . $files->getClientOriginalExtension();
@@ -110,14 +110,17 @@ class IdeaController extends Controller
         $check = Like::where('idea_id', $request->idea_id)->where('user_id', $request->user_id)->first();
 
         if ($request->ajax()) {
-            if($check){
-                // update status
-            }else {
+            if (is_null($check)) {
                 $like = new Like();
-                $like->status = 1;
+                $like->status = $request->value;
                 $like->idea_id = $request->idea_id;
                 $like->user_id = $request->user_id;
                 $like->save();
+            } else {
+                // update status
+                $check->status = $request->value;
+                $check->save();
+
             }
             return response()->json([
                 'message' => 'Like successful. '

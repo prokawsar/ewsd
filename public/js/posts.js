@@ -51,9 +51,12 @@ $(document).on('click','#submitIdea',function () {
 });
 
 
-$(document).on('click','#likeArea',function () {
+$(document).on('click','#likeArea, #unlikeArea',function () {
     var ideaid = $(this).data('id');
     var userid = $(this).data('id1');
+    var value = $(this).data('value');
+
+    console.log(value);
 
     $.ajax({
         type: 'post',
@@ -61,7 +64,8 @@ $(document).on('click','#likeArea',function () {
         data: {
             _token: token,
             idea_id: ideaid,
-            user_id: userid
+            user_id: userid,
+            value: value
         },
         success: function (response) {
             // console.log(response['message']);
@@ -78,7 +82,7 @@ $(document).on('click','#likeArea',function () {
 
 
 
-$(document).on('click','#unlikeArea',function () {
+$(document).on('click','#unlikeArea2',function () {
     var ideaid = $(this).data('id');
     var userid = $(this).data('id1');
 
