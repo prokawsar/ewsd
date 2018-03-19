@@ -145,4 +145,10 @@ class IdeaController extends Controller
         }
 
     }
+
+    public function deleteComment(Request $request)
+    {
+        $comment = Comment::find($request->comment_id);
+        $comment->delete();
+    }
 }

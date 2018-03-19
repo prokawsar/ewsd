@@ -107,6 +107,29 @@ $(document).on('click','#unlikeArea2',function () {
 
 });
 
+$(document).on('click','#deleteComment',function () {
+    var commentid = $(this).data('value');
+    var id = $(this).data('id');
+
+    $.ajax({
+        type: 'post',
+        url: '/delcomment',
+        data: {
+            _token:token,
+            comment_id: commentid,
+        },
+        success: function (response) {
+
+        },
+        error: function (response) {
+            console.log(response['data']);
+        }
+
+    });
+    $('#reload'+id).load(window.location.href + ' #reload'+id);
+
+
+});
 
 function commentButtonClicked(id, user_id){
 

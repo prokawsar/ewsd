@@ -22,7 +22,7 @@ class QAManagerController extends Controller
 
     public function ideas()
     {
-        $pubIdeas = Idea::where('approve', 1)->paginate(5);
+        $pubIdeas = Idea::where('approve', 1)->orderBy('created_at', 'desc')->paginate(5);
         $draftIdeas = Idea::with('category')->where('approve', 0)->paginate(5);
 //        dd($pubIdeas);
         return view('qamanager.allidea', compact('pubIdeas', 'draftIdeas'));

@@ -324,6 +324,8 @@
                                                                     @endif
                                                                 </span> <i
                                                                         class="fa fa-terminal"></i>  {{$cmt->comment}}
+                                                            @if($cmt->user_id == Auth::id()) <a style="cursor: pointer" id="deleteComment" data-id="{{ $posts->id }}" data-value="{{ $cmt->id }}"><i type="button" class="fa fa-trash pull-right"></i></a>
+                                                            @endif
                                                                 <br/>
                                                                 {{$cmt->created_at->diffForHumans()}} <br/>
                                                                 <hr class="style"></hr>

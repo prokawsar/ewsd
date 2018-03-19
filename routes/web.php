@@ -80,6 +80,7 @@ Route::group(['middleware'=>'auth','role'=>['coordinator']], function() {
 Route::post('/postIdea', 'IdeaController@SaveIdeaLink');
 
 Route::post('/postComment', 'IdeaController@saveComment');
+Route::post('/delcomment', 'IdeaController@deleteComment');
 
 Route::post('/like',['uses'=>'IdeaController@setLike','role'=>['coordinator', 'student', 'qamanager'],'as'=>'like']);
 Route::post('/dislike',['uses'=>'IdeaController@setDislike','role'=>['coordinator', 'student', 'qamanager'],'as'=>'dislike']);
