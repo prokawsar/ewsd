@@ -83,6 +83,7 @@
                 <li class="header"></li>
 
                 <li><a href="{{ route('ahome')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+                <li><a href="{{ route('adddepart')}}"><i class="fa fa-dashboard"></i> <span>Add Department</span></a></li>
                 <li><a href="{{ route('ideas') }}"><i class="fa fa-files-o"></i> All Ideas</a></li>
 
                 <li class="treeview">
@@ -96,8 +97,8 @@
                     <ul class="treeview-menu">
 
                         <li><a href="{{ url('#')}}"><i class="fa fa-circle-o"></i> Closer Date of Academic Year</a></li>
-                        <li><a href="{{ url('#')}}"><i class="fa fa-circle-o"></i> Staff Details</a></li>
-                        <li><a href="{{ url('#')}}"><i class="fa fa-circle-o"></i> Student Details</a></li>
+                        <li><a href="{{ route('stdetails')}}"><i class="fa fa-circle-o"></i> Staff Details</a></li>
+                        <li><a href="{{ route('sdetails')}}"><i class="fa fa-circle-o"></i> Student Details</a></li>
 
                     </ul>
                 </li>
@@ -136,35 +137,6 @@
                                 comment</a></li>
                         <li><a href="{{ url('/idea_without_like')}}"><i class="fa fa-circle-o"></i> Ideas without
                                 like</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="{{ url('#')}}">
-                        <i class="fa fa-files-o"></i>
-                        <span>Lists</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-
-                        <li><a href="{{ url('/idea_list')}}"><i class="fa fa-circle-o"></i> Total Ideas of
-                                Depertment</a></li>
-                        <li><a href="{{ url('/contributor_idea')}}"><i class="fa fa-circle-o"></i> Contributor's
-                                Ideas</a></li>
-                        <li><a href="{{ url('/catagorys_idea')}}"><i class="fa fa-circle-o"></i> Catagory's Ideas</a>
-                        </li>
-
-                        <li><a href="{{ url('/liked_idea_details')}}"><i class="fa fa-circle-o"></i> Most liked 10 IDEA
-                                Details</a></li>
-                        <li><a href="{{ url('/commented_idea_details')}}"><i class="fa fa-circle-o"></i> Most commented
-                                10 IDEA Details</a></li>
-
-                        <li><a href="{{ url('/idea_without_comment_details')}}"><i class="fa fa-circle-o"></i> Ideas
-                                without comment Details</a></li>
-                        <li><a href="{{ url('/idea_without_like_details')}}"><i class="fa fa-circle-o"></i> Ideas
-                                without like Details</a></li>
-
                     </ul>
                 </li>
 

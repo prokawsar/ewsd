@@ -16,9 +16,11 @@ class CreateStudentsTable extends Migration
             $table->increments('id');
 
             $table->integer('student_id')->unsigned();
+            $table->integer('depart_id')->unsigned();
 //            $table->primary('student_id');
 
             $table->foreign('student_id')->references('id')->on('users');
+            $table->foreign('depart_id')->references('id')->on('departments');
 
             $table->rememberToken();
             $table->timestamps();

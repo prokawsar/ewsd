@@ -96,48 +96,42 @@
                                                     @php
                                                         $likeCount=\App\Like::where('idea_id',$posts->id)->where('status', 1)->count();
                                                         $dislikeCount=\App\Like::where('idea_id',$posts->id)->where('status', 0)->count();
-                                                        $userCheck =\App\Like::where('idea_id', $posts->id )->where('user_id', Auth::id())->get();
+                                                        $userCheck =\App\Like::where('idea_id', $posts->id )->where('user_id', Auth::id())->first();
 
-                                                   // dd($userCheck);
+                                                 //  dd($userCheck->status);
                                                     @endphp
 
-                                                    @if($likeCount==1)
 
-                                                        {{$likeCount." Like "}}
-
-                                                    @elseif ($likeCount==0)
-
-                                                    @else
-                                                        {{$likeCount." Likes "}}
-                                                    @endif
-
-                                                    <span id="likeArea" style="width: 2%"
+                                                    <span @if( is_null($userCheck)) id="likeArea"
+                                                          @elseif( $userCheck->status !== 1) id="likeArea"
+                                                          @endif
+                                                          data-value="1"
                                                           data-id="{{$posts->id}}"
                                                           data-id1="{{Auth::id()}}">
-                                                        @if( count($userCheck) == 0)
-                                                            <a style="cursor: pointer;text-decoration: none;color: #040b02"
-                                                               id="{{ $posts->id }}like" title="Like it"><i
-                                                                        class="fa fa-thumbs-up fa-lg"></i></a>
-                                                        @endif
+
+                                                            <a style="cursor: pointer;text-decoration: none;"
+
+                                                               title="Like it"><i
+                                                                        class="fa @if( !is_null($userCheck) && $userCheck->status===1)fa-thumbs-up @else fa-thumbs-o-up @endif  fa-lg"></i> {{$likeCount }}
+                                                                Like</a>
+
+
                                             </span>
                                                     &nbsp
-                                                    @if($dislikeCount==1)
 
-                                                        {{$dislikeCount." Dislike "}}
+                                                    <span
+                                                            @if( is_null($userCheck)) id="unlikeArea"
+                                                            @elseif( $userCheck->status !== 0) id="unlikeArea"
+                                                            @endif
+                                                            id="unlikeArea"
+                                                            data-value="0"
+                                                            data-id="{{$posts->id}}"
+                                                            data-id1="{{Auth::id()}}">
 
-                                                    @elseif ($dislikeCount==0)
+                                                            <a style="cursor: pointer; text-decoration: none;" title="Dislike" id="dislike"><i
+                                                                        class="fa @if( !is_null($userCheck) && $userCheck->status===0)fa-thumbs-down @else fa-thumbs-o-down @endif fa-lg"></i> {{ $dislikeCount }}
+                                                                Dislike</a>
 
-                                                    @else
-                                                        {{$dislikeCount." Dislikes "}}
-                                                    @endif
-
-                                                    <span id="unlikeArea"
-                                                          style="width: 2%" data-id="{{$posts->id}}"
-                                                          data-id1="{{Auth::id()}}">
-                                                        @if( count($userCheck) == 0 )
-                                                            <a style="cursor: pointer" title="Dislike" id="dislike"><i
-                                                                        class="fa fa-thumbs-down fa-lg"></i></a>
-                                                        @endif
                                                     </span>
 
                                                 </div>
@@ -173,6 +167,8 @@
                                                                     @endif
                                                                 </span> <i
                                                                         class="fa fa-terminal"></i>  {{$cmt->comment}}
+                                                                @if($cmt->user_id == Auth::id()) <a style="cursor: pointer" id="deleteComment" data-id="{{ $posts->id }}" data-value="{{ $cmt->id }}"><i type="button" class="fa fa-trash pull-right"></i></a>
+                                                                @endif
                                                                 <br/>
                                                                 {{$cmt->created_at->diffForHumans()}} <br/>
                                                                 <hr class="style"></hr>

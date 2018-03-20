@@ -22,7 +22,7 @@ class HomeController extends Controller
     }
 
     public function myIdeas(){
-        $allIdeas = Idea::where('approve', 1)->where('student_id', Auth::id())->paginate(5);
+        $allIdeas = Idea::where('approve', 1)->where('student_id', Auth::id())->orderBy('created_at', 'desc')->paginate(5);
         $draftIdeas = Idea::with('category')->where('approve', 0)->where('student_id', Auth::id())->paginate(5);
 
         return view('student.myideas', compact(['allIdeas', 'draftIdeas']));

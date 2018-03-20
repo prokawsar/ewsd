@@ -28,6 +28,12 @@ class Qamanager extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+    public function user(){
+        return $this->belongsTo('App\User', 'qamanage_id');
+    }
+
+
     /**
      * Send the password reset notification.
      *

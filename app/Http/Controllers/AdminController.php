@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Coordinator;
 use App\Idea;
+use App\Qamanager;
+use App\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Manager;
 
 class AdminController extends Controller
 {
@@ -15,6 +19,7 @@ class AdminController extends Controller
         $this->middleware('role');
 
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,6 +29,7 @@ class AdminController extends Controller
     {
         return view('admin.home');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -32,10 +38,48 @@ class AdminController extends Controller
     public function ideas()
     {
         $pubIdeas = Idea::where('approve', 1)->paginate(5);
-        $draftIdeas = Idea::where('approve', 0)->paginate(5);
+//        $draftIdeas = Idea::where('approve', 0)->paginate(5);
 //        dd($draftIdeas);
-        return view('admin.allidea', compact('pubIdeas', 'draftIdeas'));
+        return view('admin.allidea', compact('pubIdeas'));
     }
+
+    public function student()
+    {
+        $students = Student::with('user', 'department')->get();
+//        dd($student);
+        return view('admin.student', compact('students'));
+    }
+
+    public function addStudentForm()
+    {
+        return view('admin.addstudent');
+    }
+
+
+    public function addStudent(Request $request)
+    {
+        return view('admin.student', compact('students'));
+    }
+
+    public function addDepart(Request $request)
+    {
+        return redirect('/admin/adddepart')->with('status', 'Department Added');
+    }
+
+
+    public function deleteDepart($id)
+    {
+        return redirect('/admin/adddepart')->with('warning', 'Department Deleted');
+    }
+
+    public function staff()
+    {
+        $coordinators = Coordinator::with('user', 'department')->get();
+        $managers = Qamanager::with('user')->get();
+//        dd($coordinators);
+        return view('admin.staff', compact('coordinators', 'managers'));
+    }
+
 
     public function ideaApprove($id)
     {
@@ -44,7 +88,7 @@ class AdminController extends Controller
         $idea->save();
 
 //        return view('admin.allidea')->with('status', 'Idea Approved');
-        return  Redirect::back()->with('status', 'Idea Approved');
+        return Redirect::back()->with('status', 'Idea Approved');
     }
 
 
@@ -61,7 +105,7 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -72,7 +116,7 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -83,7 +127,7 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -94,8 +138,8 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -106,7 +150,7 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

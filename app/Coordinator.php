@@ -28,6 +28,16 @@ class Coordinator extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+    public function user(){
+        return $this->belongsTo('App\User', 'cord_id');
+    }
+
+
+    public function department(){
+        return $this->belongsTo('App\Department', 'depart_id');
+    }
+
     /**
      * Send the password reset notification.
      *

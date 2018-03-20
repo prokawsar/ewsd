@@ -15,6 +15,9 @@ class DatabaseSeeder extends Seeder
         $this->call('RoleTableSeeder');
         $this->command->info('Role table seeded!');
 
+        $this->call('DepartTableSeeder');
+        $this->command->info('Department table seeded!');
+
         $this->call('UserTableSeeder');
         $this->command->info('User table seeded!');
 
@@ -43,6 +46,7 @@ class RoleTableSeeder extends Seeder {
     public function run()
     {
         DB::table('roles')->delete();
+        DB::table('departments')->delete();
         DB::table('comments')->delete();
         DB::table('ideas')->delete();
         DB::table('students')->delete();
@@ -54,6 +58,7 @@ class RoleTableSeeder extends Seeder {
         DB::table('users')->delete();
         DB::statement("ALTER TABLE users AUTO_INCREMENT = 1;");
         DB::statement("ALTER TABLE roles AUTO_INCREMENT = 1;");
+        DB::statement("ALTER TABLE departments AUTO_INCREMENT = 1;");
         DB::statement("ALTER TABLE categories AUTO_INCREMENT = 1;");
 
 
@@ -95,7 +100,7 @@ class UserTableSeeder extends Seeder {
 
         User::create([
             'name' => 'Admin',
-            'email' => 'kouther80@gmail.com',
+            'email' => 'admin@bar.com',
             'password' => bcrypt('111111'),
             'role_id' => 1
 
@@ -111,12 +116,34 @@ class UserTableSeeder extends Seeder {
 
         User::create([
             'name' => 'QA Coordinator',
-            'email' => 'coordinator@gmail.com',
+            'email' => 'coordinator@bar.com',
             'password' => bcrypt('111111'),
             'role_id' => 3
 
         ]);
 
+
+    }
+
+}
+class DepartTableSeeder extends Seeder {
+
+    public function run()
+    {
+        \App\Department::create([
+            'depart_name' => 'CSE',
+
+        ]);
+
+        \App\Department::create([
+            'depart_name' => 'Software Engineering',
+
+        ]);
+
+        \App\Department::create([
+            'depart_name' => 'IT',
+
+        ]);
 
     }
 
@@ -130,6 +157,7 @@ class StudentTableSeeder extends Seeder {
         DB::table('students')->delete();
         App\Student::create([
             'student_id' => 1,
+            'depart_id' => 1,
         ]);
 
     }
@@ -170,6 +198,7 @@ class CoordinatorTableSeeder extends Seeder {
         DB::table('coordinators')->delete();
         App\Coordinator::create([
             'cord_id' => '4',
+            'depart_id' => 2
         ]);
 
     }
@@ -184,6 +213,7 @@ class CategoryTableSeeder extends Seeder {
             'start_date' => '2018-03-04',
             'end_date' => '2018-03-10',
             'final_end_date' => '2018-03-14',
+            'depart_id' => 1
 
         ]);
 

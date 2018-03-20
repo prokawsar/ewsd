@@ -51,11 +51,21 @@ Route::group(['middleware' => 'auth', 'role' => ['student']], function () {
 Route::group(['middleware' => 'auth', 'role' => ['admin']], function () {
     Route::get('/admin/home', 'AdminController@index')->name('ahome');
     Route::get('/admin/ideas', 'AdminController@ideas')->name('ideas');
+    Route::get('/admin/adddepart', function () {
+        return view('admin.adddepart');
+    })->name('adddepart');
+
+    Route::post('/admin/adddepart', 'AdminController@addDepart')->name('adddept');
+    Route::get('/admin/deldept{id}', 'AdminController@deleteDepart')->name('deldept');
+
+    Route::get('/admin/student-details', 'AdminController@student')->name('sdetails');
+    Route::get('/admin/staff-details', 'AdminController@staff')->name('stdetails');
+    Route::get('/admin/addstudent', 'AdminController@addStudentForm')->name('addstudent');
+    Route::post('/admin/addstudent', 'AdminController@addStudent')->name('addstudent');
 
     Route::get('/ideaApprove{id}',
-        ['uses' => 'AdminController@ideaApprove', 'role' => ['admin', 'coordinator']])->name('ideaApprove');
-    Route::get('/ideaApprove{id}',
-        ['uses' => 'AdminController@ideaApprove', 'role' => ['admin', 'coordinator']])->name('ideaApprove');
+        ['uses' => 'AdminController@ideaApprove', 'role' => ['qamanager', 'coordinator']])->name('ideaApprove');
+
 });
 
 Route::group(['middleware' => 'auth', 'role' => ['qamanager']], function () {
@@ -98,6 +108,7 @@ Route::post('/dislike',
 
 Route::get('/category/{name}', 'HomeController@show');
 
+
 Route::group(['prefix' => 'qamanager'], function () {
 
     Route::get('/contributors', function () {
@@ -118,7 +129,6 @@ Route::group(['prefix' => 'qamanager'], function () {
     Route::get('/commented_idea', function () {
         return view('qamanager.commented_idea');
     });
-
 
 });
 
