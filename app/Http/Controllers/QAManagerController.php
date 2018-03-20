@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Idea;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class QAManagerController extends Controller
@@ -52,5 +53,22 @@ class QAManagerController extends Controller
         $category->save();
 
         return redirect('/qamanager/addcat')->with('status', 'Category added successfully');
+    }
+
+    public function ideasDownload()
+    {
+        return view('qamanager.download');
+    }
+
+    public function downloadZip(Request $request){
+//        dd($request->input('select'));
+
+        $files = glob(public_path("css/*"));
+        $name = date('Ymd');
+        \Zipper::make(public_path( $name .'.zip'))->add($files)->close();
+
+//        return response()->download(public_path('test.zip'));
+        return response()->download(public_path($name .'.zip'));
+
     }
 }

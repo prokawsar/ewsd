@@ -94,6 +94,8 @@
                     </li>
                     <li><a href="{{ route('managerideas')}}"><i class="fa fa-book"></i> <span>All Ideas</span></a>
                     </li>
+                    <li><a href="{{ route('ideasdownload')}}"><i class="fa fa-book"></i> <span>Download Contribution</span></a>
+                    </li>
 
                     <li class="treeview">
                         <a href="{{ url('/statical1')}}">

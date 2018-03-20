@@ -15,4 +15,9 @@ class Idea extends Model
     {
         return $this->belongsTo('App\Category', 'cat_id');
     }
+
+    public function file()
+    {
+        return $this->hasMany('App\File');
+    }
 }
