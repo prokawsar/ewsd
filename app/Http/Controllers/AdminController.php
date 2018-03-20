@@ -58,7 +58,7 @@ class AdminController extends Controller
 
     public function addStudent(Request $request)
     {
-        return view('admin.student', compact('students'));
+        return \redirect('/admin/addstudent')->with('status', 'Student Added');
     }
 
     public function addDepart(Request $request)
