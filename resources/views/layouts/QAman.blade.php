@@ -16,7 +16,7 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-custom-menu navbar-static-top">
         <div class="container">
             <div class="navbar-header">
 
@@ -104,7 +104,6 @@
             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ url('/statistics')}}"><i class="fa fa-circle-o"></i> Statistics</a></li>
                             <li><a href="{{ url('/ideas')}}"><i class="fa fa-circle-o"></i> Number of Ideas</a></li>
                             <li><a href="{{ url('/contributors')}}"><i class="fa fa-circle-o"></i> Contributors</a></li>
                             <li><a href="{{ url('/percentage')}}"><i class="fa fa-circle-o"></i>Shared Pecentage</a>
@@ -128,38 +127,6 @@
                             </li>
                             <li><a href="{{ url('/commented_idea')}}"><i class="fa fa-circle-o"></i> Most commented 10
                                     IDEA</a></li>
-                            <li><a href="{{ url('/idea_without_comment')}}"><i class="fa fa-circle-o"></i> Ideas without
-                                    comment</a></li>
-                            <li><a href="{{ url('/idea_without_like')}}"><i class="fa fa-circle-o"></i> Ideas without
-                                    like</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="{{ url('#')}}">
-                            <i class="fa fa-files-o"></i>
-                            <span>Lists</span>
-                            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                        </a>
-                        <ul class="treeview-menu">
-
-                            <li><a href="{{ url('/idea_list')}}"><i class="fa fa-circle-o"></i> Total Ideas of
-                                    Depertment</a></li>
-                            <li><a href="{{ url('/contributor_idea')}}"><i class="fa fa-circle-o"></i> Contributor's
-                                    Ideas</a></li>
-                            <li><a href="{{ url('/catagorys_idea')}}"><i class="fa fa-circle-o"></i> Catagory's
-                                    Ideas</a></li>
-
-                            <li><a href="{{ url('/liked_idea_details')}}"><i class="fa fa-circle-o"></i> Most liked 10
-                                    IDEA Details</a></li>
-                            <li><a href="{{ url('/commented_idea_details')}}"><i class="fa fa-circle-o"></i> Most
-                                    commented 10 IDEA Details</a></li>
-
-                            <li><a href="{{ url('/idea_without_comment_details')}}"><i class="fa fa-circle-o"></i> Ideas
-                                    without comment Details</a></li>
-                            <li><a href="{{ url('/idea_without_like_details')}}"><i class="fa fa-circle-o"></i> Ideas
-                                    without like Details</a></li>
 
                         </ul>
                     </li>

@@ -27,4 +27,18 @@ class HomeController extends Controller
 
         return view('student.myideas', compact(['allIdeas', 'draftIdeas']));
     }
+
+    public function categoryWise(){
+
+        return view('student.categorywise');
+    }
+
+    public function show($name)
+    {
+        $id = \App\Category::select('id')->where('cat_name', $name)->first();
+
+        $posts = \App\Idea::where('cat_id', $id->id)->where('approve', 1)->orderBy('created_at', 'desc')->paginate(5);
+//        dd($posts);
+        return view('student.categorypost', compact('posts'));
+    }
 }

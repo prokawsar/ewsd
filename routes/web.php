@@ -37,6 +37,7 @@ Route::get('/', function () {
 Route::group(['middleware'=>'auth','role'=>['student']], function() {
     Route::get('/home', 'HomeController@index')->name('shome');
     Route::get('/myideas', 'HomeController@myIdeas')->name('sideas');
+    Route::get('/categories', 'HomeController@categoryWise')->name('categories');
     Route::post('/storeidea', 'IdeaController@saveIdea');
 
     Route::get('/contribution', function () {
@@ -85,49 +86,27 @@ Route::post('/delcomment', 'IdeaController@deleteComment');
 Route::post('/like',['uses'=>'IdeaController@setLike','role'=>['coordinator', 'student', 'qamanager'],'as'=>'like']);
 Route::post('/dislike',['uses'=>'IdeaController@setDislike','role'=>['coordinator', 'student', 'qamanager'],'as'=>'dislike']);
 
+Route::get('/category/{name}', 'HomeController@show');
 
 Route::group(['prefix' => 'qamanager'], function () {
 
-    Route::get('/statistics', function () {
-        return view('qamanager.statistics');
-    });
-
-//    Route::get('/ideas', function () {
-//        return view('qamanager.ideas');
-//    });
     Route::get('/contributors', function () {
         return view('qamanager.contributors');
-    });
-    Route::get('/contributor_idea', function () {
-        return view('qamanager.contributor_idea');
     });
 
     Route::get('/catagorys_idea', function () {
         return view('qamanager.catagorys_idea');
     });
-    Route::get('/liked_idea_details', function () {
-        return view('qamanager.liked_idea_details');
-    });
+
     Route::get('/commented_idea_details', function () {
         return view('qamanager.commented_idea_details');
     });
-    Route::get('/idea_without_comment_details', function () {
-        return view('qamanager.idea_without_comment_details');
-    });
-    Route::get('/idea_without_like_details', function () {
-        return view('qamanager.idea_without_like_details');
-    });
+
     Route::get('/liked_idea', function () {
         return view('qamanager.liked_idea');
     });
     Route::get('/commented_idea', function () {
         return view('qamanager.commented_idea');
-    });
-    Route::get('/idea_without_comment', function () {
-        return view('qamanager.idea_without_comment');
-    });
-    Route::get('/idea_without_like', function () {
-        return view('qamanager.idea_without_like');
     });
 
 
