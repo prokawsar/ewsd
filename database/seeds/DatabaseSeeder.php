@@ -198,7 +198,7 @@ class CoordinatorTableSeeder extends Seeder {
         DB::table('coordinators')->delete();
         App\Coordinator::create([
             'cord_id' => '4',
-            'depart_id' => 2
+            'depart_id' => 1
         ]);
 
     }

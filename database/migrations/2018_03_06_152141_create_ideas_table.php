@@ -20,9 +20,11 @@ class CreateIdeasTable extends Migration
             $table->boolean('anonym')->default(0);
             $table->integer('cat_id')->unsigned();
             $table->integer('student_id')->unsigned();
+            $table->integer('depart_id')->unsigned();
 
             $table->foreign('student_id')->references('id')->on('users');
             $table->foreign('cat_id')->references('id')->on('categories');
+            $table->foreign('depart_id')->references('id')->on('departments');
 
             $table->timestamps();
         });

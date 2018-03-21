@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Coordinator;
 use App\File;
 use App\Idea;
 use App\Comment;
 use App\Like;
+use App\Mail\CoorNotification;
 use App\Mail\UserNotification;
 use App\User;
 use App\Visited;
@@ -33,7 +35,13 @@ class IdeaController extends Controller
         $idea->anonym = $request->anonym;
         $idea->cat_id = $request->category;
         $idea->student_id = $request->user_id;
+        $idea->depart_id = $request->depart_id;
         $idea->save();
+
+        $cord_id = Coordinator::select('cord_id')->where('depart_id', $request->depart_id)->first();
+        $email = User::select('email')->where('id', $cord_id->cord_id)->first();
+
+//        Mail::to($email->email)->send(new CoorNotification());
 
         $idea_id = Idea::select('id')->orderBy('created_at', 'desc')->first();
 
@@ -174,7 +182,7 @@ class IdeaController extends Controller
     {
         $check = Visited::where('idea_id', $id)->where('user_id', Auth::id())->first();
 //        dd($check);
-        if(is_null($check)) {
+        if (is_null($check)) {
             $visited = new Visited();
             $visited->idea_id = $id;
             $visited->user_id = Auth::id();
