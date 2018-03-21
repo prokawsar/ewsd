@@ -54,7 +54,7 @@
                                             </tr>
                                         @endforeach
                                     @else
-                                        <td class="warning text-center" colspan="4">No Pending Idea</td>
+                                        <td class="warning text-center" colspan="5">No Pending Idea</td>
                                     @endif
                                     </tbody>
 

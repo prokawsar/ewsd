@@ -47,6 +47,7 @@ class QAManagerController extends Controller
     {
         $category = new Category();
         $category->cat_name = $request['name'];
+        $category->depart_id = $request['department'];
         $category->start_date = $request['datefrom'];
         $category->end_date = $request['dateto'];
         $category->final_end_date = $request['finaldate'];

@@ -65,11 +65,11 @@
                                 @endphp
 
                                 <div class="form-group">
-                                    <label for="category" class="col-md-3 control-label">
+                                    <label for="department" class="col-md-3 control-label">
                                         Department: </label>
 
                                     <div class="col-md-6">
-                                        <select class="form-control" name="category" id="category" required>
+                                        <select class="form-control" name="department" id="department" required>
                                             @foreach($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->depart_name }}</option>
                                             @endforeach
@@ -96,7 +96,7 @@
                                     <label for="date" class="col-md-4 control-label">Date From</label>
 
                                     <div class="col-md-6">
-                                        <input id="datefrom" type="date" class="form-control" name="datefrom"
+                                        <input id="datefrom" type="text" class="form-control" name="datefrom"
                                                value="{{ old('datefrom') }}">
 
                                         @if ($errors->has('datefrom'))
@@ -111,7 +111,7 @@
                                     <label for="dateto" class="col-md-4 control-label">Date To</label>
 
                                     <div class="col-md-6">
-                                        <input id="dateto" type="date" class="form-control" name="dateto">
+                                        <input id="dateto" type="text" class="form-control" name="dateto">
 
                                         @if ($errors->has('dateto'))
                                             <span class="help-block">
@@ -125,7 +125,7 @@
                                     <label for="finaldate" class="col-md-4 control-label">Final Date</label>
 
                                     <div class="col-md-6">
-                                        <input id="finaldate" type="date" class="form-control" name="finaldate">
+                                        <input id="finaldate" type="text" class="form-control" name="finaldate">
 
                                         @if ($errors->has('finaldate'))
                                             <span class="help-block">
@@ -150,3 +150,5 @@
         </div>
     </div>
 @endsection
+
+

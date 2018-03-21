@@ -80,6 +80,8 @@ class IdeaController extends Controller
                 }
 
             }
+
+
             return response()->json([
                 'message' => 'Idea successfully submitted'
             ]);

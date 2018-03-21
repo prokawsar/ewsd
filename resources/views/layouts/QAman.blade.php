@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
 
 </head>
 <body>
@@ -144,5 +146,51 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+
+<script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js')}}"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="{{ asset('https://code.jquery.com/ui/1.12.1/jquery-ui.js') }}"></script>
+
+<script>
+    $(function () {
+        $("#datefrom").datepicker({
+            minDate: new Date,
+            dateFormat: "yy-mm-dd",
+            onSelect: function (date) {
+                var date2 = $('#datefrom').datepicker('getDate');
+                date2.setDate(date2.getDate() + 1);
+                $('#dateto').datepicker('setDate', date2);
+                //sets minDate to dt1 date + 1
+                $('#dateto').datepicker('option', 'minDate', date2);
+
+                $('#finaldate').datepicker('setDate', date2);
+                //sets minDate to dt1 date + 1
+                $('#finaldate').datepicker('option', 'minDate', date2);
+
+            }
+        });
+        $("#dateto").datepicker({
+            minDate: new Date,
+            dateFormat: "yy-mm-dd",
+            onSelect: function (date) {
+                var date2 = $('#dateto').datepicker('getDate');
+                date2.setDate(date2.getDate());
+
+                $('#finaldate').datepicker('setDate', date2);
+                //sets minDate to dt1 date + 1
+                $('#finaldate').datepicker('option', 'minDate', date2);
+
+            }
+        });
+        $("#finaldate").datepicker({
+            minDate: new Date,
+            dateFormat: "yy-mm-dd",
+        });
+
+    });
+
+</script>
+
+
 </body>
 </html>
