@@ -156,7 +156,10 @@ function commentButtonClicked(id, user_id){
                 user_id: user_id
             },
             success:function (data) {
-
+                console.log(data.message);
+            },
+            error:function (err){
+                console.log(err.responseText);
             }
         });
 

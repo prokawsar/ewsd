@@ -6,7 +6,10 @@ use App\File;
 use App\Idea;
 use App\Comment;
 use App\Like;
+use App\Mail\UserNotification;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class IdeaController extends Controller
 {
@@ -19,7 +22,7 @@ class IdeaController extends Controller
 
     public function SaveIdeaLink(Request $request)
     {
-//        dd($request->files);
+
         if (is_null($request->anonym)) {
             $request->anonym = 0;
         }
@@ -91,6 +94,17 @@ class IdeaController extends Controller
     public function saveComment(Request $request)
     {
         //dd($request);
+        $userCheck = Idea::select('student_id')->where('id', $request->idea_id)->first();
+
+        if ($userCheck->student_id != $request->user_id) {
+//            checking if commenter is student
+            $user = User::where('id', $request->user_id)->first();
+            if ($user->hasRole('student')) {
+                $email = User::select('email')->where('id', $userCheck->student_id)->first();
+                Mail::to($email->email)->send(new UserNotification());
+            }
+        }
+
         if ($request->ajax()) {
 
             $comment = new Comment();
