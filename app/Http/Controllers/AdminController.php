@@ -91,15 +91,19 @@ class AdminController extends Controller
         return Redirect::back()->with('status', 'Idea Approved');
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function ideasDepart()
     {
-        //
+        return view('admin.ideas_depart');
+    }
+
+    public function contDepart()
+    {
+        return view('admin.contri_depart');
+    }
+
+    public function ideasCat()
+    {
+        return view('admin.ideas_category');
     }
 
     /**

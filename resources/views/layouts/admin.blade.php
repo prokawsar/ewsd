@@ -111,11 +111,9 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('/statistics')}}"><i class="fa fa-circle-o"></i> Statistics</a></li>
-                        <li><a href="{{ url('/ideas')}}"><i class="fa fa-circle-o"></i> Number of Ideas</a></li>
-                        <li><a href="{{ url('/contributors')}}"><i class="fa fa-circle-o"></i> Contributors</a></li>
-                        <li><a href="{{ url('/percentage')}}"><i class="fa fa-circle-o"></i>Shared Pecentage</a></li>
-                        <li><a href="{{ url('/ideas_catagory')}}"><i class="fa fa-circle-o"></i>Ideas of each Catagories</a>
+                        <li><a href="{{ route('ideasdepart')}}"><i class="fa fa-circle-o"></i>Ideas Per Department</a></li>
+                        <li><a href="{{ route('departcont')}}"><i class="fa fa-circle-o"></i>Contributors Per Department</a></li>
+                        <li><a href="{{ route('departcat')}}"><i class="fa fa-circle-o"></i>Ideas of each Catagories</a>
                         </li>
 
                     </ul>
@@ -137,6 +135,8 @@
                                 comment</a></li>
                         <li><a href="{{ url('/idea_without_like')}}"><i class="fa fa-circle-o"></i> Ideas without
                                 like</a></li>
+                        <li><a href="{{ url('/idea_without_like')}}"><i class="fa fa-circle-o"></i> Anonymous Ideas</a></li>
+                        <li><a href="{{ url('/idea_without_like')}}"><i class="fa fa-circle-o"></i> Anonymous Comments</a></li>
                     </ul>
                 </li>
 

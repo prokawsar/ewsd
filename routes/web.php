@@ -58,6 +58,10 @@ Route::group(['middleware' => 'auth', 'role' => ['admin']], function () {
     Route::post('/admin/adddepart', 'AdminController@addDepart')->name('adddept');
     Route::get('/admin/deldept{id}', 'AdminController@deleteDepart')->name('deldept');
 
+    Route::get('/admin/departideas', 'AdminController@ideasDepart')->name('ideasdepart');
+    Route::get('/admin/departcont', 'AdminController@contDepart')->name('departcont');
+    Route::get('/admin/departcat', 'AdminController@ideasCat')->name('departcat');
+
     Route::get('/admin/student-details', 'AdminController@student')->name('sdetails');
     Route::get('/admin/staff-details', 'AdminController@staff')->name('stdetails');
     Route::get('/admin/addstudent', 'AdminController@addStudentForm')->name('addstudent');
