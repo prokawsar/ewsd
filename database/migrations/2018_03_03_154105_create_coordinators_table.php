@@ -21,7 +21,6 @@ class CreateCoordinatorsTable extends Migration
             $table->foreign('cord_id')->references('id')->on('users');
             $table->foreign('depart_id')->references('id')->on('departments');
 
-            $table->rememberToken();
             $table->timestamps();
         });
     }

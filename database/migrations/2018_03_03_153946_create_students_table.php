@@ -22,7 +22,6 @@ class CreateStudentsTable extends Migration
             $table->foreign('student_id')->references('id')->on('users');
             $table->foreign('depart_id')->references('id')->on('departments');
 
-            $table->rememberToken();
             $table->timestamps();
         });
     }

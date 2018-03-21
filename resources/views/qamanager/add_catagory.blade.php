@@ -59,23 +59,6 @@
                                   action="{{ url('/qamanager/addcat') }}">
                                 {{ csrf_field() }}
 
-                                @php
-                                    $categories = \App\Department::all();
-                                  //  dd($categories);
-                                @endphp
-
-                                <div class="form-group">
-                                    <label for="department" class="col-md-3 control-label">
-                                        Department: </label>
-
-                                    <div class="col-md-6">
-                                        <select class="form-control" name="department" id="department" required>
-                                            @foreach($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->depart_name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
 
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <label for="name" class="col-md-4 control-label">Name</label>

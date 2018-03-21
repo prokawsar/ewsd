@@ -213,7 +213,6 @@ class CategoryTableSeeder extends Seeder {
             'start_date' => '2018-03-04',
             'end_date' => '2018-03-10',
             'final_end_date' => '2018-03-14',
-            'depart_id' => 1
 
         ]);
 

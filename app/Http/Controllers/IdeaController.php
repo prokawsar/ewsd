@@ -8,7 +8,9 @@ use App\Comment;
 use App\Like;
 use App\Mail\UserNotification;
 use App\User;
+use App\Visited;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class IdeaController extends Controller
@@ -166,5 +168,21 @@ class IdeaController extends Controller
     {
         $comment = Comment::find($request->comment_id);
         $comment->delete();
+    }
+
+    public function singleIdea($id)
+    {
+        $check = Visited::where('idea_id', $id)->where('user_id', Auth::id())->first();
+//        dd($check);
+        if(is_null($check)) {
+            $visited = new Visited();
+            $visited->idea_id = $id;
+            $visited->user_id = Auth::id();
+            $visited->save();
+        }
+
+        $posts = Idea::with('user')->where('id', $id)->first();
+        //    return json_encode($post);
+        return view('student.singleidea', compact('posts'));
     }
 }

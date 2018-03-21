@@ -42,7 +42,7 @@
                                                 <td>{{ $idea->idea}}</td>
                                                 <td>{{ $idea->category->cat_name }}</td>
                                                 <td>{{ $idea->created_at->diffForHumans() }}</td>
-                                                <td> Pending </td>
+                                                <td> Pending</td>
                                                 <td><a class="btn btn-warning"
                                                        href="{{route('ideaIgnore', ['id' => $idea->id])}}">Decline</a>
                                                 </td>
@@ -54,7 +54,7 @@
                                             </tr>
                                         @endforeach
                                     @else
-                                        <td class="warning text-center" colspan="4">No Pending Idea</td>
+                                        <td class="warning text-center" colspan="5">No Pending Idea</td>
                                     @endif
                                     </tbody>
 
@@ -116,6 +116,7 @@
                                                         $likeCount=\App\Like::where('idea_id',$posts->id)->where('status', 1)->count();
                                                         $dislikeCount=\App\Like::where('idea_id',$posts->id)->where('status', 0)->count();
                                                     $userCheck =\App\Like::where('idea_id', $posts->id )->where('user_id', Auth::id())->first();
+                                                    $view = \App\Visited::where('idea_id', $posts->id)->count();
 
                                                     @endphp
 
@@ -142,10 +143,16 @@
                                                             data-id="{{$posts->id}}"
                                                             data-id1="{{Auth::id()}}">
 
-                                                            <a style="cursor: pointer; text-decoration: none;" title="Dislike" id="dislike"><i
+                                                            <a style="cursor: pointer; text-decoration: none;"
+                                                               title="Dislike" id="dislike"><i
                                                                         class="fa @if( !is_null($userCheck) && $userCheck->status===0)fa-thumbs-down @else fa-thumbs-o-down @endif fa-lg"></i> {{ $dislikeCount }}
                                                                 Dislike</a>
 
+                                                    </span>
+
+                                                    <span>
+                                                        <a><i class="fa fa-eye fa-lg"></i>
+                                                            {{ $view }} View</a>
                                                     </span>
 
                                                 </div>
@@ -159,54 +166,60 @@
 
                                                 @if(count($comments)==0)
                                                     <label for="" class="label label-default"> {{count($comments)}}
-                                                        Comment</label>
+                                                        Comment</label> <span class="text-sm" >Click on idea to view comments </span>
                                                 @else
 
                                                     <label for="" class="label label-primary"> {{count($comments)}}
-                                                        Comments</label>
+                                                        Comments</label> <span class="text-sm" >Click on idea to view comments </span>
 
                                                 @endif
-                                                <div class="panel-body" id="commentsSec{{$posts->id}}">
+                                                {{--<div class="panel-body" id="commentsSec{{$posts->id}}">--}}
 
-                                                    <div class="@php if(count($comments)!=0) {echo 'well well-sm';} @endphp">
-                                                        @foreach($comments as $cmt)
+                                                    {{--<div class="@php if(count($comments)!=0) {echo 'well well-sm';} @endphp">--}}
+                                                        {{--@foreach($comments as $cmt)--}}
 
-                                                            <span class="user">
-                                                            @if($cmt->anonym)
-                                                                    Anonymous
-                                                                @else
-                                                                    {{ $cmt->user->name  }}
-                                                                @endif
-                                                            </span> <i
-                                                                    class="fa fa-terminal"></i>  {{$cmt->comment}}
-                                                            @if($cmt->user_id == Auth::id()) <a style="cursor: pointer" id="deleteComment" data-id="{{ $posts->id }}"  data-value="{{ $cmt->id }}"><i type="button" class="fa fa-trash pull-right"></i></a>
-                                                            @endif
-                                                            <br/>
-                                                            {{$cmt->created_at->diffForHumans()}} <br/>
-                                                            <hr class="style"></hr>
+                                                            {{--<span class="user">--}}
+                                                            {{--@if($cmt->anonym)--}}
+                                                                    {{--Anonymous--}}
+                                                                {{--@else--}}
+                                                                    {{--{{ $cmt->user->name  }}--}}
+                                                                {{--@endif--}}
+                                                            {{--</span> <i--}}
+                                                                    {{--class="fa fa-terminal"></i>  {{$cmt->comment}}--}}
+                                                            {{--@if($cmt->user_id == Auth::id()) <a style="cursor: pointer"--}}
+                                                                                                {{--id="deleteComment"--}}
+                                                                                                {{--data-id="{{ $posts->id }}"--}}
+                                                                                                {{--data-value="{{ $cmt->id }}"><i--}}
+                                                                        {{--type="button"--}}
+                                                                        {{--class="fa fa-trash pull-right"></i></a>--}}
+                                                            {{--@endif--}}
+                                                            {{--<br/>--}}
+                                                            {{--{{$cmt->created_at->diffForHumans()}} <br/>--}}
+                                                            {{--<hr class="style"></hr>--}}
 
-                                                        @endforeach
-                                                    </div>
-                                                </div>
+                                                        {{--@endforeach--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
 
 
-                                                <div id="commentArea{{$posts->id}}" data-id="{{$posts->id}}"
-                                                     data-id1="{{\Illuminate\Support\Facades\Auth::id()}}">
+                                                {{--<div id="commentArea{{$posts->id}}" data-id="{{$posts->id}}"--}}
+                                                     {{--data-id1="{{\Illuminate\Support\Facades\Auth::id()}}">--}}
 
-                                                    <textarea onkeyup="increaseHeight(this);" id="{{$posts->id}}comment"
-                                                              placeholder="Write a comment..." type="text"
-                                                              class="form-control" name="comment"
-                                                              style="padding-top:10px;"></textarea>
-                                                    <br/>
-                                                    <input title="Anonymously" type="hidden" id="anonymComment{{ $posts->id }}">
+                                                    {{--<textarea onkeyup="increaseHeight(this);" id="{{$posts->id}}comment"--}}
+                                                              {{--placeholder="Write a comment..." type="text"--}}
+                                                              {{--class="form-control" name="comment"--}}
+                                                              {{--style="padding-top:10px;"></textarea>--}}
+                                                    {{--<br/>--}}
+                                                    {{--<input title="Anonymously" type="hidden"--}}
+                                                           {{--id="anonymComment{{ $posts->id }}">--}}
 
-                                                    <a class=" btn btn-default pull-right"
-                                                             id="commentPostButton{{$posts->id}}"
-                                                             onclick="return commentButtonClicked('{{$posts->id}}', '{{ Auth::id()}}' )"><i
-                                                                class="fa fa-paper-plane-o" aria-hidden="true"></i>
-                                                        comment</a>
-                                                    &nbsp;
-                                                </div>
+                                                    {{--<a class=" btn btn-default pull-right"--}}
+                                                       {{--id="commentPostButton{{$posts->id}}"--}}
+                                                       {{--onclick="return commentButtonClicked('{{$posts->id}}', '{{ Auth::id()}}' )"><i--}}
+                                                                {{--class="fa fa-paper-plane-o" aria-hidden="true"></i>--}}
+                                                        {{--comment</a>--}}
+                                                    {{--&nbsp;--}}
+                                                {{--</div>--}}
 
                                             </div>
 
