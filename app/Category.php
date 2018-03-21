@@ -14,6 +14,12 @@ class Category extends Model
         return $this->hasMany('App\Idea');
     }
 
+
+    public function department()
+    {
+        return $this->belongsTo('App\Department', 'depart_id');
+    }
+
     public static function post_count()
     {   // Need to get category id, name, number of post accociated with that category and order by name
 

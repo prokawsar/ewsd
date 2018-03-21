@@ -27,6 +27,7 @@
                                 <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Department</th>
                                     <th>Date From</th>
                                     <th>To</th>
                                     <th>Final Deadline</th>
@@ -35,11 +36,13 @@
                                 </thead>
                                 <tbody>
                                 @php
-                                    $categories = \App\Category::all();
+                                    $categories = \App\Category::with('department')->get();
+                                  //  dd($categories);
                                 @endphp
                                 @foreach( $categories as $category)
                                     <tr>
                                         <td>{{ $category->cat_name }}</td>
+                                        <td>{{ $category->department->depart_name }}</td>
                                         <td>{{ $category->start_date->toDateString() }}</td>
                                         <td>{{ $category->end_date->toDateString() }}</td>
                                         <td>{{ $category->final_end_date->toDateString() }}</td>
@@ -51,10 +54,28 @@
 
                             </table>
                         </div>
-                        <div class="col-md-6 ">
+                        <div class="col-md-10 ">
                             <form class="form-horizontal" role="form" method="POST"
                                   action="{{ url('/qamanager/addcat') }}">
                                 {{ csrf_field() }}
+
+                                @php
+                                    $categories = \App\Department::all();
+                                  //  dd($categories);
+                                @endphp
+
+                                <div class="form-group">
+                                    <label for="category" class="col-md-3 control-label">
+                                        Department: </label>
+
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="category" id="category" required>
+                                            @foreach($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->depart_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
 
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <label for="name" class="col-md-4 control-label">Name</label>
