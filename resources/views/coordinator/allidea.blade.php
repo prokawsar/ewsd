@@ -101,7 +101,7 @@
                                         <div class="panel-body" id="postDiv">
                                             <blockquote>
 
-                                                <a class="post_link" href="posts/{{$posts->id}}/show" target="_blank">
+                                                <a class="post_link" href="{{ route('singleIdea', ['id' => $posts->id ]) }}" target="_blank">
                                                     <p>{{$posts->idea }}</p></a>
 
                                             </blockquote>

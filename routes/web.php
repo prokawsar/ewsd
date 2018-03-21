@@ -114,8 +114,6 @@ Route::get('/category/{name}', 'HomeController@show');
 
 Route::get('/posts/{id}/show', 'IdeaController@singleIdea')->name('singleIdea'); // I don't want to pass post id in link
 
-Route::get('/coordinator/posts/{id}/show', 'IdeaController@singleIdea')->name('singleIdeac'); // I don't want to pass post id in link
-
 Route::group(['prefix' => 'qamanager'], function () {
 
     Route::get('/contributors', function () {
