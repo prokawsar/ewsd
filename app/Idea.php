@@ -30,4 +30,9 @@ class Idea extends Model
     {
         return $this->hasMany('App\Comment');
     }
+
+    public function visited()
+    {
+        return $this->hasMany('App\Visited');
+    }
 }

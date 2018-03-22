@@ -118,6 +118,7 @@ Route::get('/report/departideas', ['uses' => 'AdminController@ideasDepart', 'rol
 Route::get('/report/departcont', 'AdminController@contDepart')->name('departcont');
 Route::get('/report/departcat', 'AdminController@ideasCat')->name('departcat');
 Route::get('/report/anonymous', 'AdminController@anonymous')->name('anonymous');
+Route::get('/report/mostviewed', 'AdminController@mostViewed')->name('mostviewed');
 
 Route::get('/report/mostliked', 'AdminController@mostLiked')->name('mostliked');
 Route::get('/report/mostcommented', 'AdminController@mostCommented')->name('mostcommented');

@@ -13,11 +13,15 @@ else
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 @php
-                   // $ideas = \App\Idea::select('cat_id', DB::raw('count(*) as total'))->groupBy('cat_id')->get();
-                   // dd($ideas);
+                 //   $contributor= DB::table('ideas')->select('departments.depart_name as dname',DB::raw('COUNT(DISTINCT student_id) as contributor '))
+                  //              ->groupBy('depart_id')
+                    //            ->leftJoin('departments','departments.id','=','ideas.depart_id')
+                   //             ->get();
+                //dd($contributor);
+
                 @endphp
                 <div class="panel-heading">Number of Contributor each Department</div>
                 <div class="panel-body">

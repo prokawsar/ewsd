@@ -169,6 +169,11 @@ class AdminController extends Controller
         return view('admin.anonym_idea_comment');
     }
 
+    public function mostViewed()
+    {
+        return view('admin.most_viewed');
+    }
+
     public function mostLiked()
     {
         return view('admin.liked_idea');

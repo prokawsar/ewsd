@@ -91,8 +91,8 @@
                         <i class="fa fa-files-o"></i>
                         <span>Details</span>
                         <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
                     <ul class="treeview-menu">
 
@@ -103,7 +103,7 @@
                     </ul>
                 </li>
                 <li class="treeview">
-                    <a href="{{ url('/statical1')}}">
+                    <a href="#">
                         <i class="fa fa-files-o"></i>
                         <span>Statistics</span>
                         <span class="pull-right-container">
@@ -111,10 +111,11 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
+                        <li><a href="{{ route('mostviewed')}}"><i class="fa fa-circle-o"></i>Most Viewd Ideas</a>
+                        <li><a href="{{ route('departcat')}}"><i class="fa fa-circle-o"></i>Ideas of each Catagories</a>
                         <li><a href="{{ route('ideasdepart')}}"><i class="fa fa-circle-o"></i>Ideas Per Department</a></li>
                         <li><a href="{{ route('departcont')}}"><i class="fa fa-circle-o"></i>Contributors Per Department</a></li>
-                        <li><a href="{{ route('departcat')}}"><i class="fa fa-circle-o"></i>Ideas of each Catagories</a>
-                        </li>
+
 
                     </ul>
                 </li>
