@@ -10,43 +10,51 @@
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">Downloadable Ideas</div>
                     @php
-                        $ideas = App\Idea::with('user', 'file')->get();
+                        $ideas = App\Idea::with('user', 'file')->paginate(5);
                    //  dd($ideas[2]->file);
                     @endphp
                     <div class="panel-body">
-                        <form action="{{ route('downloadzip') }}" method="post">
-                            {{ csrf_field() }}
 
-                            <table id="example1" class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Submitted by</th>
-                                    <th>Idea</th>
-                                    <th>Submitted on</th>
-                                    <th>Attached Doc</th>
 
-                                </tr>
+                        <table id="example1" class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Submitted by</th>
+                                <th>Idea</th>
+                                <th>Submitted on</th>
+                                <th>Attached File</th>
 
-                                </thead>
+                            </tr>
 
-                                <tbody>
-                                @foreach($ideas as $idea)
+                            </thead>
+
+                            <tbody>
+                            @php
+                                $i = 1;
+                            @endphp
+                            @foreach($ideas as $idea)
+
+                                    <input type="hidden" name="idea_id" value="{{ $idea->id }}">
                                     <tr>
-                                        <td><input type="checkbox" name="select[]" value="{{ $idea->id }}"></td>
+                                        <td> # {{ $i++ }}</td>
                                         <td>{{ $idea->user->name }}</td>
                                         <td>{{ $idea->idea }}</td>
                                         <td>{{ $idea->created_at->format('d-m-Y') }}</td>
                                         <td>@if( $idea->file->isEmpty() ) No @else Yes @endif</td>
-
+                                        @if( !$idea->file->isEmpty())
+                                            <td>
+                                                <a type="submit" href="{{ route('downloadzip', ['id' => $idea->id]) }}" class="btn btn-success pull-right"> Download
+                                                </a>
+                                            </td>
+                                        @endif
                                     </tr>
-                                @endforeach
-                                </tbody>
 
-                            </table>
+                            @endforeach
+                            </tbody>
 
-                            <button type="submit" class="btn btn-success pull-right"> Download</button>
-                        </form>
+                        </table>
+
                     </div>
                 </div>
             </div>

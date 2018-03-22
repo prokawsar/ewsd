@@ -51,7 +51,8 @@ class IdeaController extends Controller
                 foreach ($singleFile as $files) {
 //                    dd($files);
                     $file = new File();
-                    $fileName = $files->getClientOriginalName() . '.' . $files->getClientOriginalExtension();
+//                    $fileName = $files->getClientOriginalName() . '.' . $files->getClientOriginalExtension();
+                    $fileName = $files->getClientOriginalName();
                     $files->move(public_path('supporting'), $fileName);
 
                     $file->file = $fileName;

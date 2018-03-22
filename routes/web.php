@@ -79,7 +79,7 @@ Route::group(['middleware' => 'auth', 'role' => ['qamanager']], function () {
     Route::get('/qamanager/ideas', 'QAManagerController@ideas')->name('managerideas');
     Route::get('/qamanager/download', 'QAManagerController@ideasDownload')->name('ideasdownload');
 
-    Route::post('/qamanager/downloadZIP', 'QAManagerController@downloadZip')->name('downloadzip');
+    Route::get('/qamanager/downloadZIP{id}', 'QAManagerController@downloadZip')->name('downloadzip');
 
     Route::get('/qamanager/addcat', function () {
         return view('qamanager.add_catagory');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\File;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Idea;
 use Carbon\Carbon;
@@ -61,15 +62,21 @@ class QAManagerController extends Controller
         return view('qamanager.download');
     }
 
-    public function downloadZip(Request $request){
+    public function downloadZip($id){
 //        dd($request->input('select'));
+        $files = File::where('idea_id', $id)->get();
+       // dd($files);
+        $fileArr = [];
 
-        $files = glob(public_path("css/*"));
-        $name = date('Ymd');
-        \Zipper::make(public_path( $name .'.zip'))->add($files)->close();
+        foreach ($files as $file){
+            $fileArr[] = glob(public_path("supporting/". $file->file));
+        }
+//        $files = glob(public_path("css/*"));
+        $name = date('Ymd').rand(1, 100);
+        \Zipper::make(public_path('downloaded/'. $name .'.zip'))->add($fileArr)->close();
 
 //        return response()->download(public_path('test.zip'));
-        return response()->download(public_path($name .'.zip'));
+        return response()->download(public_path('downloaded/'.$name .'.zip'));
 
     }
 }
