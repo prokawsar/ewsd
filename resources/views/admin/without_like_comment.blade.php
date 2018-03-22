@@ -16,17 +16,24 @@ else
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     @php
-                        $ideas = \App\Idea::select('cat_id', DB::raw('count(*) as total'))->groupBy('cat_id')->get();
-                     //   dd($ideas);
+
+                        $ideas = \App\Idea::
+                                           whereNOTIn('id',function($query){
+                                               $query->select('idea_id')->from('likes');
+
+                                            })
+                                        ->get();
+
+                         $ideasComment = \App\Idea::
+                                           whereNOTIn('id',function($query){
+                                               $query->select('idea_id')->from('comments');
+                                            })
+                                        ->get();
+                   //  dd($ideas);
                     @endphp
                     <div class="panel-heading">Ideas without Like Comment</div>
                     <div class="panel-body">
 
-                        @php
-                            $ideas = \App\Idea::where('anonym', 1)->get();
-                            $comments = \App\Comment::where('anonym', 1)->get();
-
-                        @endphp
                         <div class="col-md-12 ">
                             <table id="example1" class="table table-striped">
                                 <thead>
@@ -45,9 +52,9 @@ else
                                 @endforeach
 
                             <th class="text-center"> Without Comment </th>
-                                @foreach($comments as $idea)
+                                @foreach($ideasComment as $idea)
                                     <tr>
-                                        <td>{{ $idea->comment }}</td>
+                                        <td>{{ $idea->idea }}</td>
                                         <td>{{ $idea->created_at->diffForHumans() }}</td>
 
                                     </tr>

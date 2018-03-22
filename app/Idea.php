@@ -20,4 +20,14 @@ class Idea extends Model
     {
         return $this->hasMany('App\File');
     }
+
+    public function like()
+    {
+        return $this->hasMany('App\Like');
+    }
+
+    public function comment()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }

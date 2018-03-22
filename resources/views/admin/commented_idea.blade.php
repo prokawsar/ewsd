@@ -1,3 +1,5 @@
+@section('title', 'Most Commented ideas')
+
 @php if( Auth::user()->hasRole('admin'))
     $role = 'layouts.admin';
 elseif( Auth::user()->hasRole('coordinator'))
@@ -7,6 +9,7 @@ else
 @endphp
 
 @extends($role)
+
 @section('content')
 
 <div class="container">
@@ -14,24 +17,33 @@ else
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">5 Most Commented IDEA List</div>
+                @php
+                    $ideas = \App\Comment::with('idea')->select( 'idea_id', DB::raw('count(id) as total'))
+
+                                    ->groupBy('idea_id')
+                                    ->orderBy('total', 'desc')
+                                    ->take(5)
+                                    ->get();
+                  //   dd($ideas);
+                @endphp
+
                 <div class="panel-body">
                 <table id="example1" class="table table-striped">
                       <thead>
                       <tr>
-                        <th>Catagory of IDEA</th>
-                        <th>Author of IDEA </th>
-                        <th>DETAILS </th>
+                        <th>Idea </th>
+                        <th>No of Comments</th>
                       </tr>
                       
                       </thead>
                       <tbody>
+                      @foreach($ideas as $idea)
                         <tr>
-                            <td>Campus</td>
-                            <td>Pro Kawser</td>
-                            <td><a href="{{ url('commented_idea_details')}}">.....</a></td>
-                            
-                        
-                        </tr>                
+                            <td>{{ $idea->idea->idea }}</td>
+                            <td>{{ $idea->total }}</td>
+
+                        </tr>
+                          @endforeach
                     </tbody>
               
                   </table>
