@@ -1,12 +1,24 @@
 @section('title', 'Contributor of Each Department')
 
-@extends('layouts.admin')
+@php if( Auth::user()->hasRole('admin'))
+    $role = 'layouts.admin';
+elseif( Auth::user()->hasRole('coordinator'))
+    $role = 'layouts.qacoor';
+else
+    $role = 'layouts.QAman';
+@endphp
+
+@extends($role)
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
+                @php
+                   // $ideas = \App\Idea::select('cat_id', DB::raw('count(*) as total'))->groupBy('cat_id')->get();
+                   // dd($ideas);
+                @endphp
                 <div class="panel-heading">Number of Contributor each Department</div>
                 <div class="panel-body">
 

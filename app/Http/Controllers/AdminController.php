@@ -164,6 +164,26 @@ class AdminController extends Controller
         return view('admin.ideas_category');
     }
 
+    public function anonymous()
+    {
+        return view('admin.anonym_idea_comment');
+    }
+
+    public function mostLiked()
+    {
+        return view('admin.liked_idea');
+    }
+
+    public function mostCommented()
+    {
+        return view('admin.commented_idea');
+    }
+
+    public function withoutComment()
+    {
+        return view('admin.without_like_comment');
+    }
+
     /**
      * Store a newly created resource in storage.
      *

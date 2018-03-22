@@ -1,11 +1,11 @@
-@section('title', 'Ideas of Each Category')
+@section('title', 'Ideas without Like Comment')
 
 @php if( Auth::user()->hasRole('admin'))
-    $role = 'layouts.admin';
+    {$role = 'layouts.admin';}
 elseif( Auth::user()->hasRole('coordinator'))
-    $role = 'layouts.qacoor';
+    {$role = 'layouts.qacoor';}
 else
-    $role = 'layouts.QAman';
+    {$role = 'layouts.QAman';}
 @endphp
 
 @extends($role)
@@ -19,31 +19,36 @@ else
                         $ideas = \App\Idea::select('cat_id', DB::raw('count(*) as total'))->groupBy('cat_id')->get();
                      //   dd($ideas);
                     @endphp
-                    <div class="panel-heading">Number of Ideas each Category</div>
+                    <div class="panel-heading">Ideas without Like Comment</div>
                     <div class="panel-body">
 
                         @php
+                            $ideas = \App\Idea::where('anonym', 1)->get();
+                            $comments = \App\Comment::where('anonym', 1)->get();
 
-                                @endphp
+                        @endphp
                         <div class="col-md-12 ">
                             <table id="example1" class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Category Name</th>
-                                    <th>Number of Ideas</th>
-                                    {{--<th>Sharing Percentage</th>--}}
+                                    <th class="text-center">Without Like</th>
                                 </tr>
 
                                 </thead>
                                 <tbody>
                                 @foreach($ideas as $idea)
-                                    @php
-                                        $name = \App\Category::select('cat_name')->where('id', $idea->cat_id)->first();
-
-                                    @endphp
                                     <tr>
-                                        <td>{{ $name->cat_name }}</td>
-                                        <td><a href="#">{{ $idea->total }}</a></td>
+                                        <td>{{ $idea->idea }}</td>
+                                        <td>{{ $idea->created_at->diffForHumans() }}</td>
+
+                                    </tr>
+                                @endforeach
+
+                            <th class="text-center"> Without Comment </th>
+                                @foreach($comments as $idea)
+                                    <tr>
+                                        <td>{{ $idea->comment }}</td>
+                                        <td>{{ $idea->created_at->diffForHumans() }}</td>
 
                                     </tr>
                                 @endforeach

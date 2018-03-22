@@ -100,7 +100,7 @@
                     </li>
 
                     <li class="treeview">
-                        <a href="{{ url('/statical1')}}">
+                        <a href="#">
                             <i class="fa fa-files-o"></i>
                             <span>Statistics</span>
                             <span class="pull-right-container">
@@ -108,15 +108,14 @@
             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ url('/ideas')}}"><i class="fa fa-circle-o"></i> Number of Ideas</a></li>
-                            <li><a href="{{ url('/contributors')}}"><i class="fa fa-circle-o"></i> Contributors</a></li>
-                            <li><a href="{{ url('/percentage')}}"><i class="fa fa-circle-o"></i>Shared Pecentage</a>
+                            <li><a href="{{ route('ideasdepart')}}"><i class="fa fa-circle-o"></i>Ideas Per Department</a></li>
+                            <li><a href="{{ route('departcont')}}"><i class="fa fa-circle-o"></i>Contributors Per Department</a></li>
+                            <li><a href="{{ route('departcat')}}"><i class="fa fa-circle-o"></i>Ideas of each Catagories</a>
                             </li>
-                            <li><a href="{{ url('/ideas_catagory')}}"><i class="fa fa-circle-o"></i>Ideas of each
-                                    Catagories</a></li>
 
                         </ul>
                     </li>
+
                     <li class="treeview">
                         <a href="{{ url('#')}}">
                             <i class="fa fa-files-o"></i>

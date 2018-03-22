@@ -1,4 +1,12 @@
-@extends('layouts.QAman')
+@php if( Auth::user()->hasRole('admin'))
+    $role = 'layouts.admin';
+elseif( Auth::user()->hasRole('coordinator'))
+    $role = 'layouts.qacoor';
+else
+    $role = 'layouts.QAman';
+@endphp
+
+@extends($role)
 
 @section('content')
 
@@ -6,22 +14,23 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Contributors List</div>
+                <div class="panel-heading">5 Most Liked IDEA List</div>
                 <div class="panel-body">
                 <table id="example1" class="table table-striped">
                       <thead>
                       <tr>
-                        <th>Contributor Name</th>
-                        <th>Number of Contribution</th>
+                        <th>Catagory of IDEA</th>
+                        <th>Author of Idea</th>
+                        <th>Details</th>
                         
                       </tr>
                       
                       </thead>
                       <tbody>
                         <tr>
+                            <td>Campus</td>
                             <td>Pro Kawser</td>
-                            <td><a href="{{ url('/contributor_idea')}}">10</a></td>
-                            
+                            <td><a href="{{ url('liked_idea_details')}}">.....</a></td>
                         
                         </tr>                
                     </tbody>

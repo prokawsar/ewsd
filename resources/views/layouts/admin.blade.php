@@ -128,16 +128,13 @@
                     </a>
                     <ul class="treeview-menu">
 
-                        <li><a href="{{ url('/liked_idea')}}"><i class="fa fa-circle-o"></i> Most liked 10 IDEA</a></li>
-                        <li><a href="{{ url('/commented_idea')}}"><i class="fa fa-circle-o"></i> Most commented 10 IDEA</a>
+                        <li><a href="{{ route('mostliked')}}"><i class="fa fa-circle-o"></i> Most liked 5 IDEA</a></li>
+                        <li><a href="{{ route('mostcommented')}}"><i class="fa fa-circle-o"></i> Most commented 5 IDEA</a>
                         </li>
-                        <li><a href="{{ url('/idea_without_comment')}}"><i class="fa fa-circle-o"></i> Ideas without
-                                comment</a></li>
-                        <li><a href="{{ url('/idea_without_like')}}"><i class="fa fa-circle-o"></i> Ideas without
-                                like</a></li>
-                        <li><a href="{{ url('/idea_without_like')}}"><i class="fa fa-circle-o"></i> Anonymous Ideas</a></li>
-                        <li><a href="{{ url('/idea_without_like')}}"><i class="fa fa-circle-o"></i> Anonymous Comments</a></li>
-                    </ul>
+                        <li><a href="{{ route('withoutcomment')}}"><i class="fa fa-circle-o"></i> Ideas without
+                                like/comment</a></li>
+                        <li><a href="{{ route('anonymous')}}"><i class="fa fa-circle-o"></i> Anonymous Ideas</a></li>
+                        </ul>
                 </li>
 
             </ul>

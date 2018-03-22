@@ -58,10 +58,6 @@ Route::group(['middleware' => 'auth', 'role' => ['admin']], function () {
     Route::post('/admin/adddepart', 'AdminController@addDepart')->name('adddept');
     Route::get('/admin/deldept{id}', 'AdminController@deleteDepart')->name('deldept');
 
-    Route::get('/admin/departideas', 'AdminController@ideasDepart')->name('ideasdepart');
-    Route::get('/admin/departcont', 'AdminController@contDepart')->name('departcont');
-    Route::get('/admin/departcat', 'AdminController@ideasCat')->name('departcat');
-
     Route::get('/admin/student-details', 'AdminController@student')->name('sdetails');
     Route::get('/admin/staff-details', 'AdminController@staff')->name('stdetails');
     Route::get('/admin/addstudent', 'AdminController@addStudentForm')->name('addstudent');
@@ -117,27 +113,16 @@ Route::get('/category/{name}', 'HomeController@show');
 
 Route::get('/posts/{id}/show', 'IdeaController@singleIdea')->name('singleIdea'); // I don't want to pass post id in link
 
-Route::group(['prefix' => 'qamanager'], function () {
 
-    Route::get('/contributors', function () {
-        return view('qamanager.contributors');
-    });
+Route::get('/report/departideas', ['uses' => 'AdminController@ideasDepart', 'role' => ['coordinator', 'admin', 'qamanager']])->name('ideasdepart');
+Route::get('/report/departcont', 'AdminController@contDepart')->name('departcont');
+Route::get('/report/departcat', 'AdminController@ideasCat')->name('departcat');
+Route::get('/report/anonymous', 'AdminController@anonymous')->name('anonymous');
 
-    Route::get('/catagorys_idea', function () {
-        return view('qamanager.catagorys_idea');
-    });
+Route::get('/report/mostliked', 'AdminController@mostLiked')->name('mostliked');
+Route::get('/report/mostcommented', 'AdminController@mostCommented')->name('mostcommented');
 
-    Route::get('/commented_idea_details', function () {
-        return view('qamanager.commented_idea_details');
-    });
+Route::get('/report/withoutcomment', 'AdminController@withoutComment')->name('withoutcomment');
 
-    Route::get('/liked_idea', function () {
-        return view('qamanager.liked_idea');
-    });
-    Route::get('/commented_idea', function () {
-        return view('qamanager.commented_idea');
-    });
-
-});
 
 Auth::routes();
