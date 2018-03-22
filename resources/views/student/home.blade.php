@@ -54,7 +54,7 @@
 
                                             @php
                                                 //retrieve all category
-                                                $categories = \App\Category::all();
+                                                $categories = \App\Category::where('end_date', '>=', \Carbon\Carbon::today())->get();
                                                 $depart_id = \App\Student::select('depart_id')->where('student_id', Auth::id())->first();
                                             @endphp
 

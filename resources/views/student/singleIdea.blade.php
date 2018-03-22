@@ -19,7 +19,6 @@
                         {{$posts->created_at->diffForHumans()}}
 
                         <div class="pull-right">
-                            <!-- $category = \App\PostCategory::where('id',$posts->cat_id)->select('cat_name')->first(); -->
 
                             @php
                                 $category= App\Category::find($posts->cat_id);
@@ -157,7 +156,7 @@
                                 </div>
                             </div>
 
-
+                    @if( $category->final_end_date >= \Carbon\Carbon::today())
                             <div id="commentArea{{$posts->id}}" data-id="{{$posts->id}}"
                                  data-id1="{{\Illuminate\Support\Facades\Auth::id()}}">
 
@@ -180,6 +179,9 @@
                             </div>
 
                         </div>
+                        @else
+                            <p class="lead user text-center"> Final closure date is over</p>
+                        @endif
 
                         {{--</div>--}}
 
