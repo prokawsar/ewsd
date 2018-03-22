@@ -23,6 +23,7 @@ class RoleMiddleware
             return $next($request);
         }
 
-        return response('You are unauthorized.');
+        return response(view('error'));
+//        return response('You are unauthorized.');
     }
 }
