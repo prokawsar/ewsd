@@ -19,7 +19,7 @@
 
                                 <table id="example1" class="table table-striped">
                                     <thead>
-                                    <td class="active text-center" colspan="6"><a class="btn btn-default pull-right" href="#">Add Staff</a></td>
+                                    <td class="active text-center" colspan="6"><a class="btn btn-default pull-right" href="{{ route('addstaff') }}">Add Staff</a></td>
 
                                     <tr>
                                         <th>Name</th>

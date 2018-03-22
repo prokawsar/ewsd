@@ -39,7 +39,7 @@
                                         <div class="panel-body" id="postDiv">
                                             <blockquote>
 
-                                                <a class="post_link" href="posts/{{$post->id}}/show" target="_blank">
+                                                <a class="post_link" href="{{ route('singleIdea', ['id' => $post->id]) }}" target="_blank">
                                                     <p>{{$post->idea }}</p></a>
 
                                             </blockquote>
@@ -54,6 +54,7 @@
                                                         $likeCount=\App\Like::where('idea_id',$post->id)->where('status', 1)->count();
                                                         $dislikeCount=\App\Like::where('idea_id',$post->id)->where('status', 0)->count();
                                                         $userCheck =\App\Like::where('idea_id', $post->id )->where('user_id', Auth::id())->first();
+                                                        $view = \App\Visited::where('idea_id', $post->id)->count();
 
                                                  //  dd($userCheck->status);
                                                     @endphp
@@ -91,6 +92,13 @@
 
                                                     </span>
 
+
+                                                    <span>
+                                                            <a><i class="fa fa-eye fa-lg"></i>
+                                                                {{ $view }} View</a>
+
+                                                    </span>
+
                                                 </div>
                                                 <br>
 
@@ -110,52 +118,7 @@
                                                         Comments</label>
 
                                                 @endif
-                                                <div class="panel-body" id="commentsSec{{$post->id}}">
 
-                                                    <div class="@php if(count($comments)!=0) {echo 'well well-sm';} @endphp">
-                                                        @foreach($comments as $cmt)
-
-                                                            @if( $cmt->user->hasRole('student'))
-                                                                <span class="user"> <i class="fa fa-user"></i>
-                                                                    @if($cmt->anonym)
-                                                                        Anonymous
-                                                                    @else
-                                                                        {{ $cmt->user->name  }}
-                                                                    @endif
-                                                                </span> <i
-                                                                        class="fa fa-terminal"></i>  {{$cmt->comment}}
-                                                            @if($cmt->user_id == Auth::id()) <a style="cursor: pointer" id="deleteComment" data-id="{{ $post->id }}" data-value="{{ $cmt->id }}"><i type="button" class="fa fa-trash pull-right"></i></a>
-                                                            @endif
-                                                                <br/>
-                                                                {{$cmt->created_at->diffForHumans()}} <br/>
-                                                                <hr class="style"></hr>
-                                                            @endif
-
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-
-
-                                                <div id="commentArea{{$post->id}}" data-id="{{$post->id}}"
-                                                     data-id1="{{\Illuminate\Support\Facades\Auth::id()}}">
-
-                                                    <textarea onkeyup="increaseHeight(this);" id="{{$post->id}}comment"
-                                                              placeholder="Write a comment..." type="text"
-                                                              class="form-control" name="comment"
-                                                              style="padding-top:10px;"></textarea>
-                                                    <br/>
-
-                                                    <input title="Anonymously" type="checkbox"
-                                                           id="anonymComment{{ $post->id }}"
-                                                           name="anonymComment"> Comment Anonymously
-
-                                                    <a class=" btn btn-default pull-right"
-                                                       id="commentPostButton{{$post->id}}"
-                                                       onclick="return commentButtonClicked('{{$post->id}}','{{ Auth::id() }}')"><i
-                                                                class="fa fa-paper-plane-o" aria-hidden="true"></i>
-                                                        comment</a>
-                                                    &nbsp;
-                                                </div>
 
                                             </div>
 

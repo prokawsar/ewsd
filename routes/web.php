@@ -67,6 +67,9 @@ Route::group(['middleware' => 'auth', 'role' => ['admin']], function () {
     Route::get('/admin/addstudent', 'AdminController@addStudentForm')->name('addstudent');
     Route::post('/admin/addstudent', 'AdminController@addStudent')->name('addstudent');
 
+    Route::get('/admin/addstaff', 'AdminController@addStaffForm')->name('addstaff');
+    Route::post('/admin/addstaff', 'AdminController@addStaff')->name('addstaff');
+
     Route::get('/ideaApprove{id}',
         ['uses' => 'AdminController@ideaApprove', 'role' => ['qamanager', 'coordinator']])->name('ideaApprove');
 

@@ -1,4 +1,4 @@
-@section('title', 'Student Add')
+@section('title', 'Staff Add')
 
 @extends('layouts.admin')
 
@@ -16,7 +16,7 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
-                                <form class="form-horizontal" method="POST" action="{{ route('addstudent') }}">
+                                <form class="form-horizontal" method="POST" action="{{ route('addstaff') }}">
                                     {{ csrf_field() }}
 
                                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -64,15 +64,17 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="department" class="col-md-4 control-label">Department</label>
+                                        <label for="department" class="col-md-4 control-label">Role</label>
 
                                         <div class="col-md-6">
                                             @php
-                                                $department = \App\Department::all();
+                                                $department = \App\Role::all();
                                             @endphp
                                             <select class="form-control" id="department" name="department">
                                                 @foreach($department as $dept)
-                                                    <option value="{{ $dept->id }}">{{ $dept->depart_name }}</option>
+                                                    @if($dept->role_name == 'coordinator' || $dept->role_name == 'qamanager' )
+                                                        <option value="{{ $dept->id }}">{{ $dept->role_name }}</option>
+                                                    @endif
                                                 @endforeach
                                             </select>
                                         </div>
@@ -81,7 +83,7 @@
                                     <div class="form-group">
                                         <div class="col-md-6 col-md-offset-4">
                                             <button type="submit" class="btn btn-primary">
-                                                Register
+                                                Add
                                             </button>
                                         </div>
                                     </div>

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Coordinator;
+use App\Department;
 use App\Idea;
+use App\Mail\CoorNotification;
 use App\Qamanager;
 use App\Student;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Manager;
@@ -55,20 +58,75 @@ class AdminController extends Controller
         return view('admin.addstudent');
     }
 
+    public function addStaffForm()
+    {
+        return view('admin.addstaff');
+    }
+
 
     public function addStudent(Request $request)
     {
-        return \redirect('/admin/addstudent')->with('status', 'Student Added');
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->role_id = 2;
+        $user->save();
+
+        $user_id = User::select('id')->orderBy('created_at', 'desc')->first();
+
+        $student = new Student();
+        $student->student_id = $user_id->id;
+        $student->depart_id = $request->department;
+        $student->save();
+
+        return redirect('/admin/addstudent')->with('status', 'Student Added');
+    }
+
+
+    public function addStaff(Request $request)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->role_id = $request->department;
+        $user->save();
+
+        $user_id = User::select('id')->orderBy('created_at', 'desc')->first();
+
+        if($request->department == 3){
+            $coordinator = new Coordinator();
+            $coordinator->cord_id = $user_id->id;
+            $coordinator->depart_id = 1; //dhama chapa
+            $coordinator->save();
+        }else {
+            $manager = new Qamanager();
+            $manager->qamanage_id = $user_id->id;
+            $manager->save();
+        }
+        return redirect('/admin/addstaff')->with('status', 'New Staff Added');
     }
 
     public function addDepart(Request $request)
     {
+        $depart = new Department();
+        $depart->depart_name = $request->name;
+        $depart->save();
+
         return redirect('/admin/adddepart')->with('status', 'Department Added');
     }
 
 
     public function deleteDepart($id)
     {
+        if(Coordinator::where('depart_id', $id)->first() || Student::where('depart_id', $id)->first() ){
+
+            return redirect('/admin/adddepart')->with('warning', 'Can not delete this Department');
+        }
+
+        Department::find($id)->delete();
+
         return redirect('/admin/adddepart')->with('warning', 'Department Deleted');
     }
 
