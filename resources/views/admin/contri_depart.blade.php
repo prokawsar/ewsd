@@ -16,11 +16,11 @@ else
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 @php
-                 //   $contributor= DB::table('ideas')->select('departments.depart_name as dname',DB::raw('COUNT(DISTINCT student_id) as contributor '))
-                  //              ->groupBy('depart_id')
-                    //            ->leftJoin('departments','departments.id','=','ideas.depart_id')
-                   //             ->get();
-                //dd($contributor);
+                 $contributor = \App\Idea::with('department')->select('depart_id',  DB::raw('count(DISTINCT student_id) as total'))
+                            ->groupBy('depart_id')
+                            ->get();
+
+            //    dd($contributor);
 
                 @endphp
                 <div class="panel-heading">Number of Contributor each Department</div>
@@ -40,11 +40,13 @@ else
                       
                       </thead>
                       <tbody>
+                      @foreach($contributor as $person)
                         <tr>
-                            <td>Science</td>
-                            <td><a href="{{ url('/ideas')}}">10</a></td>
+                            <td>{{ $person->department->depart_name }}</td>
+                            <td>{{ $person->total }}</td>
                         
-                        </tr>                
+                        </tr>
+                          @endforeach
                     </tbody>
               
                   </table>

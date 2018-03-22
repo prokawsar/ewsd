@@ -35,4 +35,9 @@ class Idea extends Model
     {
         return $this->hasMany('App\Visited');
     }
+
+    public function department()
+    {
+        return $this->belongsTo('App\Department', 'depart_id');
+    }
 }

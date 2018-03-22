@@ -10,4 +10,9 @@ class Department extends Model
     {
         return $this->hasMany('App\Category' );
     }
+
+    public function idea()
+    {
+        return $this->hasMany('App\Idea');
+    }
 }
