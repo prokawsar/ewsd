@@ -1,11 +1,11 @@
 @section('title', 'Idea of Each Department')
 
 @php if( Auth::user()->hasRole('admin'))
-    $role = 'layouts.admin';
+    {$role = 'layouts.admin';}
 elseif( Auth::user()->hasRole('coordinator'))
-    $role = 'layouts.qacoor';
+    {$role = 'layouts.qacoor';}
 else
-    $role = 'layouts.QAman';
+    {$role = 'layouts.QAman';}
 @endphp
 
 @extends($role)
@@ -29,14 +29,21 @@ else
                             <table id="example1" class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Depertment Name</th>
+                                    <th>Department Name</th>
                                     <th>Number of IDEA</th>
-                                    {{--<th>Number of Contributor </th>--}}
                                     <th>Sharing Percentage</th>
                                 </tr>
 
                                 </thead>
                                 <tbody>
+                                @php
+                                    $total = 0;
+
+                                    foreach($ideas as $idea){
+                                        $total += $idea->total;
+                                    }
+                                @endphp
+
                                 @foreach($ideas as $idea)
                                     @php
                                         $name = \App\Department::select('depart_name')->where('id', $idea->depart_id)->first();
@@ -44,8 +51,8 @@ else
                                     @endphp
                                     <tr>
                                         <td>{{ $name->depart_name }}</td>
-                                        <td><a href="{{ url('/ideas')}}">{{ $idea->total }}</a></td>
-                                        <td>20%</td>
+                                        <td>{{ $idea->total }}</td>
+                                        <td>{{  100 / $total * $idea->total  }}%</td>
 
                                     </tr>
                                 @endforeach
