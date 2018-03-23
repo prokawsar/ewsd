@@ -229,13 +229,16 @@ class IdeaTableSeeder extends Seeder {
         App\Idea::create([
             'idea' => 'Wonderful Idea 1',
             'cat_id' => 1,
-            'student_id' => 1
+            'student_id' => 1,
+            'approve' => 1,
+            'depart_id' => 1
         ]);
 
         App\Idea::create([
             'idea' => 'Wonderful Idea 2',
             'cat_id' => 1,
-            'student_id' => 1
+            'student_id' => 1,
+            'depart_id' => 2
         ]);
 
     }
