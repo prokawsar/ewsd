@@ -27,7 +27,6 @@
                                 <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Department</th>
                                     <th>Date From</th>
                                     <th>To</th>
                                     <th>Final Deadline</th>
@@ -42,10 +41,10 @@
                                 @foreach( $categories as $category)
                                     <tr>
                                         <td>{{ $category->cat_name }}</td>
-                                        <td>{{ $category->department->depart_name }}</td>
                                         <td>{{ $category->start_date->toDateString() }}</td>
                                         <td>{{ $category->end_date->toDateString() }}</td>
-                                        <td>{{ $category->final_end_date->toDateString() }}</td>
+                                        <td>{{ $category->final_end_date->diffForHumans() }}</td>
+                                        {{--<td><a class="btn btn-info" href="{{ route('editcat', ['id' => $category->id]) }}" title="Reassign">Reassign Date</a></td>--}}
                                         <td><a href="{{ route('delcat', ['id' => $category->id]) }}" title="Remove"><i class="fa fa-remove"></i></a></td>
 
                                     </tr>

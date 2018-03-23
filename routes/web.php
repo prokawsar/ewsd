@@ -75,6 +75,7 @@ Route::group(['middleware' => 'auth', 'role' => ['qamanager']], function () {
     Route::get('/qamanager/home', 'QAManagerController@index')->name('qahome');
     Route::post('/qamanager/addcat', 'QAManagerController@addCategory');
     Route::get('/qamanager/delcat{id}', 'QAManagerController@deleteCategory')->name('delcat');
+    Route::get('/qamanager/editcat{id}', 'QAManagerController@editCategory')->name('editcat');
 
     Route::get('/qamanager/ideas', 'QAManagerController@ideas')->name('managerideas');
     Route::get('/qamanager/download', 'QAManagerController@ideasDownload')->name('ideasdownload');

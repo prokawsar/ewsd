@@ -1,4 +1,4 @@
-@section('title', 'Ideas of Each Category')
+@section('title', 'Anonymous Idea and Comment')
 
 @php if( Auth::user()->hasRole('admin'))
     {$role = 'layouts.admin';}

@@ -192,6 +192,6 @@ class IdeaController extends Controller
 
         $posts = Idea::with('user')->where('id', $id)->first();
         //    return json_encode($post);
-        return view('student.singleidea', compact('posts'));
+        return view('student.singleIdea', compact('posts'));
     }
 }

@@ -1,4 +1,4 @@
-@section('title', 'Most Commented ideas')
+@section('title', 'Most Viewed ideas')
 
 @php if( Auth::user()->hasRole('admin'))
     $role = 'layouts.admin';

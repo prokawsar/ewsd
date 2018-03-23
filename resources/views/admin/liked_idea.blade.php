@@ -6,7 +6,7 @@ else
     {$role = 'layouts.QAman';}
 @endphp
 
-@section('title', 'Most Commented ideas')
+@section('title', 'Most Liked ideas')
 
 @extends($role)
 
