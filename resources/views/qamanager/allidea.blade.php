@@ -4,77 +4,21 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-
-                                @if (session('status'))
-                                    <div class="alert alert-success">
-                                        {{ session('status') }}
-                                    </div>
-                                @endif
-
-                                @if (session('warning'))
-                                    <div class="alert alert-warning">
-                                        {{ session('warning') }}
-                                    </div>
-                                @endif
-
-                                <table id="example1" class="table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Idea Description</th>
-                                        <th>Category</th>
-                                        <th>Submitted on</th>
-                                        <th>Publish Status</th>
-                                    </tr>
-
-                                    </thead>
-                                    <tbody>
-                                    @if( !$draftIdeas->isEmpty() )
-                                        @foreach( $draftIdeas as $idea)
-                                            <tr>
-                                                <td>{{ $idea->user->name  }}</td>
-                                                <td>{{ $idea->idea}}</td>
-                                                <td>{{ $idea->category->cat_name }}</td>
-                                                <td>{{ $idea->created_at->diffForHumans() }}</td>
-                                                <td> Pending </td>
-                                                <td><a class="btn btn-warning"
-                                                       href="{{route('ideaIgnore', ['id' => $idea->id])}}">Decline</a>
-                                                </td>
-
-                                                <td><a class="btn btn-success"
-                                                       href="{{route('ideaApprove', ['id' => $idea->id])}}">Approve</a>
-                                                </td>
-
-                                            </tr>
-                                        @endforeach
-                                    @else
-                                        <td class="warning text-center" colspan="5">No Pending Idea</td>
-                                    @endif
-                                    </tbody>
-
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- end row -->
+        <!-- <div class="row">
+            <div class="col-md-12"> -->
+                
+            <!-- </div>
+        </div> end row -->
 
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+            <!-- <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">Published Ideas</div>
+                    <div class="panel-heading">Published Ideas</div> -->
                     <div id="postsTable" class="panel-body">
                         @foreach($pubIdeas as $posts)
 
                             <div class="row" id="eachPost{{$posts->id}}">
-                                <div class="col-md-8 col-md-offset-2">
+                                <div class="col-md-10 col-md-offset-1">
                                     <div class="panel panel-default">
                                         <div class="panel-heading"><strong>Posted by
                                                 @if( !$posts->anonym )
@@ -232,8 +176,8 @@
                         {{ $pubIdeas->links() }}
 
                     </div>
-                </div>
-            </div>
+                <!-- </div>
+            </div> -->
         </div> <!-- end row -->
 
     </div>

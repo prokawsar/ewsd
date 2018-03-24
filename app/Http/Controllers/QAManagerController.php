@@ -19,7 +19,10 @@ class QAManagerController extends Controller
 
     public function index()
     {
-        return view('qamanager.home');
+        
+        $pubIdeas = Idea::where('approve', 1)->orderBy('created_at', 'desc')->paginate(5);
+
+        return view('qamanager.home', compact('pubIdeas'));
     }
 
     public function ideas()

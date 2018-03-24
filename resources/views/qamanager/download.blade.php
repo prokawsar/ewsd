@@ -6,7 +6,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-10 col-md-offset-2">
+            <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">Downloadable Contribution</div>
                     @php
@@ -16,7 +16,7 @@
                     <div class="panel-body">
 
 
-                        <table id="example1" class="table table-striped">
+                        <table class="table table-striped">
                             <thead>
                             <tr>
                                 <th></th>
