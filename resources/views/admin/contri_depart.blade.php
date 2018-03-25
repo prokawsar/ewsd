@@ -29,7 +29,7 @@ else
                     @php
 
                     @endphp
-                  <div class="col-md-12 ">
+                  <!-- <div class="col-md-12 "> -->
                     <table id="example1" class="table table-striped">
                       <thead>
                       <tr>
@@ -50,7 +50,7 @@ else
                     </tbody>
               
                   </table>
-                  </div>
+                  <!-- </div> -->
                   
                 </div>
             </div>

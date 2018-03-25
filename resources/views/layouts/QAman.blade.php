@@ -95,9 +95,9 @@
 
                     <li><a href="{{ url('/qamanager/addcat')}}"><i class="fa fa-book"></i> <span>Catagories</span></a>
                     </li>
-                    <li><a href="{{ route('managerideas')}}"><i class="fa fa-book"></i> <span>All Ideas</span></a>
-                    </li>
-                    <li><a href="{{ route('ideasdownload')}}"><i class="fa fa-book"></i>
+                    <!-- <li><a href="{{ route('managerideas')}}"><i class="fa fa-book"></i> <span>All Ideas</span></a>
+                    </li> -->
+                    <li><a href="{{ route('ideasdownload')}}"><i class="fa fa-download"></i>
                             <span>Download Contribution</span></a>
                     </li>
 

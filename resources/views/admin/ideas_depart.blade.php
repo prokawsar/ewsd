@@ -13,7 +13,7 @@ else
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     @php
                         $ideas = \App\Idea::select('depart_id', DB::raw('count(*) as total'))->groupBy('depart_id')->get();
@@ -25,8 +25,8 @@ else
                         @php
 
                                 @endphp
-                        <div class="col-md-12 ">
-                            <table id="example1" class="table table-striped">
+                        <!-- <div class="col-md-12 "> -->
+                            <table  class="table table-striped">
                                 <thead>
                                 <tr>
                                     <th>Department Name</th>
@@ -59,7 +59,7 @@ else
                                 </tbody>
 
                             </table>
-                        </div>
+                        <!-- </div> -->
 
                     </div>
                 </div>

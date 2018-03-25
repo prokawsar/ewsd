@@ -30,7 +30,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        $pubIdeas = Idea::where('approve', 1)->orderBy('created_at', 'desc')->paginate(5);
+        // return view('coordinator.home', compact('pubIdeas'));
+        return view('admin.home', compact('pubIdeas'));
     }
 
     /**
