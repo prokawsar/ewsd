@@ -15,8 +15,10 @@ class QACoordinatorController extends Controller
     }
 
     public function index()
+    
     {
-        return view('coordinator.home');
+        $pubIdeas = Idea::where('approve', 1)->orderBy('created_at', 'desc')->paginate(5);
+        return view('coordinator.home', compact('pubIdeas'));
     }
 
     public function ideas()

@@ -88,7 +88,7 @@
 
                     </li>
 
-                    <li><a href="{{ route('coorideas') }}"><i class="fa fa-book"></i> <span>All Ideas</span></a></li>
+                    <li><a href="{{ route('coorideas') }}"><i class="fa fa-book"></i> <span>Pending Ideas</span></a></li>
 
                     <li class="treeview">
                         <a href="#">

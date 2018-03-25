@@ -83,12 +83,12 @@
                 <li class="header"></li>
 
                 <li><a href="{{ route('ahome')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-                <li><a href="{{ route('adddepart')}}"><i class="fa fa-dashboard"></i> <span>Add Department</span></a></li>
-                <li><a href="{{ route('ideas') }}"><i class="fa fa-files-o"></i> All Ideas</a></li>
+                <li><a href="{{ route('adddepart')}}"><i class="fa fa-plus-square"></i> <span>Add Department</span></a></li>
+                <!-- <li><a href="{{ route('ideas') }}"><i class="fa fa-files-o"></i> All Ideas</a></li> -->
 
                 <li class="treeview">
                     <a href="{{ url('#')}}">
-                        <i class="fa fa-files-o"></i>
+                        <i class="fa fa-navicon"></i>
                         <span>Details</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
@@ -104,7 +104,7 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-files-o"></i>
+                        <i class="fa fa-indent"></i>
                         <span>Statistics</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -121,7 +121,7 @@
                 </li>
                 <li class="treeview">
                     <a href="{{ url('#')}}">
-                        <i class="fa fa-files-o"></i>
+                        <i class="fa fa-indent"></i>
                         <span>Further Statistics</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>

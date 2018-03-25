@@ -8,12 +8,12 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">Idea feed</div>
+                    <div class="panel-heading">Ideas for catagoroy</div>
                     <div id="postsTable" class="panel-body">
                         @foreach($posts as $post)
 
                             <div class="row" id="eachPost{{$post->id}}">
-                                <div class="col-md-8 col-md-offset-2">
+                                <!-- <div class="col-md-8 col-md-offset-2"> -->
                                     <div class="panel panel-default">
                                         <div class="panel-heading"><strong>Posted by
                                                 @if( !$post->anonym )
@@ -127,7 +127,7 @@
                                         </div>
                                     </div>
 
-                                </div>
+                                <!-- </div> -->
                             </div>
                             {{--</div>--}}
 
