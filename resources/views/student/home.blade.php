@@ -5,9 +5,9 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-10 col-md-offset-1">
+                <!-- <div class="row">
+                    <div class="col-md-12 "> -->
 
                         @if (session('status'))
                             <div class="alert alert-success">
@@ -16,122 +16,137 @@
                         @endif
 
                         <button type="button" class="btn btn-primary pull-right" data-toggle="modal"
-                                data-target="#myModal">Share my idea
+                                data-target="#myModal">Share idea
                         </button>
                         <br>
                         <br>
                         <br>
                         <!-- Modal -->
-                        <div class="modal fade" id="myModal" role="dialog">
-                            <div class="modal-dialog modal-lg">
+                        <div class="col-md-6 col-md-offset-1 ">
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog modal-lg">
 
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        {{--<button type="button" class="close" data-dismiss="modal">&times;</button>--}}
-                                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">
-                                            Close
-                                        </button>
-                                        <h4 class="modal-title">Share your idea.....</h4>
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            {{--<button type="button" class="close" data-dismiss="modal">&times;</button>--}}
+                                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <h4 class="modal-title">Share your idea.....</h4>
 
-                                    </div>
-                                    <form id="cform" method="post" action="{{ url('/postIdea') }}"
-                                          enctype="multipart/form-data">
-                                        {{csrf_field()}}
+                                        </div>
+                                        <form id="cform" method="post" action="{{ url('/postIdea') }}"
+                                            enctype="multipart/form-data">
+                                            {{csrf_field()}}
 
-                                        <div class="modal-body">
-                                            <span class="label label-danger validation" style="font-size: 15px"></span>
+                                            <div class="modal-body">
+                                                <span class="label label-danger validation" style="font-size: 15px"></span>
 
 
-                                            <input type="hidden" value="{{ \Illuminate\Support\Facades\Auth::id() }}"
-                                                   name="user_id" id="user_id">
+                                                <input type="hidden" value="{{ \Illuminate\Support\Facades\Auth::id() }}"
+                                                    name="user_id" id="user_id">
 
-                                            {{--<fieldset>--}}
-                                            <div class="form-group">
-                                                <textarea name="posts" id="posts" cols="10" rows="5"
-                                                          class="form-control" required></textarea>
-                                            </div>
-
-                                            @php
-                                                //retrieve all category
-                                                $categories = \App\Category::where('end_date', '>=', \Carbon\Carbon::today())->get();
-                                                $depart_id = \App\Student::select('depart_id')->where('student_id', Auth::id())->first();
-                                            @endphp
-
-                                            <div class="form-group">
-                                                <label for="category" class="col-md-3 control-label">Select
-                                                    Category: </label>
-
-                                                <div class="col-md-8">
-                                                    <select class="form-control" name="category" id="category" required>
-                                                        @foreach($categories as $category)
-                                                            <option value="{{ $category->id }}">{{ $category->cat_name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <br>
-                                            <br>
-                                            <div class="form-group">
-                                                <label for="file" class="col-md-3 control-label">Supporting
-                                                    file/s: </label>
-
-                                                <div class="col-md-8">
-                                                    <input type="file" name="file[]" class="form-control" multiple>
-                                                    <input type="hidden" name="depart_id"  value="{{ $depart_id->depart_id }}">
+                                                {{--<fieldset>--}}
+                                                <div class="form-group">
+                                                    <textarea name="posts" id="posts" cols="10" rows="5"
+                                                            class="form-control" required></textarea>
                                                 </div>
 
-                                            </div>
+                                                @php
+                                                    //retrieve all category
+                                                    $categories = \App\Category::where('end_date', '>=', \Carbon\Carbon::today())->get();
+                                                    $depart_id = \App\Student::select('depart_id')->where('student_id', Auth::id())->first();
+                                                @endphp
 
-                                            <br>
-                                            <br>
+                                                <div class="form-group">
+                                                    <label for="category" class="col-md-3 control-label">Select
+                                                        Category: </label>
 
+                                                    <div class="col-md-8">
+                                                        <select class="form-control" name="category" id="category" required>
+                                                            @foreach($categories as $category)
+                                                                <option value="{{ $category->id }}">{{ $category->cat_name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
 
-                                            <div class="form-group">
-                                                <div class="col-md-10">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="terms" required> I have read <a
-                                                                    href="#" target="_blank">Terms and Conditions</a>
+                                                <br>
+                                                <br>
 
-                                                        </label>
-                                                        <span class="pull-right">
-                                                            <input title="Anonymously" type="checkbox" id="anonym"
-                                                                   name="anonym"> Post Anonymously
-                                                        </span>
+                                                <div class="form-group">
+                                                    <label for="file" class="col-md-3 control-label">Supporting
+                                                        file/s: </label>
+
+                                                    <div class="col-md-8">
+                                                        <input type="file" name="file[]" class="form-control" multiple>
+                                                        <input type="hidden" name="depart_id"  value="{{ $depart_id->depart_id }}">
                                                     </div>
 
                                                 </div>
+                                                <br>
+                                                <br>
+                                                
+                                                <div class="form-group">
+                                                <label for="file" class="col-md-3 control-label"> Post Anonymously</label>
+                                                    <div class="col-md-8">
+                                                       
+                                                                <input title="Anonymously" type="checkbox" id="anonym"
+                                                                    name="anonym">
+                                                    
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <br>
+
+
+                                                
+
                                             </div>
+                                            <br>
+                                             <br>
+                                            <div class="modal-footer">
+                                            <div class="form-group">
+                                                   
+                                                    <div class="col-md-4">
+                                                        <div class="checkbox">
+                                                        
+                                                            <label>
+                                                                <input type="checkbox" name="terms" required> I have read <a
+                                                                        href="#" target="_blank">Terms and Conditions</a>
 
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-primary pull-right"><i
-                                                        class="fa fa-terminal"></i> Submit
-                                            </button>
-                                        </div>
-                                    </form>
+                                                            </label>
+                                                        
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <button class="btn btn-primary pull-right"><i
+                                                            class=""></i> Submit
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+
                                 </div>
-
                             </div>
                         </div>
 
-
-                    </div>
-                </div>
+                <!-- //     </div>
+                // </div> -->
             </div>
         </div> <!-- end row -->
 
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Idea feed</div>
+                <!-- <div class="panel panel-primary"> -->
+                    <!-- <div class="panel-heading">Idea feed</div> -->
                     <div id="postsTable" class="panel-body">
                         @foreach($allIdeas as $posts)
 
                             <div class="row" id="eachPost{{$posts->id}}">
-                                <div class="col-md-8 col-md-offset-2">
+                                <!-- <div class="col-md-8 col-md-offset-2"> -->
                                     <div class="panel panel-default">
                                         <div class="panel-heading"><strong>Posted by
                                                 @if( !$posts->anonym )
@@ -289,7 +304,7 @@
                                         </div>
                                     </div>
 
-                                </div>
+                                <!-- </div> -->
                             </div>
                             {{--</div>--}}
 
@@ -298,7 +313,7 @@
                         {{ $allIdeas->links() }}
 
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
         </div> <!-- end row -->
 

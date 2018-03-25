@@ -5,64 +5,64 @@
 @section('content')
     <div class="container">
 
+      
         <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"></div>
+                        <div class="panel-body">
 
-                                @if (session('status'))
-                                    <div class="alert alert-success">
-                                        {{ session('status') }}
-                                    </div>
+                            @if (session('status'))
+                                <div class="alert alert-success">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+                            <table id="example1" class="table">
+                                <thead>
+                                <td class="active text-center" colspan="4">Submitted Ideas</td>
+
+                                <tr>
+                                    <th>Idea Description</th>
+                                    <th>Category</th>
+                                    <th>Submitted on</th>
+                                    <th>Publish Status</th>
+                                </tr>
+
+                                </thead>
+                                <tbody>
+
+                                @if( !$draftIdeas->isEmpty() )
+                                    @foreach( $draftIdeas as $idea)
+                                        <tr>
+                                            <td>{{ $idea->idea}}</td>
+                                            <td>{{ $idea->category->cat_name }}</td>
+                                            <td>{{ $idea->created_at->diffForHumans() }}</td>
+                                            <td> Pending </td>
+
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <td class="warning text-center" colspan="4">No Pending Idea</td>
                                 @endif
-                                <table id="example1" class="table table-striped">
-                                    <thead>
-                                    <td class="active text-center" colspan="4">Submitted Ideas</td>
+                                </tbody>
 
-                                    <tr>
-                                        <th>Idea Description</th>
-                                        <th>Category</th>
-                                        <th>Submitted on</th>
-                                        <th>Publish Status</th>
-                                    </tr>
-
-                                    </thead>
-                                    <tbody>
-
-                                    @if( !$draftIdeas->isEmpty() )
-                                        @foreach( $draftIdeas as $idea)
-                                            <tr>
-                                                <td>{{ $idea->idea}}</td>
-                                                <td>{{ $idea->category->cat_name }}</td>
-                                                <td>{{ $idea->created_at->diffForHumans() }}</td>
-                                                <td> Pending </td>
-
-                                            </tr>
-                                        @endforeach
-                                    @else
-                                        <td class="warning text-center" colspan="4">No Pending Idea</td>
-                                    @endif
-                                    </tbody>
-
-                                </table>
-                            </div>
+                            </table>
                         </div>
-                    </div>
+                    </div>    
                 </div>
             </div>
-        </div> <!-- end row -->
+        </div>
+           <!-- end row -->
 
         <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Approved Idea</div>
-                    <div id="postsTable" class="panel-body">
+            <div class="col-md-8 col-md-offset-2">
+                <!-- <div class="panel panel-primary"> -->
+                    <!-- <div class="panel-heading">Approved Idea</div> -->
+                    <!-- <div id="postsTable" class="panel-body"> -->
                         @foreach($allIdeas as $posts)
 
                             <div class="row" id="eachPost{{$posts->id}}">
-                                <div class="col-md-8 col-md-offset-2">
+                                <!-- <div class="col-md-12"> -->
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             {{$posts->created_at->diffForHumans()}}
@@ -214,7 +214,7 @@
                                         </div>
                                     </div>
 
-                                </div>
+                                <!-- </div> -->
                             </div>
                             {{--</div>--}}
 
@@ -222,8 +222,8 @@
                         @endforeach
                         {{ $allIdeas->links() }}
 
-                    </div>
-                </div>
+                    <!-- </div> -->
+                <!-- </div> -->
             </div>
         </div> <!-- end row -->
 

@@ -5,25 +5,25 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-11 col-md-offset-1">
+            <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
 
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    @if (session('warning'))
-                        <div class="alert alert-warning">
-                            {{ session('warning') }}
-                        </div>
+                     @if (session('status'))
+                         <div class="alert alert-success">
+                             {{ session('status') }}
+                         </div>
+                     @endif
+                     @if (session('warning'))
+                         <div class="alert alert-warning">
+                             {{ session('warning') }}
+                         </div>
                     @endif
 
                     <div class="panel-heading">Add Catagories</div>
                     <div class="panel-body">
 
-                        <div class="col-md-10 ">
-                            <table id="example1" class="table table-striped">
+                        <div class="col-md-12 ">
+                            <table class="table table-striped">
                                 <thead>
                                 <tr>
                                     <th>Name</th>
@@ -53,7 +53,8 @@
 
                             </table>
                         </div>
-                        <div class="col-md-10 ">
+
+                        <div class="col-md-12 ">
                             <form class="form-horizontal" role="form" method="POST"
                                   action="{{ url('/qamanager/addcat') }}">
                                 {{ csrf_field() }}

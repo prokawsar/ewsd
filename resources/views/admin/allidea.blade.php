@@ -24,9 +24,9 @@
         </div> <!-- end row -->
 
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Published Ideas</div>
+            <!-- <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-primary"> -->
+                    <!-- <div class="panel-heading">Published Ideas</div> -->
                     <div id="postsTable" class="panel-body">
                         @foreach($pubIdeas as $posts)
 
@@ -149,8 +149,8 @@
                         {{ $pubIdeas->links() }}
 
                     </div>
-                </div>
-            </div>
+                <!-- </div>
+            </div> -->
         </div> <!-- end row -->
 
     </div>

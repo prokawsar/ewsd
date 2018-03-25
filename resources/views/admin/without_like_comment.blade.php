@@ -14,7 +14,7 @@ else
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     @php
 
                         $ideas = \App\Idea::
@@ -31,14 +31,14 @@ else
                                         ->get();
                    //  dd($ideas);
                     @endphp
-                    <div class="panel-heading">Ideas without Like Comment</div>
+                    <div class="panel-heading"><b>Ideas without Like Comment</b></div>
                     <div class="panel-body">
 
-                        <div class="col-md-12 ">
+                        <!-- <div class="col-md-12 "> -->
                             <table id="example1" class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th class="text-center">Without Like</th>
+                                    <th >Without Like</th>
                                 </tr>
 
                                 </thead>
@@ -51,7 +51,7 @@ else
                                     </tr>
                                 @endforeach
 
-                            <th class="text-center"> Without Comment </th>
+                            <th > Without Comment </th>
                                 @foreach($ideasComment as $idea)
                                     <tr>
                                         <td>{{ $idea->idea }}</td>
@@ -62,7 +62,7 @@ else
                                 </tbody>
 
                             </table>
-                        </div>
+                        <!-- </div> -->
 
                     </div>
                 </div>
