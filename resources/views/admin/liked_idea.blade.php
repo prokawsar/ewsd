@@ -12,7 +12,8 @@ else
 
 @section('content')
 
-    <div class="container">
+    <div class="content-wrapper">
+    <section class="content">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
@@ -53,6 +54,7 @@ else
                 </div>
             </div>
         </div>
+    </section>
     </div>
 
 @endsection
