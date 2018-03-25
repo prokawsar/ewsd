@@ -2,7 +2,7 @@
     <IfModule mod_negotiation.c>
         Options -MultiViews
     </IfModule>
-
+	Options +FollowSymLinks
     RewriteEngine On
 
     # Redirect Trailing Slashes If Not A Folder...
@@ -16,6 +16,6 @@
     RewriteRule ^ index.php [L]
 
     # Handle Authorization Header
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+#    RewriteCond %{HTTP:Authorization} .
+ #   RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 </IfModule>
