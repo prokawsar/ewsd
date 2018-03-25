@@ -106,9 +106,9 @@ Route::post('/postComment', 'IdeaController@saveComment');
 Route::post('/delcomment', 'IdeaController@deleteComment');
 
 Route::post('/like',
-    ['uses' => 'IdeaController@setLike', 'role' => ['coordinator', 'student', 'qamanager'], 'as' => 'like']);
+    ['uses' => 'IdeaController@setLike', 'role' => ['admin', 'coordinator', 'student', 'qamanager'], 'as' => 'like']);
 Route::post('/dislike',
-    ['uses' => 'IdeaController@setDislike', 'role' => ['coordinator', 'student', 'qamanager'], 'as' => 'dislike']);
+    ['uses' => 'IdeaController@setDislike', 'role' => [ 'admin', 'coordinator', 'student', 'qamanager'], 'as' => 'dislike']);
 
 Route::get('/category/{name}', 'HomeController@show');
 
