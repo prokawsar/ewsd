@@ -17,8 +17,8 @@
 
 
 </head>
-<body>
-<div id="wrapper">
+<body class="hold-transition skin-white sidebar-mini">
+<div class="wrapper">
     <header class="main-header">
         <a href="{{ route('qahome') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->

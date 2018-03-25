@@ -17,7 +17,7 @@
                                     {{ session('status') }}
                                 </div>
                             @endif
-                            <table id="example1" class="table">
+                            <table class="table">
                                 <thead>
                                 <td class="active text-center" colspan="4">Submitted Ideas</td>
 
@@ -53,9 +53,7 @@
             </div>
         </div>
            <!-- end row -->
-    <!-- </section>
-
-    <section class="content"> -->
+    
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <!-- <div class="panel panel-primary"> -->
@@ -228,6 +226,7 @@
                 <!-- </div> -->
             </div>
         </div> <!-- end row -->
+    
     </section>    
 </div>
 @endsection
