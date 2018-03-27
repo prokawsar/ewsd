@@ -14,27 +14,35 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 </head>
-<body class="hold-transition skin-white sidebar-mini" >
-<div class="wrapper">
-    <header class="main-header">
-        <a href="{{ route('shome') }}" class="logo">
-        <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>S</b>td</span>
-        <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Student</b></span>
-        </a>
-       
-        <nav class="navbar navbar-static-top">
-        <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                <span class="sr-only">Toggle navigation</span>
-            </a>
-            <!-- <a class="navbar-brand" href="{{ route('shome') }}">
-                {{ config('app.name', 'Laravel') }}
-            </a> -->
-            <!-- Navbar Right Menu -->
-            <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav navbar-right">
+<body>
+<div id="app">
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+
+                <!-- Collapsed Hamburger -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#app-navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <!-- Branding Image -->
+                <a class="navbar-brand" href="{{ route('shome') }}">
+                    {{ config('app.name', 'Laravel') }} : Student
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+
+                </ul>
+
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if( !Auth::user()->hasRole('student'))
                         <li><a href="{{ route('login') }}">Login</a></li>
@@ -66,29 +74,28 @@
                     @endif
                 </ul>
             </div>
-
-        </nav>
-    </header>
+        </div>
+    </nav>
     @if( Auth::user()->hasRole('student'))
-    <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-            <ul class="sidebar-menu" data-widget="tree">
-                <li class="header"></li>
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
 
-                <li><a href="{{ route('shome')}}"><i class="fa fa-dashboard"></i> <span>Home</span></a></li>
-                <li><a href="{{ route('sideas')}}"><i class="fa fa-book"></i> <span>My Ideas</span></a></li>
-                <li><a href="{{ route('categories')}}"><i class="fa fa-tree"></i> <span>Category wise</span></a></li>
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="header"></li>
 
-
-            </ul>
-        </section>
-    <!-- /.sidebar -->
-    </aside>
+                    <li><a href="{{ route('shome')}}"><i class="fa fa-dashboard"></i> <span>Home</span></a></li>
+                    <li><a href="{{ route('sideas')}}"><i class="fa fa-book"></i> <span>My Ideas</span></a></li>
+                    <li><a href="{{ route('categories')}}"><i class="fa fa-tree"></i> <span>Category wise</span></a></li>
 
 
+                </ul>
+            </section>
         @endif
-        
+        <!-- /.sidebar -->
+        </aside>
+
         @yield('content')
 </div>
 

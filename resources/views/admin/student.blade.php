@@ -3,7 +3,8 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container">
+<div class="content-wrapper">
+    <section class="content">
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
@@ -52,8 +53,8 @@
             </div>
         </div> <!-- end row -->
 
-
-    </div>
+    </section>
+</div>
 @endsection
 
 

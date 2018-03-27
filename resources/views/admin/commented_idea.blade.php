@@ -12,46 +12,48 @@ else
 
 @section('content')
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">5 Most Commented IDEA List</div>
-                @php
-                    $ideas = \App\Comment::with('idea')->select( 'idea_id', DB::raw('count(id) as total'))
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">5 Most Commented IDEA List</div>
+                    @php
+                        $ideas = \App\Comment::with('idea')->select( 'idea_id', DB::raw('count(id) as total'))
 
-                                    ->groupBy('idea_id')
-                                    ->orderBy('total', 'desc')
-                                    ->take(5)
-                                    ->get();
-                  //   dd($ideas);
-                @endphp
+                                        ->groupBy('idea_id')
+                                        ->orderBy('total', 'desc')
+                                        ->take(5)
+                                        ->get();
+                    //   dd($ideas);
+                    @endphp
 
-                <div class="panel-body">
-                <table id="example1" class="table table-striped">
-                      <thead>
-                      <tr>
-                        <th>Idea </th>
-                        <th>No of Comments</th>
-                      </tr>
-                      
-                      </thead>
-                      <tbody>
-                      @foreach($ideas as $idea)
+                    <div class="panel-body">
+                    <table id="example1" class="table table-striped">
+                        <thead>
                         <tr>
-                            <td>{{ $idea->idea->idea }}</td>
-                            <td>{{ $idea->total }}</td>
-
+                            <th>Idea </th>
+                            <th>No of Comments</th>
                         </tr>
-                          @endforeach
-                    </tbody>
-              
-                  </table>
-               
+                        
+                        </thead>
+                        <tbody>
+                        @foreach($ideas as $idea)
+                            <tr>
+                                <td>{{ $idea->idea->idea }}</td>
+                                <td>{{ $idea->total }}</td>
+
+                            </tr>
+                            @endforeach
+                        </tbody>
+                
+                    </table>
+                
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </div>
 
 @endsection
