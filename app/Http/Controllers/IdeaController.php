@@ -26,13 +26,16 @@ class IdeaController extends Controller
 
     public function SaveIdeaLink(Request $request)
     {
-
+        $idea = new Idea();
+        
         if (is_null($request->anonym)) {
             $request->anonym = 0;
+        } else {
+            $idea->anonym = 1;
         }
-        $idea = new Idea();
+
         $idea->idea = $request->posts;
-        $idea->anonym = $request->anonym;
+//        $idea->anonym = $request->anonym;
         $idea->cat_id = $request->category;
         $idea->student_id = $request->user_id;
         $idea->depart_id = $request->depart_id;
