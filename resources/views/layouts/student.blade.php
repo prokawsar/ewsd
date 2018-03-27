@@ -15,7 +15,7 @@
 
 </head>
 <body class="hold-transition skin-white sidebar-mini" >
-<div class="wrapper">
+<div class="wrapper" id="app">
     <header class="main-header">
         <a href="{{ route('shome') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
