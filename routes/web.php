@@ -42,9 +42,7 @@ Route::group(['middleware' => 'auth', 'role' => ['student']], function () {
     Route::get('/categories', 'HomeController@categoryWise')->name('categories');
     Route::post('/storeidea', 'IdeaController@saveIdea');
 
-    Route::get('/contribution', function () {
-        return view('student.stowncon');
-    })->name('sowncon');
+    Route::get('/cancelidea{id}', 'IdeaController@cancelIdea')->name('cancel');
 
 });
 
@@ -106,9 +104,9 @@ Route::post('/postComment', 'IdeaController@saveComment');
 Route::post('/delcomment', 'IdeaController@deleteComment');
 
 Route::post('/like',
-    ['uses' => 'IdeaController@setLike', 'role' => ['coordinator', 'student', 'qamanager'], 'as' => 'like']);
+    ['uses' => 'IdeaController@setLike', 'role' => ['admin', 'coordinator', 'student', 'qamanager'], 'as' => 'like']);
 Route::post('/dislike',
-    ['uses' => 'IdeaController@setDislike', 'role' => ['coordinator', 'student', 'qamanager'], 'as' => 'dislike']);
+    ['uses' => 'IdeaController@setDislike', 'role' => ['admin', 'coordinator', 'student', 'qamanager'], 'as' => 'dislike']);
 
 Route::get('/category/{name}', 'HomeController@show');
 

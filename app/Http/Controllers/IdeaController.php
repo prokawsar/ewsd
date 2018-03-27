@@ -173,6 +173,14 @@ class IdeaController extends Controller
 
     }
 
+    public function cancelIdea($id)
+    {
+        $idea = Idea::find($id);
+        $idea->delete();
+
+        return redirect(route('sideas'))->with('warning', 'Idea cancelled !');
+    }
+
     public function deleteComment(Request $request)
     {
         $comment = Comment::find($request->comment_id);
