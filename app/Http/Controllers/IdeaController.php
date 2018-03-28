@@ -27,47 +27,54 @@ class IdeaController extends Controller
     public function SaveIdeaLink(Request $request)
     {
         $idea = new Idea();
-        
-        if (is_null($request->anonym)) {
-            $request->anonym = 0;
-        } else {
-            $idea->anonym = 1;
-        }
+        $users_status = User::where('id', $request->user_id)->first();
+//        dd($users_status);
+        if($users_status->status) {
+            if (is_null($request->anonym)) {
+                $request->anonym = 0;
+            } else {
+                $idea->anonym = 1;
+            }
 
-        $idea->idea = $request->posts;
+            $idea->idea = $request->posts;
 //        $idea->anonym = $request->anonym;
-        $idea->cat_id = $request->category;
-        $idea->student_id = $request->user_id;
-        $idea->depart_id = $request->depart_id;
-        $idea->save();
+            $idea->cat_id = $request->category;
+            $idea->student_id = $request->user_id;
+            $idea->depart_id = $request->depart_id;
+            $idea->save();
 
-        $cord_id = Coordinator::select('cord_id')->where('depart_id', $request->depart_id)->first();
-        $email = User::select('email')->where('id', $cord_id->cord_id)->first();
+            $cord_id = Coordinator::select('cord_id')->where('depart_id', $request->depart_id)->first();
+//            dd($cord_id);
+
+            $email = User::select('email')->where('id', $cord_id->cord_id)->first();
 
 //        Mail::to($email->email)->send(new CoorNotification());
 
-        $idea_id = Idea::select('id')->orderBy('created_at', 'desc')->first();
+            $idea_id = Idea::select('id')->orderBy('created_at', 'desc')->first();
 
-        if (isset($request->files)) {
+            if (isset($request->files)) {
 
-            foreach ($request->files as $singleFile) {
-                foreach ($singleFile as $files) {
+                foreach ($request->files as $singleFile) {
+                    foreach ($singleFile as $files) {
 //                    dd($files);
-                    $file = new File();
+                        $file = new File();
 //                    $fileName = $files->getClientOriginalName() . '.' . $files->getClientOriginalExtension();
-                    $fileName = $files->getClientOriginalName();
-                    $files->move(public_path('supporting'), $fileName);
+                        $fileName = $files->getClientOriginalName();
+                        $files->move(public_path('supporting'), $fileName);
 
-                    $file->file = $fileName;
-                    $file->idea_id = $idea_id['id'];
-                    $file->save();
+                        $file->file = $fileName;
+                        $file->idea_id = $idea_id['id'];
+                        $file->save();
+
+                    }
 
                 }
 
             }
-
+            return redirect('/home')->with('status', 'Idea successfully submitted');
+        }else{
+            return redirect('/home')->with('warning', 'You are unable to submit idea ');
         }
-        return redirect('/home')->with('status', 'Idea successfully submitted');
     }
 
 //    Save by ajax request

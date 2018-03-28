@@ -38,6 +38,11 @@
             <!-- <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-primary"> -->
                     <!-- <div class="panel-heading">Published Ideas</div> -->
+        @if (session('warning'))
+            <div class="alert alert-warning">
+                {{ session('warning') }}
+            </div>
+        @endif
                     <div id="postsTable" class="panel-body">
                         @foreach($pubIdeas as $posts)
 
@@ -50,33 +55,33 @@
                                                 @else
                                                     Anonymous
 
-                                                    <a style="cursor: hand;" data-toggle="modal" data-target="#details" > (Show student details) <a/>
-                                                        <div id="details" class="modal fade" role="dialog">
-                                                            <div class="modal-dialog">
+                                                @endif
+                                                <a style="cursor: hand;" data-toggle="modal" data-target="#details{{ $posts->id }}" > (Show student details) </a>
+                                                <div id="details{{ $posts->id }}" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog">
 
-                                                                <!-- Modal content-->
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h4 class="modal-title">Student Details</h4>
-                                                                    </div>
-                                                                    @php
-                                                                        $student = App\Student::with('department')->where('student_id', $posts->user->id)->first();
-                                                                       // dd($student);
-                                                                    @endphp
-                                                                    <div class="modal-body">
-                                                                        <p>Name: {{ $posts->user->name }}</p>
-                                                                        <p>Email: {{ $posts->user->email }}</p>
-                                                                        <p>Department: {{ $student->department->depart_name }}</p>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                    </div>
-                                                                </div>
-
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Student Details</h4>
+                                                            </div>
+                                                            @php
+                                                                $student = App\Student::with('department')->where('student_id', $posts->user->id)->first();
+                                                               // dd($student);
+                                                            @endphp
+                                                            <div class="modal-body">
+                                                                <p>Name: {{ $posts->user->name }}</p>
+                                                                <p>Email: {{ $posts->user->email }}</p>
+                                                                <p>Department: {{ $student->department->depart_name }}</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a href="{{ route('disable', ['id' => $posts->user->id, 'post_id' => $posts->id ]) }}" type="button" class="btn btn-danger pull-left" > Disable account</a>
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                             </div>
                                                         </div>
-                                                @endif
 
+                                                    </div>
+                                                </div>
                                                 &nbsp</strong>
                                             {{$posts->created_at->diffForHumans()}}
 

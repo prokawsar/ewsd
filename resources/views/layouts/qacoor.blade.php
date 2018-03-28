@@ -16,7 +16,7 @@
 <body class="hold-transition skin-white sidebar-mini">
 <div class="wrapper" id="app">
     <header class="main-header">
-        <a href="{{ route('qahome') }}" class="logo">
+        <a href="{{ route('chome') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>Q</b>C</span>
         <!-- logo for regular state and mobile devices -->
@@ -28,7 +28,7 @@
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
             </a>
-            <!-- <a class="navbar-brand" href="{{ route('shome') }}">
+            <!-- <a class="navbar-brand" href="{{ route('chome') }}">
                 {{ config('app.name', 'Laravel') }}
             </a> -->
             <!-- Navbar Right Menu -->
@@ -82,7 +82,9 @@
                     </li>
 
                     <li><a href="{{ route('coorideas') }}"><i class="fa fa-book"></i> <span>Pending Ideas</span></a></li>
-
+            <li><a href="{{ route('enablestudent')}}">
+                <i class="fa fa-dashboard"></i> <span>Disabled Student</span>
+            </a></li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-files-o"></i>
