@@ -15,7 +15,7 @@
                         $count = App\Idea::where('approve', 0)->count();
                     @endphp
                     <div class="col-lg-4 col-xs-6">
-                        
+
                         <div class="small-box bg-red">
                             <div class="inner">
                                 <h3>{{ $count }}</h3>
@@ -49,6 +49,32 @@
                                                     {{ $posts->user->name }}
                                                 @else
                                                     Anonymous
+
+                                                    <a style="cursor: hand;" data-toggle="modal" data-target="#details" > (Show student details) <a/>
+                                                        <div id="details" class="modal fade" role="dialog">
+                                                            <div class="modal-dialog">
+
+                                                                <!-- Modal content-->
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title">Student Details</h4>
+                                                                    </div>
+                                                                    @php
+                                                                        $student = App\Student::with('department')->where('student_id', $posts->user->id)->first();
+                                                                       // dd($student);
+                                                                    @endphp
+                                                                    <div class="modal-body">
+                                                                        <p>Name: {{ $posts->user->name }}</p>
+                                                                        <p>Email: {{ $posts->user->email }}</p>
+                                                                        <p>Department: {{ $student->department->depart_name }}</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
                                                 @endif
 
                                                 &nbsp</strong>
