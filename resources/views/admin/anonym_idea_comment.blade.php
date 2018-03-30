@@ -32,7 +32,7 @@ else
                             <table id="example1" class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th class="text-center">Anonymous Ideas</th>
+                                    <th class="text-left">Anonymous Ideas</th>
                                 </tr>
 
                                 </thead>
@@ -45,7 +45,7 @@ else
                                     </tr>
                                 @endforeach
 
-                            <th class="text-center"> Anonymous Comments </th>
+                            <th class="text-left"> Anonymous Comments </th>
                                 @foreach($comments as $idea)
                                     <tr>
                                         <td>{{ $idea->comment }}</td>

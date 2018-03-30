@@ -68,10 +68,14 @@ class AdminController extends Controller
 
     public function addStudent(Request $request)
     {
+        if(User::where('email', $request->email)->first()){
+            return redirect('/admin/addstudent')->with('warning', 'Email already exist');
+        }
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->status = 1;
         $user->role_id = 2;
         $user->save();
 
@@ -96,6 +100,7 @@ class AdminController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->status = 1;
         $user->role_id = $request->role;
         $user->save();
 
