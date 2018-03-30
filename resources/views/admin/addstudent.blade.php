@@ -74,7 +74,9 @@
 
                                         <div class="col-md-6">
                                             @php
-                                                $department = \App\Department::all();
+                                                $arr = \App\Coordinator::pluck('depart_id')->all(); 
+                                           
+                                                $department = \App\Department::whereIn('id', $arr )->get();
                                             @endphp
                                             <select class="form-control" id="department" name="department">
                                                 @foreach($department as $dept)
