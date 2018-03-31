@@ -137,7 +137,7 @@ function commentButtonClicked(id, user_id){
     var comment= elementId.value;
     var anonym = 0;
 
-    if($("#" + 'anonymComment').length != 0) {
+    if($("#" + 'anonymComment' + id).length != 0) {
         //it doesn't exist
         if (document.getElementById('anonymComment' + id).checked) {
             anonym = 1;

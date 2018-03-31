@@ -2,8 +2,9 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
-<div class="row">
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
             <!-- <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-primary"> -->
                     <!-- <div class="panel-heading">Published Ideas</div> -->
@@ -173,6 +174,7 @@
             </div> -->
         </div> <!-- end row -->
 
+    </section>
 </div>
 @endsection
 <script

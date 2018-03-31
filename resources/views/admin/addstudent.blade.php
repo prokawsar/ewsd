@@ -3,7 +3,8 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container">
+<div class="content-wrapper">
+    <section class="content">
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
@@ -16,6 +17,11 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
+                                @if (session('warning'))
+                                        <div class="alert alert-warning">
+                                            {{ session('warning') }}
+                                        </div>
+                                    @endif
                                 <form class="form-horizontal" method="POST" action="{{ route('addstudent') }}">
                                     {{ csrf_field() }}
 
@@ -68,7 +74,9 @@
 
                                         <div class="col-md-6">
                                             @php
-                                                $department = \App\Department::all();
+                                                $arr = \App\Coordinator::pluck('depart_id')->all(); 
+                                           
+                                                $department = \App\Department::whereIn('id', $arr )->get();
                                             @endphp
                                             <select class="form-control" id="department" name="department">
                                                 @foreach($department as $dept)
@@ -94,8 +102,8 @@
             </div>
         </div> <!-- end row -->
 
-
-    </div>
+    </section>
+</div>
 @endsection
 
 

@@ -68,10 +68,14 @@ class AdminController extends Controller
 
     public function addStudent(Request $request)
     {
+        if(User::where('email', $request->email)->first()){
+            return redirect('/admin/addstudent')->with('warning', 'Email already exist');
+        }
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->status = 1;
         $user->role_id = 2;
         $user->save();
 
@@ -88,19 +92,24 @@ class AdminController extends Controller
 
     public function addStaff(Request $request)
     {
+        if(User::where('email', $request->email)->first()){
+            return redirect('/admin/addstaff')->with('warning', 'Email already exist');
+        }
+
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->role_id = $request->department;
+        $user->status = 1;
+        $user->role_id = $request->role;
         $user->save();
 
         $user_id = User::select('id')->orderBy('created_at', 'desc')->first();
 
-        if($request->department == 3){
+        if($request->role == 3){
             $coordinator = new Coordinator();
             $coordinator->cord_id = $user_id->id;
-            $coordinator->depart_id = 1; //dhama chapa
+            $coordinator->depart_id = $request->department; //no dhama chapa, real now
             $coordinator->save();
         }else {
             $manager = new Qamanager();

@@ -13,31 +13,38 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="hold-transition skin-white sidebar-mini">
-<div class="wrapper" id="app">
-    <header class="main-header">
-        <a href="{{ url('/') }}" class="logo">
-        <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>Ad</b>mn</span>
-        <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Administrator</b></span>
-        </a>
-       
-        <nav class="navbar navbar-static-top">
-        <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                <span class="sr-only">Toggle navigation</span>
-            </a>
-            <!-- <a class="navbar-brand" href="{{ route('shome') }}">
-                {{ config('app.name', 'Laravel') }}
-            </a> -->
-            <!-- Navbar Right Menu -->
-            <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav navbar-right">
+<body>
+<div id="app">
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+
+                <!-- Collapsed Hamburger -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#app-navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <!-- Branding Image -->
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }} : Admin
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+
+                </ul>
+
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    @if( !Auth::user()->hasRole('admin'))
-                        <li><a href="{{ route('login') }}">Login</a></li>
-                        {{----}}
+                    @guest
+                    <li><a href="{{ route('login') }}">Login</a></li>
 
                     @else
                         <li class="dropdown">
@@ -62,17 +69,17 @@
                                 </li>
                             </ul>
                         </li>
-                    @endif
+                        @endguest
                 </ul>
             </div>
-
-        </nav>
-    </header>
-    @if( Auth::user()->hasRole('admin'))
+        </div>
+    </nav>
     <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
+        <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-        <ul class="sidebar-menu" data-widget="tree">
+            <!-- Sidebar user panel -->
+
+            <ul class="sidebar-menu" data-widget="tree">
                 <li class="header"></li>
 
                 <li><a href="{{ route('ahome')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
@@ -133,15 +140,11 @@
 
             </ul>
         </section>
-    <!-- /.sidebar -->
+        <!-- /.sidebar -->
     </aside>
 
-
-        @endif
-        
-        @yield('content')
+    @yield('content')
 </div>
-
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>

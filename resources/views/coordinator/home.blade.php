@@ -3,7 +3,8 @@
 @extends('layouts.qacoor')
 
 @section('content')
-<div class="container">
+<div class="content-wrapper">
+    <section class="content">
     <!-- <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
@@ -14,7 +15,7 @@
                         $count = App\Idea::where('approve', 0)->count();
                     @endphp
                     <div class="col-lg-4 col-xs-6">
-                        
+
                         <div class="small-box bg-red">
                             <div class="inner">
                                 <h3>{{ $count }}</h3>
@@ -37,6 +38,11 @@
             <!-- <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-primary"> -->
                     <!-- <div class="panel-heading">Published Ideas</div> -->
+        @if (session('warning'))
+            <div class="alert alert-warning">
+                {{ session('warning') }}
+            </div>
+        @endif
                     <div id="postsTable" class="panel-body">
                         @foreach($pubIdeas as $posts)
 
@@ -48,8 +54,34 @@
                                                     {{ $posts->user->name }}
                                                 @else
                                                     Anonymous
-                                                @endif
 
+                                                @endif
+                                                <a style="cursor: hand;" data-toggle="modal" data-target="#details{{ $posts->id }}" > (Show student details) </a>
+                                                <div id="details{{ $posts->id }}" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Student Details</h4>
+                                                            </div>
+                                                            @php
+                                                                $student = App\Student::with('department')->where('student_id', $posts->user->id)->first();
+                                                               // dd($student);
+                                                            @endphp
+                                                            <div class="modal-body">
+                                                                <p>Name: {{ $posts->user->name }}</p>
+                                                                <p>Email: {{ $posts->user->email }}</p>
+                                                                <p>Department: {{ $student->department->depart_name }}</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a href="{{ route('disable', ['id' => $posts->user->id, 'post_id' => $posts->id ]) }}" type="button" class="btn btn-danger pull-left" > Disable account</a>
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
                                                 &nbsp</strong>
                                             {{$posts->created_at->diffForHumans()}}
 
@@ -207,6 +239,7 @@
                 <!-- </div>
             </div> -->
         </div> <!-- end row -->
+    </section>
 </div>
 
 @endsection

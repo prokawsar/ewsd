@@ -4,7 +4,8 @@
 
 @section('content')
 
-    <div class="container">
+   <div class="content-wrapper">
+    <section class="content">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
@@ -24,7 +25,6 @@
                                 <th>Idea</th>
                                 <th>Category</th>
                                 <th>Submitted on</th>
-                                <th>Attached File</th>
 
                             </tr>
 
@@ -36,22 +36,23 @@
                             @endphp
                             @foreach($ideas as $idea)
                                 @if($idea->category->final_end_date < \Carbon\Carbon::today())
-                                    <input type="hidden" name="idea_id" value="{{ $idea->id }}">
-                                    <tr>
-                                        <td> # {{ $i++ }}</td>
-                                        <td>{{ $idea->user->name }}</td>
-                                        <td>{{ $idea->idea }}</td>
-                                        <td>{{ $idea->category->cat_name }}</td>
-                                        <td>{{ $idea->created_at->format('d-m-Y') }}</td>
-                                        <td>@if( $idea->file->isEmpty() ) No @else Yes @endif</td>
-                                        @if( !$idea->file->isEmpty())
-                                            <td>
-                                                <a type="submit" href="{{ route('downloadzip', ['id' => $idea->id]) }}"
-                                                   class="btn btn-success pull-right"> Download
-                                                </a>
-                                            </td>
-                                        @endif
-                                    </tr>
+                                    @if( !$idea->file->isEmpty())
+                                        <input type="hidden" name="idea_id" value="{{ $idea->id }}">
+                                        <tr>
+                                            <td> # {{ $i++ }}</td>
+                                            <td>{{ $idea->user->name }}</td>
+                                            <td>{{ $idea->idea }}</td>
+                                            <td>{{ $idea->category->cat_name }}</td>
+                                            <td>{{ $idea->created_at->format('d-m-Y') }}</td>
+                                        
+                                                <td>
+                                                    <a type="submit" href="{{ route('downloadzip', ['id' => $idea->id]) }}"
+                                                    class="btn btn-success pull-right"> Download
+                                                    </a>
+                                                </td>
+                                            
+                                        </tr>
+                                    @endif
                                 @endif
 
                             @endforeach
@@ -63,6 +64,7 @@
                 </div>
             </div>
         </div>
+        </section>
     </div>
 
 @endsection

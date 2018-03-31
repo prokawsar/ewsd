@@ -11,7 +11,8 @@ else
 @extends($role)
 
 @section('content')
-    <div class="container">
+<div class="content-wrapper">
+    <section class="content">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
@@ -31,7 +32,7 @@ else
                             <table id="example1" class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th class="text-center">Anonymous Ideas</th>
+                                    <th class="text-left">Anonymous Ideas</th>
                                 </tr>
 
                                 </thead>
@@ -44,7 +45,7 @@ else
                                     </tr>
                                 @endforeach
 
-                            <th class="text-center"> Anonymous Comments </th>
+                            <th class="text-left"> Anonymous Comments </th>
                                 @foreach($comments as $idea)
                                     <tr>
                                         <td>{{ $idea->comment }}</td>
@@ -61,5 +62,6 @@ else
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+</div>
 @endsection

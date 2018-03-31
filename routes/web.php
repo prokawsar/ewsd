@@ -42,9 +42,7 @@ Route::group(['middleware' => 'auth', 'role' => ['student']], function () {
     Route::get('/categories', 'HomeController@categoryWise')->name('categories');
     Route::post('/storeidea', 'IdeaController@saveIdea');
 
-    Route::get('/contribution', function () {
-        return view('student.stowncon');
-    })->name('sowncon');
+    Route::get('/cancelidea{id}', 'IdeaController@cancelIdea')->name('cancel');
 
 });
 
@@ -90,8 +88,13 @@ Route::group(['middleware' => 'auth', 'role' => ['qamanager']], function () {
 
 Route::group(['middleware' => 'auth', 'role' => ['coordinator']], function () {
     Route::get('/coordinator/home', 'QACoordinatorController@index')->name('chome');
+    Route::get('/coordinator/disable{id}{post_id}', 'QACoordinatorController@disableAccount')->name('disable');
 
     Route::get('/coordinator/ideas', 'QACoordinatorController@ideas')->name('coorideas');
+    Route::get('/coordinator/enablestudent', function (){
+        return view('coordinator.enable');
+    })->name('enablestudent');
+    Route::get('/coordinator/enable{id}', 'QACoordinatorController@enableAccount')->name('enable');
 
     Route::get('/ideaIgnore{id}',
         ['uses' => 'QACoordinatorController@ideaIgnore', 'role' => ['coordinator']])->name('ideaIgnore');
@@ -108,7 +111,7 @@ Route::post('/delcomment', 'IdeaController@deleteComment');
 Route::post('/like',
     ['uses' => 'IdeaController@setLike', 'role' => ['admin', 'coordinator', 'student', 'qamanager'], 'as' => 'like']);
 Route::post('/dislike',
-    ['uses' => 'IdeaController@setDislike', 'role' => [ 'admin', 'coordinator', 'student', 'qamanager'], 'as' => 'dislike']);
+    ['uses' => 'IdeaController@setDislike', 'role' => ['admin', 'coordinator', 'student', 'qamanager'], 'as' => 'dislike']);
 
 Route::get('/category/{name}', 'HomeController@show');
 

@@ -3,7 +3,8 @@
 @extends('layouts.student')
 
 @section('content')
-    <div class="container">
+    <div class="content-wrapper">
+    <section class="content">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 @php
@@ -31,5 +32,6 @@
 
             </div>
         </div>
+        </section>
     </div>
 @endsection

@@ -46,13 +46,16 @@ class RoleTableSeeder extends Seeder {
     public function run()
     {
         DB::table('roles')->delete();
+        DB::table('students')->delete();
+        DB::table('coordinators')->delete();
         DB::table('departments')->delete();
         DB::table('comments')->delete();
+        DB::table('files')->delete();
+        DB::table('likes')->delete();
+        DB::table('visiteds')->delete();
         DB::table('ideas')->delete();
-        DB::table('students')->delete();
         DB::table('admins')->delete();
         DB::table('qamanagers')->delete();
-        DB::table('coordinators')->delete();
         DB::table('categories')->delete();
 
         DB::table('users')->delete();
@@ -91,10 +94,11 @@ class UserTableSeeder extends Seeder {
     public function run()
     {
         User::create([
-            'name' => 'Student',
+            'name' => 'Kawsar Ahmed',
             'email' => 'student@bar.com',
             'password' => bcrypt('111111'),
-            'role_id' => 2
+            'role_id' => 2,
+            'status' => 1
 
         ]);
 
@@ -102,7 +106,8 @@ class UserTableSeeder extends Seeder {
             'name' => 'Admin',
             'email' => 'admin@bar.com',
             'password' => bcrypt('111111'),
-            'role_id' => 1
+            'role_id' => 1,
+            'status' => 1
 
         ]);
 
@@ -110,7 +115,8 @@ class UserTableSeeder extends Seeder {
             'name' => 'QA Manager',
             'email' => 'manager@bar.com',
             'password' => bcrypt('111111'),
-            'role_id' => 4
+            'role_id' => 4,
+            'status' => 1
 
         ]);
 
@@ -118,7 +124,8 @@ class UserTableSeeder extends Seeder {
             'name' => 'QA Coordinator',
             'email' => 'coordinator@bar.com',
             'password' => bcrypt('111111'),
-            'role_id' => 3
+            'role_id' => 3,
+            'status' => 1
 
         ]);
 
@@ -210,9 +217,9 @@ class CategoryTableSeeder extends Seeder {
     {
         App\Category::create([
             'cat_name' => 'Campus',
-            'start_date' => '2018-03-04',
-            'end_date' => '2018-03-10',
-            'final_end_date' => '2018-03-14',
+            'start_date' => '2018-04-04',
+            'end_date' => '2018-04-10',
+            'final_end_date' => '2018-04-14',
 
         ]);
 

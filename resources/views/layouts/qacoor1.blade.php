@@ -13,32 +13,38 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="hold-transition skin-white sidebar-mini">
-<div class="wrapper" id="app">
-    <header class="main-header">
-        <a href="{{ route('chome') }}" class="logo">
-        <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>Q</b>C</span>
-        <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>QA</b>Coordinator</span>
-        </a>
-       
-        <nav class="navbar navbar-static-top">
-        <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                <span class="sr-only">Toggle navigation</span>
-            </a>
-            <!-- <a class="navbar-brand" href="{{ route('chome') }}">
-                {{ config('app.name', 'Laravel') }}
-            </a> -->
-            <!-- Navbar Right Menu -->
-            <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav navbar-right">
+<body>
+<div id="app">
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+
+                <!-- Collapsed Hamburger -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#app-navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <!-- Branding Image -->
+                <a class="navbar-brand" href="{{ route('chome') }}">
+                    {{ config('app.name', 'Laravel') }} : QA Coordinator
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+
+                </ul>
+
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if( !Auth::user()->hasRole('coordinator'))
                         <li><a href="{{ route('login') }}">Login</a></li>
-                        {{----}}
-
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -62,17 +68,18 @@
                                 </li>
                             </ul>
                         </li>
-                    @endif
+                        @endguest
                 </ul>
             </div>
+        </div>
+    </nav>
+    @if (Auth::user()->hasRole('coordinator'))
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
 
-        </nav>
-    </header>
-    @if( Auth::user()->hasRole('coordinator'))
-    <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-        <ul class="sidebar-menu" data-widget="tree">
+                <ul class="sidebar-menu" data-widget="tree">
                     <li class="header"></li>
                     <li>
                         <a href="{{ route('chome')}}">
@@ -82,9 +89,7 @@
                     </li>
 
                     <li><a href="{{ route('coorideas') }}"><i class="fa fa-book"></i> <span>Pending Ideas</span></a></li>
-            <li><a href="{{ route('enablestudent')}}">
-                <i class="fa fa-dashboard"></i> <span>Disabled Student</span>
-            </a></li>
+
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-files-o"></i>
@@ -104,16 +109,13 @@
                         </ul>
                     </li>
                 </ul>
-        </section>
-    <!-- /.sidebar -->
-    </aside>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+    @endif
 
-
-        @endif
-        
-        @yield('content')
+    @yield('content')
 </div>
-
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
