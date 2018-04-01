@@ -88,7 +88,7 @@ Route::group(['middleware' => 'auth', 'role' => ['qamanager']], function () {
 
 Route::group(['middleware' => 'auth', 'role' => ['coordinator']], function () {
     Route::get('/coordinator/home', 'QACoordinatorController@index')->name('chome');
-    Route::get('/coordinator/disable{id}{post_id}', 'QACoordinatorController@disableAccount')->name('disable');
+    Route::get('/coordinator/disable/{id}/{post_id}', 'QACoordinatorController@disableAccount')->name('disable');
 
     Route::get('/coordinator/ideas', 'QACoordinatorController@ideas')->name('coorideas');
     Route::get('/coordinator/enablestudent', function (){
