@@ -48,7 +48,7 @@ class IdeaController extends Controller
 
             $email = User::select('email')->where('id', $cord_id->cord_id)->first();
 
-//        Mail::to($email->email)->send(new CoorNotification());
+            Mail::to($email->email)->send(new CoorNotification());
 
             $idea_id = Idea::select('id')->orderBy('created_at', 'desc')->first();
 
