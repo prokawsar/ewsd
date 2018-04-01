@@ -25771,6 +25771,11 @@ button.close {
   font-weight: bold;
 }
 
+.staff{
+  color: rgb(59, 126, 251) !important;
+  font-weight: bold;
+}
+
 hr.style {
   margin: 7px;
   border: 0;
