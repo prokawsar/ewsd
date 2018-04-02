@@ -10,15 +10,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class CoorNotification extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $user;
+    public $idea;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user, $idea)
     {
-        //
+        $this->user = $user;
+        $this->idea = $idea;
     }
 
     /**

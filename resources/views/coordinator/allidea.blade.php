@@ -58,7 +58,7 @@
                                         <td class="warning text-center" colspan="5">No Pending Idea</td>
                                     @endif
                                     </tbody>
-
+                                {{ $draftIdeas->links() }}
                                 </table>
                             </div>
                         </div>

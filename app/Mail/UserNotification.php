@@ -10,15 +10,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class UserNotification extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $idea;
+    public $comment;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($idea, $comment)
     {
-        //
+        $this->idea = $idea;
+        $this->comment = $comment;
     }
 
     /**

@@ -43,12 +43,14 @@ class IdeaController extends Controller
             $idea->depart_id = $request->depart_id;
             $idea->save();
 
+            $user = User::where('id', $request->user_id)->first();
+
             $cord_id = Coordinator::select('cord_id')->where('depart_id', $request->depart_id)->first();
-//            dd($cord_id);
+         //   dd($user);
 
             $email = User::select('email')->where('id', $cord_id->cord_id)->first();
 
-            Mail::to($email->email)->send(new CoorNotification());
+            Mail::to($email->email)->send(new CoorNotification($user, $idea));
 
             $idea_id = Idea::select('id')->orderBy('created_at', 'desc')->first();
 
@@ -116,13 +118,14 @@ class IdeaController extends Controller
     {
         //dd($request);
         $userCheck = Idea::select('student_id')->where('id', $request->idea_id)->first();
+        $idea = Idea::where('id', $request->idea_id)->first();
 
         if ($userCheck->student_id != $request->user_id) {
 //            checking if commenter is student
             $user = User::where('id', $request->user_id)->first();
             if ($user->hasRole('student')) {
                 $email = User::select('email')->where('id', $userCheck->student_id)->first();
-                Mail::to($email->email)->send(new UserNotification());
+                Mail::to($email->email)->send(new UserNotification($idea, $request->comment));
             }
         }
 

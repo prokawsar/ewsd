@@ -25,7 +25,7 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th>Phone</th>
+                                        {{--<th>Phone</th>--}}
                                         <th>Role</th>
                                         <th>Department</th>
                                     </tr>
@@ -37,7 +37,7 @@
                                         <tr>
                                             <td>{{ $person->user->name}}</td>
                                             <td>{{ $person->user->email }}</td>
-                                            <td>{{ $person->user->phone }}</td>
+                                            {{--<td>{{ $person->user->phone }}</td>--}}
                                             <td>{{ $person->user->role->role_name }}</td>
                                             <td>{{ $person->department->depart_name }}</td>
 
