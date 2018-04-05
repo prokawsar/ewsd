@@ -40,7 +40,15 @@
                                   //  dd($categories);
                                 @endphp
                                 @foreach( $categories as $category)
-                                    <tr>
+                                
+                                @php if($category->final_end_date < \Carbon\Carbon::today() ){
+                                    $class = "danger";
+                                }else{
+                                    $class = "";
+                                }
+
+                                @endphp
+                                    <tr class= "{{ $class }}" >
                                         <td>{{ $category->cat_name }}</td>
                                         <td>{{ $category->start_date->toDateString() }}</td>
                                         <td>{{ $category->end_date->toDateString() }}</td>
