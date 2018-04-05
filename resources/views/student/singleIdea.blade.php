@@ -133,7 +133,7 @@
                                             {{$cmt->created_at->diffForHumans()}} <br/>
                                             <hr class="style"></hr>
                                         @elseif( !$cmt->user->hasRole('student') && !Auth::user()->hasRole('student'))
-                                            <span class="staff"> <i class="fa fa-user"></i>
+                                            <span class="user"> <i class="fa fa-user"></i>
                                                 @if($cmt->anonym)
                                                     Anonymous
                                                 @else

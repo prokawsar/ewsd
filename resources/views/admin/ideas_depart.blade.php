@@ -53,7 +53,7 @@ else
                                     <tr>
                                         <td>{{ $name->depart_name }}</td>
                                         <td>{{ $idea->total }}</td>
-                                        <td>{{  100 / $total * $idea->total  }}%</td>
+                                        <td>{{  round((100 / $total * $idea->total), 2 )  }}%</td>
 
                                     </tr>
                                 @endforeach
